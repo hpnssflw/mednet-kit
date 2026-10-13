@@ -10,6 +10,7 @@
     "directory": "packages/tokens"
   },
   "scripts": {
+    "generate": "tsx scripts/generate-primitives.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
   },
