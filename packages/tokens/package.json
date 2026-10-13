@@ -9,8 +9,27 @@
     "url": "git+https://github.com/hpnssflw/mednet-kit.git",
     "directory": "packages/tokens"
   },
+  "files": [
+    "dist",
+    "tokens",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens.css": "./dist/tokens.css",
+    "./theme.css": "./dist/theme.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "generate": "tsx scripts/generate-primitives.ts",
+    "build": "tsx scripts/build.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
   },
