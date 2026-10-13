@@ -1,0 +1,14 @@
+@import 'tailwindcss';
+@import '@mednet/tokens/theme.css';
+
+@layer base {
+  body {
+    font-weight: var(--mn-font-weight-body);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: var(--mn-font-weight-heading);
+  }
+}
