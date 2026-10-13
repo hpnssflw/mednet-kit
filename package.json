@@ -14,9 +14,13 @@
     "typecheck": "turbo run typecheck",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:visual": "pnpm --filter docs test:visual:docker"
+    "test:visual": "pnpm --filter docs test:visual:docker",
+    "changeset": "changeset",
+    "version-packages": "changeset version && pnpm install --lockfile-only",
+    "release": "turbo run build --filter=./packages/* && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^3.0.3",
     "@types/node": "^26.6.5",
     "prettier": "^3.9.10",
     "turbo": "^2.11.7",
