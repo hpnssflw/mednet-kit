@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@mednet/css — компоненты</title>
+    <link rel="stylesheet" href="../dist/mednet.css" />
+    <script src="../dist/mednet.js" defer></script>
+    <style>
+      /* Раскладка демо. Tailwind-утилит в mednet.css нет — поэтому свой минимальный CSS. */
+      main {
+        max-width: 64rem;
+        margin: 0 auto;
+        padding: 2.5rem 1.5rem;
+        display: grid;
+        gap: 2.5rem;
+      }
+      .demo-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+      }
+      .demo-grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      }
+      .demo-title {
+        grid-column: 1 / -1;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Компоненты @mednet/css</h1>
+        <p>
+          Basecoat (стиль Maia) в теме ЦНИИОИЗ. Страница использует только mednet.css и mednet.js.
+        </p>
+      </header>
+
+      <section aria-labelledby="buttons">
+        <h2 id="buttons">Кнопки</h2>
+        <div class="demo-row">
+          <button class="btn" type="button">Подать заявку</button>
+          <button class="btn" data-variant="secondary" type="button">Вторичная</button>
+          <button class="btn" data-variant="outline" type="button">Контурная</button>
+          <button class="btn" data-variant="ghost" type="button">Прозрачная</button>
+          <button class="btn" data-variant="link" type="button">Ссылка</button>
+          <button class="btn" data-variant="destructive" type="button">Удалить</button>
+          <button class="btn" data-size="sm" type="button">Маленькая</button>
+          <button class="btn" data-size="lg" type="button">Большая</button>
+          <button class="btn" type="button" disabled>Недоступна</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="badges">
+        <h2 id="badges">Бейджи</h2>
+        <div class="demo-row">
+          <span class="badge">Новое</span>
+          <span class="badge" data-variant="secondary">Черновик</span>
+          <span class="badge" data-variant="outline">Архив</span>
+          <span class="badge" data-variant="destructive">Отклонено</span>
+        </div>
+      </section>
+
+      <section class="demo-grid" aria-labelledby="alerts">
+        <h2 id="alerts" class="demo-title">Уведомления</h2>
+        <div class="alert">
+          <h3>Приём заявок открыт</h3>
+          <section>Заявки принимаются до 31 октября включительно.</section>
+        </div>
+        <div class="alert" data-variant="destructive">
+          <h3>Проверьте СНИЛС</h3>
+          <section>Контрольная сумма не совпадает.</section>
+        </div>
+      </section>
+
+      <section aria-labelledby="form-title">
+        <h2 id="form-title">Форма</h2>
+        <form class="card" onsubmit="return false;">
+          <header>
+            <h3>Заявка на обучение</h3>
+            <p>Программа «Организация здравоохранения и общественное здоровье»</p>
+          </header>
+          <section class="demo-grid">
+            <div class="field">
+              <label for="name">ФИО</label>
+              <input id="name" type="text" placeholder="Иванова Мария Петровна" />
+            </div>
+            <div class="field">
+              <label for="email">Эл. почта</label>
+              <input id="email" type="email" placeholder="name@example.ru" />
+            </div>
+            <div class="field">
+              <label for="region">Регион</label>
+              <select id="region">
+                <option>Москва</option>
+                <option>Санкт-Петербург</option>
+                <option>Новосибирская область</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="comment">Комментарий</label>
+              <textarea id="comment" rows="3"></textarea>
+            </div>
+            <label class="label">
+              <input type="checkbox" class="input" />
+              Согласен на обработку персональных данных
+            </label>
+          </section>
+          <footer class="demo-row">
+            <button class="btn" type="submit">Отправить</button>
+            <button class="btn" data-variant="outline" type="reset">Очистить</button>
+          </footer>
+        </form>
+      </section>
+
+      <section aria-labelledby="table-title">
+        <h2 id="table-title">Таблица</h2>
+        <table class="table">
+          <caption>
+            Заявки по федеральным округам
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Округ</th>
+              <th scope="col">Заявок</th>
+              <th scope="col">Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Центральный</td>
+              <td>1 284</td>
+              <td><span class="badge">Принято</span></td>
+            </tr>
+            <tr>
+              <td>Северо-Западный</td>
+              <td>642</td>
+              <td><span class="badge" data-variant="secondary">На проверке</span></td>
+            </tr>
+            <tr>
+              <td>Сибирский</td>
+              <td>318</td>
+              <td><span class="badge" data-variant="destructive">Отклонено</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
