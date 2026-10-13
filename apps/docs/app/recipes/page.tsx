@@ -6,10 +6,14 @@ export const metadata: Metadata = { title: 'Внедрение в существ
 const TOKENS_CDN = 'https://cdn.jsdelivr.net/npm/@mednet/tokens@0/dist/tokens.css';
 const FONTS_CDN = 'https://cdn.jsdelivr.net/npm/@mednet/css@0/dist/fonts.css';
 
-const PMSP = `<!-- после собственных стилей сайта -->
+const PMSP = `<!-- ДО собственных стилей сайта: имена без префикса из tokens.css
+     (--accent, --muted…) не перекроют переменные сайта -->
 <link rel="stylesheet" href="${FONTS_CDN}">
 <link rel="stylesheet" href="${TOKENS_CDN}">
 
+<!-- …стили сайта… -->
+
+<!-- ПОСЛЕ стилей сайта: переназначаем его переменные на токены -->
 <style>
   :root {
     --accent: var(--mn-primary);          /* было #2e6b52 / #8f3150 */
@@ -25,7 +29,7 @@ const PMSP = `<!-- после собственных стилей сайта -->
   }
 </style>`;
 
-const MEDNET = `<!-- ПОСЛЕ bootstrap.min.css: Bootstrap 4 объявляет свой --primary -->
+const MEDNET = `<!-- порядок относительно bootstrap.min.css не важен: используем только --mn-* -->
 <link rel="stylesheet" href="${TOKENS_CDN}">
 
 /* style_new.css: заменить литералы на переменные (без учёта регистра) */

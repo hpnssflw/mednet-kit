@@ -32,6 +32,11 @@ export default function CssPage() {
         Или скопируйте к себе папку <code>dist/</code> из пакета — шрифты подключаются
         относительными путями.
       </p>
+      <p className="mt-3 max-w-3xl font-semibold">
+        <code>mednet.css</code> — для новых страниц и сайтов без Bootstrap и других CSS-фреймворков:
+        в нём есть сброс стилей, поэтому на существующий сайт подключайте только токены и шрифты
+        (раздел «Внедрение»).
+      </p>
 
       <h2 className="mt-12 text-h2">Разметка</h2>
       <pre className="mt-4 overflow-x-auto rounded-xl bg-muted p-4 text-sm">
