@@ -100,6 +100,7 @@
 | D13 | **Единая версия** всех пакетов (Changesets `fixed`) | «Кит 1.4» понятнее людям и агентам, чем матрица совместимости |
 | D14 | Публикация через **npm trusted publishing** (OIDC) | Нет долгоживущего токена, есть provenance |
 | D15 | Без тёмной темы и без a11y-темы в v1 | YAGNI; семантический слой делает их дешёвыми позже |
+| D16 | Стиль компонентов — **Maia** на обеих сторонах (`basecoat-css/maia` в статике, стиль Maia в shadcn) | Мягкий и скруглённый, как лендинги брендбука; один и тот же стиль у shadcn и Basecoat — максимальное совпадение React и статики |
 
 ---
 
@@ -148,6 +149,10 @@ Peer-зависимости `@mednet/ui`: `react`, `react-dom`, `tailwindcss@4`.
 
 ## 5. `@mednet/tokens`
 
+### Формат
+
+Цвета — DTCG JSON (формат DTCG 2025.10: `$value` цвета — объект `{colorSpace, components, hex}`; семантика — алиасы `{color.red.600}`). Типографика, радиусы, тени и движение — TS-константы пакета: `clamp()` и тени с прозрачностью в DTCG без потерь не выражаются.
+
 ### Слои
 
 1. **Примитивы** — шкалы бренда.
@@ -192,8 +197,8 @@ Peer-зависимости `@mednet/ui`: `react`, `react-dom`, `tailwindcss@4`.
 | `destructive` / `-foreground` | `#c62828` / `#ffffff` | 5.62 |
 | `success` *(расш.)* | `green-700` `#58754a` | 5.17 |
 | `info` *(расш.)* | `blue-600` `#4a7388` | 5.12 |
-| `warning` *(расш.)* | `orange-800` (генерируется) | ≥ 4.5 на белом и на `orange-100` |
-| `success-muted`, `info-muted`, `warning-muted`, `destructive-muted` *(расш.)* | `green-100`, `blue-100`, `orange-100`, `#fdecea` | фоны плашек/алертов; текст на них — соответствующий тёмный токен (`#c62828` на `#fdecea` — 4.92) |
+| `warning` *(расш.)* | `orange-800` (генерируется, `#8c5f3e`) | 5.50 на белом, 4.98 на `orange-50` |
+| `success-muted`, `info-muted`, `warning-muted`, `destructive-muted` *(расш.)* | `green-50`, `blue-50`, `orange-50`, `danger-100` (`#fdecea`) | фоны плашек/алертов; текст на них — соответствующий тёмный токен: 4.80 / 4.53 / 4.98 / 4.92. Ступень 100 не подходит: зелёный и синий текст на ней дают 4.41 и 4.02 |
 | `border` | `beige-300` `#e6d9ca` | декоративные границы (карточки, разделители) |
 | `input` | `graphite-400` `#8a8a8a` | 3.45 на белом, 3.10 на beige-100 — границы полей (WCAG 1.4.11) |
 | `ring` | `blue-600` `#4a7388` | 5.12 (D7) |
@@ -204,13 +209,13 @@ Peer-зависимости `@mednet/ui`: `react`, `react-dom`, `tailwindcss@4`.
 
 ### Типографика
 
-- `--font-sans`: Montserrat; `--font-display`: Bebas Neue (только промо-заголовки).
+- `--font-sans`: Montserrat; `--font-display`: Bebas Neue (только промо-заголовки). Файлы Bebas Neue в v1 **не поставляются**: в @fontsource/bebas-neue нет кириллицы (§18 Q6); токен объявлен с фолбэком на Montserrat.
 - Веса: текст 500, заголовки 600/700.
 - Шкала: `xs` 13px, `sm` 14px, `base` 16px, `lead` 18px, `h4` 18px, `h3` 20px, `h2` `clamp(28px, 2.6vw, 38px)`, `h1` `clamp(28px, 3.2vw, 46px)`. Межстрочный: текст 1.5, заголовки 1.2.
 
 ### Форма, тени, движение
 
-- `--radius: 1rem`. Кнопки — «пилюля» (`9999px`), поля — `0.75rem`, карточки — `1.25rem`.
+- Скругления компонентов задаёт стиль Maia (D16): кнопки и поля — `rounded-4xl` («пилюли»), карточки и аккордеоны — `rounded-2xl`. `--radius: 1rem` — база производной шкалы shadcn (`radius-sm…xl`) для своих компонентов.
 - Отступы — стандартная шкала Tailwind (4px).
 - Тени — мягкие, тёплые (тон beige-700 с низкой прозрачностью), 3 уровня: `sm`, `md`, `lg`.
 - Движение: `--ease: cubic-bezier(.2, .7, .2, 1)`; длительности 150/250ms; `prefers-reduced-motion` отключает анимации.
@@ -223,10 +228,10 @@ Peer-зависимости `@mednet/ui`: `react`, `react-dom`, `tailwindcss@4`.
 
 | Файл | Для чего |
 |---|---|
-| `tokens.css` | CSS-переменные: примитивы `--mn-*` + семантика в именах shadcn (`--primary`, `--radius`…) |
+| `tokens.css` | CSS-переменные: примитивы `--mn-red-500`…; семантика дважды — с префиксом `--mn-primary: var(--mn-red-600)` и в именах shadcn `--primary: var(--mn-primary)`; база (`--radius`, `--mn-font-*`, `--mn-text-*`…) |
 | `theme.css` | Tailwind v4 `@theme`-блок со сбросом палитры (импортируется `@mednet/ui` и шаблонами) |
 | `tokens.ts` / `tokens.js` | Значения для JS (графики, antd-рецепт) |
-| `tokens.json` | Плоский JSON для сторонних инструментов |
+| `tokens.json` | JSON с итоговыми значениями (без алиасов) для сторонних инструментов |
 
 ### Проверка контраста (в CI, валит сборку)
 
@@ -236,7 +241,9 @@ Peer-зависимости `@mednet/ui`: `react`, `react-dom`, `tailwindcss@4`.
 
 ## 6. `@mednet/css` (статика)
 
-- Состав: `tokens.css` + шрифты (@fontsource Montserrat 500/600/700, Bebas Neue 400, кириллица+латиница, woff2) + Basecoat с нашей темой + фирменные блоки + JS Basecoat.
+- Состав: `tokens.css` + шрифты (@fontsource Montserrat 500/600/700, кириллица + латиница, woff2) + Basecoat (стиль Maia) с нашей темой + фирменные блоки + JS Basecoat.
+- Порядок подключения: Basecoat → `@mednet/tokens/theme.css` (наши `:root`-переменные и `@theme` перекрывают нейтральную тему Basecoat).
+- Tailwind-утилит (`flex`, `p-4`…) в `mednet.css` нет — как и в CDN-сборках Basecoat. Нужны утилиты — HTML-шаблон со сборкой (этап 5).
 - Фирменные блоки (классы): `mn-header`, `mn-footer`, `mn-hero`, `mn-section`, `mn-pattern`, `mn-blob`, `mn-logo`, `mn-stat`. Пишутся как HTML-фрагменты с Tailwind-утилитами; CSS компилируется сканированием этих фрагментов.
 - Выход: `dist/mednet.css`, `dist/mednet.js`, `dist/fonts/*`. Подключение: npm, jsDelivr (`cdn.jsdelivr.net/npm/@mednet/css@1/dist/mednet.css`) или копия файлов.
 - Версия Basecoat пиннится точно; обновление — осознанно, со скриншот-тестами.
@@ -390,6 +397,8 @@ Vite (multi-page) + `@mednet/css`, стартовая страница с `mn-he
 
 ## 15. Внедрение в существующие сайты (рецепты, не адаптеры)
 
+**Правило: на существующих сайтах использовать только переменные с префиксом `--mn-*`.** Имена shadcn без префикса конфликтуют с чужими: Bootstrap 4 (mednet.ru) объявляет в `:root` свой `--primary: #007bff`, у pmsp-* есть свои `--accent` и `--muted`. Если на такой сайт подключается `mednet.css` с компонентами — подключать его **после** CSS сайта.
+
 - **pmsp-*** (статика с CSS-переменными): подключить `tokens.css` + шрифты; переназначить свои переменные (`--accent`, `--accent-dark`, `--accent-tint`, `--ink`, `--muted`, `--line`, `--line-soft`, `--bg-warm`, `--font-display`, `--font-text`…) на `var(--…)` кита.
 - **mednet.ru** (MODX + Bootstrap 4.1, переменных нет): подключить `tokens.css`; заменить `#e06b65` (108 вхождений в `style_new.css`) и `#3b3b3b` на переменные.
 - **olimpiada** (antd): тема `ConfigProvider` из `@mednet/tokens` (TS-экспорт).
@@ -431,6 +440,7 @@ Vite (multi-page) + `@mednet/css`, стартовая страница с `mn-he
 | Q3 | Домен docs-сайта и registry | Отдельная задача (§1, §13) |
 | Q4 | GitHub | Решено: github.com/hpnssflw/mednet-kit |
 | Q5 | Геометрия субъектов РФ | Снято: карта вне v1 |
+| Q6 | Bebas Neue с кириллицей (в брендбуке шрифт кириллический, в @fontsource/bebas-neue только latin/latin-ext) | Открыт. Нужен файл шрифта с кириллицей и лицензией на веб-использование (от дизайнеров или проверенный OFL-источник). До решения `--font-display` падает на Montserrat |
 
 ---
 
