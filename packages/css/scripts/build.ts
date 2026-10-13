@@ -31,7 +31,9 @@ const compiler = await compile(readFileSync(entry, 'utf8'), {
   onDependency: () => {},
 });
 const css = `${banner}\n${fonts.css}\n\n${compiler.build([])}`;
-writeFileSync(join(dist, 'mednet.css'), css);
+// Обе версии проходят Lightning CSS: вложенные правила Basecoat (`&`) разворачиваются,
+// поэтому mednet.css работает и в браузерах без CSS nesting — так же, как mednet.min.css.
+writeFileSync(join(dist, 'mednet.css'), optimize(css, { minify: false }).code);
 writeFileSync(join(dist, 'mednet.min.css'), optimize(css, { minify: true }).code);
 
 // JS Basecoat для интерактивных компонентов (диалоги, выпадающие меню, табы).

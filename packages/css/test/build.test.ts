@@ -39,10 +39,21 @@ describe('dist/mednet.css', () => {
     for (const weight of FONT_WEIGHTS) {
       for (const subset of FONT_SUBSETS) {
         const file = `montserrat-${subset}-${weight}-normal.woff2`;
-        expect(css).toContain(`url(./fonts/${file})`);
+        // Lightning CSS берёт адрес в кавычки: url("./fonts/…").
+        expect(css).toMatch(
+          new RegExp(`url\\(["']?\\./fonts/${file.replaceAll('.', '\\.')}["']?\\)`),
+        );
         expect(existsSync(distUrl(`fonts/${file}`)), file).toBe(true);
       }
     }
+  });
+
+  it('не использует CSS nesting (как и mednet.min.css)', () => {
+    const code = css
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, '""')
+      .replace(/url\([^)]*\)/g, 'url()');
+    expect(code).not.toContain('&');
   });
 });
 
