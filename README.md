@@ -21,6 +21,10 @@ pnpm typecheck
 pnpm format       # Prettier
 ```
 
+## Релизы
+
+Изменение пакета `@mednet/*` → changeset (`pnpm changeset`) → merge в `main` → бот открывает PR «Релиз пакетов @mednet/\*» → его merge публикует пакеты из GitHub Actions (trusted publishing, provenance). Подробно и правила — [docs/releasing.md](docs/releasing.md).
+
 ## Лицензия
 
 MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России — см. [LICENSE](LICENSE). Сторонние компоненты в `@mednet/css` — [THIRD_PARTY_NOTICES.md](packages/css/THIRD_PARTY_NOTICES.md).
