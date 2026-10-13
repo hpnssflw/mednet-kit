@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 const IMAGE = 'mcr.microsoft.com/playwright:v1.64.0-noble';
 const PNPM = '10.34.6';
 const update = process.argv.includes('--update');
-const repo = fileURLToPath(new URL('../../../', import.meta.url)).replace(/[\/]$/, '');
+const repo = fileURLToPath(new URL('../../../', import.meta.url)).replace(/[\\/]$/, '');
 
 const script = [
   'set -euo pipefail',
