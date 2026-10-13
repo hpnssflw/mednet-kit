@@ -1,0 +1,15 @@
+# Брендбук хранится вне git (12 МБ, исходник у дизайнеров)
+*.pdf
+
+node_modules/
+dist/
+.turbo/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+.env*
+!.env.example
+.DS_Store
+Thumbs.db
