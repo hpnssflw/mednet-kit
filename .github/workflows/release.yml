@@ -33,3 +33,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: 'true'
+      # changesets/action v1 не понимает вывод changesets 3: теги создаются только локально,
+      # GitHub Releases не появляются. Досылаем теги с HEAD и создаём релизы из CHANGELOG.
+      - name: Теги и GitHub Releases
+        run: |
+          for tag in $(git tag --points-at HEAD --list '@mednet/*'); do
+            git push origin "refs/tags/$tag"
+            version="${tag##*@}"
+            package="${tag%@*}"
+            notes=$(awk -v heading="## $version" '$0 == heading { found = 1; next } /^## / { found = 0 } found' "packages/${package#@mednet/}/CHANGELOG.md")
+            gh release view "$tag" > /dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes "$notes"
+          done
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
