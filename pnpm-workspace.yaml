@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - apps/*
+
+# pnpm 10 по умолчанию не запускает install-скрипты зависимостей.
+# Если pnpm напишет «Ignored build scripts: …», добавьте сюда пакеты из списка
+# esbuild, sharp, @tailwindcss/oxide, unrs-resolver — и только их.
+onlyBuiltDependencies:
+  - esbuild

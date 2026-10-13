@@ -1,0 +1,14 @@
+pnpm-lock.yaml
+**/dist
+**/out
+**/.next
+**/CHANGELOG.md
+**/public/static-demo
+**/tests/__screenshots__
+**/playwright-report
+**/test-results
+packages/tokens/tokens/primitives.json
+docs/superpowers
+assets
+.changeset/*.md
+.superpowers

@@ -1,0 +1,24 @@
+{
+  "name": "mednet-kit",
+  "private": true,
+  "description": "Дизайн-система ЦНИИОИЗ: токены, CSS для статики, React-компоненты, шаблоны",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.34.6",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "prettier": "^3.9.10",
+    "turbo": "^2.11.7",
+    "typescript": "~6.0.3"
+  }
+}
