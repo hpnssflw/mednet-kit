@@ -9,7 +9,26 @@
     "url": "git+https://github.com/hpnssflw/mednet-kit.git",
     "directory": "packages/css"
   },
+  "files": [
+    "dist",
+    "demo",
+    "README.md"
+  ],
+  "style": "dist/mednet.css",
+  "jsdelivr": "dist/mednet.min.css",
+  "unpkg": "dist/mednet.min.css",
+  "exports": {
+    "./mednet.css": "./dist/mednet.css",
+    "./mednet.min.css": "./dist/mednet.min.css",
+    "./fonts.css": "./dist/fonts.css",
+    "./mednet.js": "./dist/mednet.js",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "build": "tsx scripts/build.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
   },
