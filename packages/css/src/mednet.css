@@ -1,9 +1,11 @@
 /*
  * Точка входа @mednet/css. Порядок важен (спека §6):
- * Basecoat (стиль Maia) → тема бренда (перекрывает :root и @theme Basecoat) → база.
+ * Basecoat (стиль Maia) → тема бренда (перекрывает :root и @theme Basecoat) → база →
+ * бренд-правки компонентов Basecoat (overrides.css, слой components после Basecoat).
  * source(none): Tailwind-утилит в итоговом файле нет — только компоненты.
  */
 @import 'tailwindcss' source(none);
 @import 'basecoat-css/maia';
 @import '@mednet/tokens/theme.css';
 @import './base.css';
+@import './overrides.css';

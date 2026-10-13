@@ -9,6 +9,76 @@ const require = createRequire(import.meta.url);
 const distUrl = (file: string) => new URL(`../dist/${file}`, import.meta.url);
 const read = (file: string) => readFileSync(distUrl(file), 'utf8');
 
+interface CssRule {
+  /** Обёртки правила (@layer, @media) без @supports: в современных браузерах он не меняет каскад. */
+  context: string;
+  selectors: string[];
+  declarations: Array<[string, string]>;
+}
+
+/** Делит текст по разделителю верхнего уровня — вне скобок и строк. */
+function splitTopLevel(text: string, separator: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let quote = '';
+  let current = '';
+  for (const char of text) {
+    if (quote) {
+      if (char === quote) quote = '';
+    } else if (char === '"' || char === "'") {
+      quote = char;
+    } else if (char === '(' || char === '[') {
+      depth++;
+    } else if (char === ')' || char === ']') {
+      depth--;
+    } else if (char === separator && depth === 0) {
+      parts.push(current.trim());
+      current = '';
+      continue;
+    }
+    current += char;
+  }
+  if (current.trim()) parts.push(current.trim());
+  return parts;
+}
+
+/** Правила CSS без вложенности (выход Lightning CSS) в порядке исходника. */
+function parseRules(source: string): CssRule[] {
+  const rules: CssRule[] = [];
+  const stack: string[] = [];
+  let buffer = '';
+  let quote = '';
+  for (const char of source.replace(/\/\*[\s\S]*?\*\//g, '')) {
+    if (quote) {
+      if (char === quote) quote = '';
+      buffer += char;
+    } else if (char === '"' || char === "'") {
+      quote = char;
+      buffer += char;
+    } else if (char === '{') {
+      // Отбрасываем at-правила-инструкции перед блоком (`@layer utilities;`).
+      stack.push(buffer.slice(buffer.lastIndexOf(';') + 1).trim());
+      buffer = '';
+    } else if (char === '}') {
+      const prelude = stack.pop() ?? '';
+      if (!prelude.startsWith('@')) {
+        rules.push({
+          context: stack.filter((wrapper) => !wrapper.startsWith('@supports')).join(' '),
+          selectors: splitTopLevel(prelude, ','),
+          declarations: splitTopLevel(buffer, ';').map((declaration) => {
+            const colon = declaration.indexOf(':');
+            return [declaration.slice(0, colon).trim(), declaration.slice(colon + 1).trim()];
+          }),
+        });
+      }
+      buffer = '';
+    } else {
+      buffer += char;
+    }
+  }
+  return rules;
+}
+
 describe('dist/mednet.css', () => {
   const css = read('mednet.css');
 
@@ -54,6 +124,75 @@ describe('dist/mednet.css', () => {
       .replace(/"(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'/g, '""')
       .replace(/url\([^)]*\)/g, 'url()');
     expect(code).not.toContain('&');
+  });
+});
+
+describe('бренд-правки Basecoat (src/overrides.css)', () => {
+  const rules = parseRules(read('mednet.css'));
+  const COMPONENTS = '@layer components';
+  const HOVER = '@layer components @media (hover: hover)';
+
+  /**
+   * Значение, которое победит в каскаде: последнее объявление для того же селектора
+   * (та же специфичность) в тех же обёртках.
+   */
+  const winning = (selector: string, context: string, property: string) =>
+    rules
+      .filter((rule) => rule.context === context && rule.selectors.includes(selector))
+      .flatMap((rule) => rule.declarations)
+      .filter(
+        ([name]) => name === property || (property === 'background-color' && name === 'background'),
+      )
+      .at(-1)?.[1];
+
+  /** Селекторы Basecoat с заданной заливкой, кроме тёмной темы (её в v1 нет, спека D15). */
+  const filledWith = (fill: string, context: string) =>
+    rules
+      .filter(
+        (rule) =>
+          rule.context === context &&
+          rule.declarations.some(([name, value]) => name === 'background-color' && value === fill),
+      )
+      .flatMap((rule) => rule.selectors)
+      .filter((selector) => !selector.includes('html.dark'));
+
+  it.each(['.alert > :is(h2, h3, h4, h5, h6)', '.toaster .toast .toast-content section h2'])(
+    'возвращает заголовку %s размер текста компонента',
+    (selector) => {
+      expect(winning(selector, COMPONENTS, 'font-size')).toBe('inherit');
+      expect(winning(selector, COMPONENTS, 'line-height')).toBe('inherit');
+    },
+  );
+
+  it('заливает поля, контурные кнопку и бейдж белым --field вместо серого --input', () => {
+    // Поиск без рамки внутри popover и command: белое на белом исчезнет — остаётся заливка Basecoat.
+    const kept = ['.command > header', '.combobox [data-popover] > .input-group'];
+    const selectors = filledWith('color-mix(in oklab, var(--input) 30%, transparent)', COMPONENTS);
+    expect(selectors).toEqual(
+      expect.arrayContaining([
+        ...kept,
+        '.btn[data-variant="outline"]',
+        '.badge[data-variant="outline"]',
+        '.field > textarea',
+        '.input[type="email"]',
+        '.input:not([type])',
+        '.field > select',
+        '.select:not(select) > button',
+        '.combobox > input[role="combobox"]',
+        '.input-group',
+      ]),
+    );
+    for (const selector of selectors.filter((selector) => !kept.includes(selector))) {
+      expect(winning(selector, COMPONENTS, 'background-color'), selector).toBe('var(--field)');
+    }
+  });
+
+  it('подсвечивает контурную кнопку при наведении --muted вместо серого --input', () => {
+    const selectors = filledWith('color-mix(in oklab, var(--input) 50%, transparent)', HOVER);
+    expect(selectors).toEqual(['.btn[data-variant="outline"]:hover']);
+    expect(winning('.btn[data-variant="outline"]:hover', HOVER, 'background-color')).toBe(
+      'var(--muted)',
+    );
   });
 });
 
