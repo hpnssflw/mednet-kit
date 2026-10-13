@@ -1,0 +1,27 @@
+{
+  "name": "@mednet/css",
+  "version": "0.0.0",
+  "description": "CSS для сайтов без React: компоненты Basecoat в теме ЦНИИОИЗ, шрифты, токены",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpnssflw/mednet-kit.git",
+    "directory": "packages/css"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@fontsource/montserrat": "^5.3.0",
+    "@mednet/tokens": "workspace:*",
+    "@tailwindcss/node": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "basecoat-css": "1.0.2",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.4"
+  }
+}
