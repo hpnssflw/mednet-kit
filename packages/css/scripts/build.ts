@@ -35,7 +35,20 @@ writeFileSync(join(dist, 'mednet.css'), css);
 writeFileSync(join(dist, 'mednet.min.css'), optimize(css, { minify: true }).code);
 
 // JS Basecoat для интерактивных компонентов (диалоги, выпадающие меню, табы).
-copyFileSync(require.resolve('basecoat-css/all.min'), join(dist, 'mednet.js'));
+// Лицензия MIT требует сохранять уведомление об авторских правах в каждой копии.
+const basecoatDir = dirname(require.resolve('basecoat-css/package.json'));
+const basecoatVersion = (
+  JSON.parse(readFileSync(join(basecoatDir, 'package.json'), 'utf8')) as { version: string }
+).version;
+const basecoatCopyright = /^Copyright \(c\) (.+)$/m.exec(
+  readFileSync(join(basecoatDir, 'LICENSE.md'), 'utf8'),
+)?.[1];
+if (!basecoatCopyright) {
+  throw new Error('basecoat-css/LICENSE.md: не найдена строка Copyright (c) …');
+}
+const basecoatNotice = `/*! Basecoat v${basecoatVersion} | MIT | (c) ${basecoatCopyright} | https://basecoatui.com */`;
+const basecoatJs = readFileSync(require.resolve('basecoat-css/all.min'), 'utf8');
+writeFileSync(join(dist, 'mednet.js'), `${basecoatNotice}\n${basecoatJs}`);
 
 console.log(
   `@mednet/css: ${Math.round(css.length / 1024)} КБ CSS, ${fonts.files.length} файлов шрифтов → dist/`,

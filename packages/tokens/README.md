@@ -41,3 +41,7 @@ semantic.primary; // '#b55c57' — кнопки и ссылки
 - `tokens/semantic.json` — семантика: только алиасы на примитивы.
 - `pnpm build` → `dist/tokens.css`, `dist/theme.css`, `dist/tokens.json`, `dist/index.js`.
 - `pnpm test` проверяет контраст всех семантических пар (WCAG 2.1 AA). Если пара не проходит — меняйте ступень в `semantic.json`, а не порог.
+
+## Лицензия
+
+MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России (`LICENSE`).

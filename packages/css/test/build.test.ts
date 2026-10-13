@@ -1,6 +1,10 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { FONT_SUBSETS, FONT_WEIGHTS } from '../scripts/fonts.ts';
+
+const require = createRequire(import.meta.url);
 
 const distUrl = (file: string) => new URL(`../dist/${file}`, import.meta.url);
 const read = (file: string) => readFileSync(distUrl(file), 'utf8');
@@ -57,9 +61,46 @@ describe('остальные файлы dist', () => {
     expect(statSync(distUrl('mednet.js')).size).toBeGreaterThan(1000);
   });
 
+  it('JS Basecoat начинается с уведомления о лицензии Basecoat', () => {
+    const basecoat = dirname(require.resolve('basecoat-css/package.json'));
+    const { version } = JSON.parse(readFileSync(join(basecoat, 'package.json'), 'utf8')) as {
+      version: string;
+    };
+    expect(readFileSync(join(basecoat, 'LICENSE.md'), 'utf8')).toContain(
+      'Copyright (c) 2025 Ronan Berder',
+    );
+    const js = read('mednet.js');
+    const header = `/*! Basecoat v${version} | MIT | (c) 2025 Ronan Berder | https://basecoatui.com */\n`;
+    expect(js.startsWith(header)).toBe(true);
+    expect(js.slice(header.length)).toBe(
+      readFileSync(require.resolve('basecoat-css/all.min'), 'utf8'),
+    );
+  });
+
   it('минифицированная версия меньше обычной', () => {
     expect(statSync(distUrl('mednet.min.css')).size).toBeLessThan(
       statSync(distUrl('mednet.css')).size,
     );
+  });
+});
+
+describe('лицензии в пакете', () => {
+  const pkgUrl = (file: string) => new URL(`../${file}`, import.meta.url);
+
+  it('кладёт MIT-лицензию пакета', () => {
+    expect(readFileSync(pkgUrl('LICENSE'), 'utf8')).toMatch(
+      /^MIT License\n\nCopyright \(c\) 2026 ФГБУ «ЦНИИОИЗ» Минздрава России\n/,
+    );
+  });
+
+  it('публикует уведомления о сторонних компонентах', () => {
+    const notices = readFileSync(pkgUrl('THIRD_PARTY_NOTICES.md'), 'utf8');
+    expect(notices).toContain('Copyright (c) 2025 Ronan Berder');
+    expect(notices).toContain('Copyright (c) Tailwind Labs, Inc.');
+    expect(notices).toContain('dist/fonts/OFL.txt');
+    const { files } = JSON.parse(readFileSync(pkgUrl('package.json'), 'utf8')) as {
+      files: string[];
+    };
+    expect(files).toContain('THIRD_PARTY_NOTICES.md');
   });
 });

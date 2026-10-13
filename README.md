@@ -20,3 +20,7 @@ pnpm test         # тесты
 pnpm typecheck
 pnpm format       # Prettier
 ```
+
+## Лицензия
+
+MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России — см. [LICENSE](LICENSE). Сторонние компоненты в `@mednet/css` — [THIRD_PARTY_NOTICES.md](packages/css/THIRD_PARTY_NOTICES.md).

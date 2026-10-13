@@ -12,7 +12,8 @@
   "files": [
     "dist",
     "demo",
-    "README.md"
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "style": "dist/mednet.css",
   "jsdelivr": "dist/mednet.min.css",

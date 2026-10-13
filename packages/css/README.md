@@ -46,4 +46,4 @@
 
 ## Лицензии
 
-Код — MIT. Montserrat — SIL Open Font License 1.1 (`dist/fonts/OFL.txt`). Basecoat и Tailwind CSS — MIT.
+Код пакета — MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России (`LICENSE`). В пакет входят сторонние компоненты: Basecoat и Tailwind CSS — MIT, шрифт Montserrat — SIL Open Font License 1.1 (`dist/fonts/OFL.txt`). Их уведомления об авторских правах — в `THIRD_PARTY_NOTICES.md` и в заголовке `dist/mednet.js`; копируя `dist/` к себе, берите и `THIRD_PARTY_NOTICES.md`.
