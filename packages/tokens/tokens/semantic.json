@@ -31,6 +31,7 @@
     "warning-muted": { "$value": "{color.orange.50}" },
     "border": { "$value": "{color.beige.300}" },
     "input": { "$value": "{color.graphite.400}" },
+    "field": { "$value": "{color.white}" },
     "ring": { "$value": "{color.blue.600}" },
     "chart-1": { "$value": "{color.blue.500}" },
     "chart-2": { "$value": "{color.red.500}" },

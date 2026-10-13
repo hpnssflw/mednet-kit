@@ -25,8 +25,11 @@ export const CONTRAST_PAIRS: ReadonlyArray<readonly [string, string, number]> = 
   ['sidebar-foreground', 'sidebar', 4.5],
   ['sidebar-primary-foreground', 'sidebar-primary', 4.5],
   ['sidebar-accent-foreground', 'sidebar-accent', 4.5],
+  ['foreground', 'field', 4.5],
+  ['muted-foreground', 'field', 4.5],
   ['input', 'background', 3],
   ['input', 'muted', 3],
+  ['input', 'field', 3],
   ['ring', 'background', 3],
   ['ring', 'muted', 3],
 ];
