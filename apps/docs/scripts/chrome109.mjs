@@ -23,11 +23,41 @@ check(
   'ожидался Chromium 109',
 );
 
-async function open(path) {
+const MIN_CSS = '/static-demo/dist/mednet.min.css';
+
+/**
+ * Открывает страницу. С minCss статическая страница подключает mednet.min.css (файл, который
+ * отдаёт CDN) вместо mednet.css: фокус-кольцо в Chrome 109 когда-то терялось именно в min-версии.
+ */
+async function open(path, { minCss = false } = {}) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const errors = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto(BASE + path, { waitUntil: 'networkidle' });
+  if (minCss) {
+    await page.evaluate(async (href) => {
+      const link = document.querySelector('link[rel="stylesheet"][href$="/mednet.css"]');
+      if (!link) throw new Error('на странице нет ссылки на mednet.css');
+      const min = document.createElement('link');
+      min.rel = 'stylesheet';
+      min.href = href;
+      await new Promise((resolve, reject) => {
+        min.onload = resolve;
+        min.onerror = () => reject(new Error(`не загрузился ${href}`));
+        link.replaceWith(min);
+      });
+    }, MIN_CSS);
+    const sheets = await page.evaluate(() =>
+      [...document.styleSheets].map((sheet) => sheet.href).filter(Boolean),
+    );
+    console.log(`  таблицы стилей ${path}: ${sheets.join(', ')}`);
+    check(
+      `${path}: подключён mednet.min.css`,
+      sheets.some((href) => href.endsWith(MIN_CSS)) &&
+        !sheets.some((href) => href.endsWith('/mednet.css')),
+      sheets.join(', '),
+    );
+  }
   return { page, errors };
 }
 
@@ -44,11 +74,12 @@ async function focusShadow(page, testId) {
   return 'элемент не получил фокус';
 }
 
-for (const [side, path] of [
-  ['React', '/parity/'],
-  ['статика', '/parity/static.html'],
+for (const [side, path, options] of [
+  ['React', '/parity/', {}],
+  ['статика', '/parity/static.html', {}],
+  ['статика (min)', '/parity/static.html', { minCss: true }],
 ]) {
-  const { page, errors } = await open(path);
+  const { page, errors } = await open(path, options);
   const style = (id, property) =>
     page.$eval(`[data-testid="${id}"]`, (element, p) => getComputedStyle(element)[p], property);
   const ring = await focusShadow(page, 'btn-outline');
@@ -75,13 +106,16 @@ for (const [side, path] of [
   await page.close();
 }
 
-{
-  const { page } = await open('/parity/static-dialog.html');
+for (const [side, options] of [
+  ['статика', {}],
+  ['статика (min)', { minCss: true }],
+]) {
+  const { page } = await open('/parity/static-dialog.html', options);
   const backdrop = await page.$eval(
     'dialog',
     (element) => getComputedStyle(element, '::backdrop').backgroundColor,
   );
-  check('статика: фон под диалогом затемнён', alpha(backdrop) > 0, backdrop);
+  check(`${side}: фон под диалогом затемнён`, alpha(backdrop) > 0 && alpha(backdrop) < 1, backdrop);
   await page.close();
 }
 

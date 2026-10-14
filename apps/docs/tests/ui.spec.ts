@@ -29,7 +29,11 @@ test('бренд: поля белые, наведение на основную 
 
 test('шрифт Montserrat загружен', async ({ page }) => {
   await page.goto('/ui/');
-  expect(await page.evaluate(() => document.fonts.check('500 16px Montserrat'))).toBe(true);
+  // check() даёт true и когда подходящего @font-face нет вовсе; load() тогда вернёт пустой список.
+  const loaded = await page.evaluate(async () =>
+    (await document.fonts.load('500 16px Montserrat')).map((font) => font.family),
+  );
+  expect(loaded.length).toBeGreaterThan(0);
 });
 
 test('AppShell: кнопка меню сворачивает боковую панель', async ({ page }) => {
