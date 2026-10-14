@@ -17,7 +17,7 @@
     "test:visual": "pnpm --filter docs test:visual:docker",
     "changeset": "changeset",
     "version-packages": "changeset version && pnpm install --lockfile-only",
-    "release": "turbo run build --filter=./packages/* && changeset publish"
+    "release": "turbo run build test --filter=./packages/* && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
