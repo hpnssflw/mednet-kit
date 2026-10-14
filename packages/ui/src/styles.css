@@ -1,0 +1,37 @@
+/*
+ * Стили @mednet/ui. Проекту достаточно одной строки в globals.css:
+ *   @import '@mednet/ui/styles.css';
+ * Tailwind подключён развёрнуто: бренд-правки (brand.css) должны стоять в слое utilities
+ * раньше утилит Tailwind — тогда они перекрывают сгенерированный класс shadcn, но уступают
+ * вариантам (hover:, aria-expanded:) и классам проекта. С обычным @import 'tailwindcss'
+ * блок @layer utilities из этого файла попадает после утилит (проверено прототипом).
+ */
+@layer theme, base, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import './brand.css' layer(utilities);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+/* Тема бренда: палитра Tailwind удалена, цвета только из токенов. */
+@import '@mednet/tokens/theme.css';
+@import 'tw-animate-css';
+@import './shadcn-tailwind.css';
+/* Montserrat self-hosted (спека D11): в 500.css все подмножества с unicode-range — браузер качает только нужные. */
+@import '@fontsource/montserrat/500.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+
+/* Классы компонентов живут в dist пакета, а node_modules Tailwind сам не сканирует. */
+@source '../dist';
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground;
+    /* текст 500 (спека §5), как body в @mednet/css */
+    font-weight: var(--mn-font-weight-body);
+  }
+}

@@ -1,0 +1,5 @@
+/*
+ * Бренд-правки shadcn Maia для React (зеркало packages/css/src/overrides.css).
+ * Подключается в styles.css как `@import './brand.css' layer(utilities)` ДО утилит Tailwind.
+ * Сгенерированные файлы shadcn не трогаем — `shadcn add <x> --diff` показывает только апстрим.
+ */

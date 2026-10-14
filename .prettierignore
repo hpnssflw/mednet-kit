@@ -12,3 +12,8 @@ docs/superpowers
 assets
 .changeset/*.md
 .superpowers
+
+# @mednet/ui: сгенерированный код не форматируется — так `shadcn add --diff` показывает только наши правки
+packages/ui/src/components
+packages/ui/src/hooks
+packages/ui/src/shadcn-tailwind.css

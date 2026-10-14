@@ -1,0 +1,20 @@
+{
+  // Не наследует tsconfig.base.json: тот для пакетов без выпуска (noEmit, allowImportingTsExtensions),
+  // а здесь tsc собирает dist. verbatimModuleSyntax выключен: shadcn смешивает типы и значения в импортах.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "declaration": true,
+    "types": ["node"]
+  },
+  "include": ["src"]
+}
