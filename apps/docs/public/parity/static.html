@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Паритет: статика</title>
+    <link rel="stylesheet" href="/static-demo/dist/mednet.css" />
+    <script src="/static-demo/dist/mednet.js" defer></script>
+    <style>
+      /* раскладка (в mednet.css нет утилит) повторяет React-страницу: max-w-4xl, p-8, gap-3 */
+      main {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 2rem;
+        display: grid;
+        gap: 2rem;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .stack {
+        display: grid;
+        gap: 0.5rem;
+        align-content: start;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>@mednet/css — пары для сверки с React</h1>
+      <section class="stack">
+        <h2>Кнопки</h2>
+        <div class="row">
+          <button class="btn" type="button" data-testid="btn-default">Основная</button>
+          <button class="btn" data-variant="outline" type="button" data-testid="btn-outline">
+            Контурная
+          </button>
+          <button class="btn" data-variant="secondary" type="button" data-testid="btn-secondary">
+            Вторичная
+          </button>
+          <button class="btn" data-variant="ghost" type="button" data-testid="btn-ghost">
+            Прозрачная
+          </button>
+          <button
+            class="btn"
+            data-variant="destructive"
+            type="button"
+            data-testid="btn-destructive"
+          >
+            Удалить
+          </button>
+          <button class="btn" data-variant="link" type="button" data-testid="btn-link">
+            Ссылка
+          </button>
+        </div>
+        <div class="row">
+          <button class="btn" data-size="xs" type="button" data-testid="btn-xs">XS</button>
+          <button class="btn" data-size="sm" type="button" data-testid="btn-sm">Маленькая</button>
+          <button class="btn" type="button">Обычная</button>
+          <button class="btn" data-size="lg" type="button" data-testid="btn-lg">Большая</button>
+          <button
+            class="btn"
+            data-size="icon"
+            type="button"
+            aria-label="Иконка"
+            data-testid="btn-icon"
+          >
+            +
+          </button>
+          <button class="btn" type="button" disabled data-testid="btn-disabled">Недоступна</button>
+          <button class="btn" data-variant="outline" type="button" disabled>Недоступна</button>
+          <button
+            class="btn"
+            data-variant="outline"
+            type="button"
+            aria-invalid="true"
+            data-testid="btn-invalid"
+          >
+            Ошибка
+          </button>
+        </div>
+      </section>
+      <section class="stack">
+        <h2>Бейджи</h2>
+        <div class="row">
+          <span class="badge" data-testid="badge-default">Новое</span>
+          <span class="badge" data-variant="secondary" data-testid="badge-secondary">Черновик</span>
+          <span class="badge" data-variant="outline" data-testid="badge-outline">Архив</span>
+          <span class="badge" data-variant="destructive" data-testid="badge-destructive"
+            >Отклонено</span
+          >
+        </div>
+      </section>
+      <section class="grid2">
+        <div class="stack">
+          <label class="label" for="name" data-testid="label">ФИО</label>
+          <input
+            class="input"
+            type="text"
+            id="name"
+            placeholder="Иванова Мария Петровна"
+            data-testid="input"
+          />
+        </div>
+        <div class="stack">
+          <label class="label" for="bad">С ошибкой</label>
+          <input
+            class="input"
+            type="text"
+            id="bad"
+            aria-invalid="true"
+            value="123"
+            data-testid="input-invalid"
+          />
+        </div>
+        <div class="stack">
+          <label class="label">Регион</label>
+          <div class="select" id="region">
+            <button
+              type="button"
+              id="region-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="region-listbox"
+              data-testid="select"
+            >
+              <span class="truncate">Москва</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down text-muted-foreground opacity-50 shrink-0"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+            <div id="region-popover" data-popover aria-hidden="true">
+              <div
+                role="listbox"
+                id="region-listbox"
+                aria-orientation="vertical"
+                aria-labelledby="region-trigger"
+              >
+                <div role="option" data-value="msk" aria-selected="true">Москва</div>
+                <div role="option" data-value="spb">Санкт-Петербург</div>
+                <div role="option" data-value="nsk">Новосибирская область</div>
+              </div>
+            </div>
+            <input type="hidden" name="region" value="msk" />
+          </div>
+        </div>
+        <div class="stack">
+          <label class="label" for="comment">Комментарий</label>
+          <textarea
+            class="textarea"
+            id="comment"
+            placeholder="Текст"
+            data-testid="textarea"
+          ></textarea>
+        </div>
+        <div class="row">
+          <input type="checkbox" class="input" id="c1" data-testid="checkbox" />
+          <label class="label" for="c1">Согласен</label>
+          <input
+            type="checkbox"
+            class="input"
+            checked
+            aria-label="Отмечено"
+            data-testid="checkbox-checked"
+          />
+          <input
+            type="checkbox"
+            role="switch"
+            class="input"
+            aria-label="Выключено"
+            data-testid="switch"
+          />
+          <input
+            type="checkbox"
+            role="switch"
+            class="input"
+            checked
+            aria-label="Включено"
+            data-testid="switch-checked"
+          />
+        </div>
+        <div class="row">
+          <label class="label"
+            ><input
+              type="radio"
+              class="input"
+              name="form"
+              value="a"
+              checked
+              data-testid="radio-checked"
+            />
+            Очно</label
+          >
+          <label class="label"
+            ><input type="radio" class="input" name="form" value="b" data-testid="radio" />
+            Заочно</label
+          >
+        </div>
+      </section>
+      <section class="grid2">
+        <div class="card" data-testid="card">
+          <header>
+            <h2 data-testid="card-title">Заявка на обучение</h2>
+            <p data-testid="card-description">Программа «Организация здравоохранения»</p>
+          </header>
+          <section>Содержимое карточки</section>
+          <footer><button class="btn" type="button">Отправить</button></footer>
+        </div>
+        <div class="stack">
+          <div class="alert" data-testid="alert">
+            <h2 data-testid="alert-title">Приём заявок открыт</h2>
+            <section>Заявки принимаются до 31 октября.</section>
+          </div>
+          <div class="alert" data-variant="destructive" data-testid="alert-destructive">
+            <h2>Проверьте СНИЛС</h2>
+            <section>Контрольная сумма не совпадает.</section>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="tabs" id="tabs" data-testid="tabs">
+          <nav role="tablist" aria-orientation="horizontal" data-testid="tabs-list">
+            <button
+              type="button"
+              role="tab"
+              id="tabs-tab-1"
+              aria-controls="tabs-panel-1"
+              aria-selected="true"
+              tabindex="0"
+              data-testid="tab-active"
+            >
+              Обзор
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="tabs-tab-2"
+              aria-controls="tabs-panel-2"
+              aria-selected="false"
+              tabindex="-1"
+              data-testid="tab"
+            >
+              Детали
+            </button>
+          </nav>
+          <div role="tabpanel" id="tabs-panel-1" aria-labelledby="tabs-tab-1" tabindex="-1">
+            Панель «Обзор»
+          </div>
+          <div role="tabpanel" id="tabs-panel-2" aria-labelledby="tabs-tab-2" tabindex="-1" hidden>
+            Панель «Детали»
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Паритет: статика, диалог</title>
+    <link rel="stylesheet" href="/static-demo/dist/mednet.css" />
+    <script src="/static-demo/dist/mednet.js" defer></script>
+  </head>
+  <body>
+    <main style="padding: 2rem"><p>Фон страницы под диалогом</p></main>
+    <dialog id="dlg" class="dialog" aria-labelledby="dlg-title" aria-describedby="dlg-desc">
+      <div data-testid="dialog">
+        <header>
+          <h2 id="dlg-title" data-testid="dialog-title">Заявка на обучение</h2>
+          <p id="dlg-desc">Проверьте данные перед отправкой.</p>
+        </header>
+        <section>
+          <input class="input" type="email" placeholder="Эл. почта" aria-label="Эл. почта" />
+        </section>
+        <footer>
+          <button
+            class="btn"
+            data-variant="outline"
+            type="button"
+            onclick="this.closest('dialog').close()"
+          >
+            Отмена
+          </button>
+          <button class="btn" type="button">Отправить</button>
+        </footer>
+        <button type="button" aria-label="Закрыть" onclick="this.closest('dialog').close()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+      </div>
+    </dialog>
+    <script>
+      document.getElementById('dlg').showModal();
+    </script>
+  </body>
+</html>
