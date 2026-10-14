@@ -22,6 +22,14 @@ import { Button } from '@mednet/ui/button';
 import { AppShell } from '@mednet/ui/app-shell';
 ```
 
+Chrome/Edge 109 (Windows 7/8.1): в `postcss.config.mjs` после `@tailwindcss/postcss` добавьте плагин кита, иначе пропадут кольца фокуса и полупрозрачные цвета:
+
+```js
+export default {
+  plugins: { '@tailwindcss/postcss': {}, '@mednet/ui/postcss': {} },
+};
+```
+
 Правила для людей и AI-агентов — в `node_modules/@mednet/ui/llms.md` (генерируется под установленную версию). Главное: смена элемента — проп `render`, а не `asChild`; цвета — только семантические классы бренда.
 
 ## Разработка пакета
