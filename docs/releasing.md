@@ -52,6 +52,8 @@
 
 Trusted publisher настраивается только для уже существующего пакета, поэтому первая версия публикуется вручную.
 
+Private-пакеты версионируются Version PR вместе с остальными (`privatePackages.version: true` в `.changeset/config.json`), но не публикуются и не получают тегов, пока не снят `private`.
+
 1. `package.json`: `"name": "@mednet/<имя>"`, версия — текущая версия кита, `"license": "MIT"`, `"publishConfig": { "access": "public" }`, `repository.directory`, `files`; файл `LICENSE` в папке пакета.
 2. Первая публикация — по разделу «Ручная публикация».
 3. `npm trust github @mednet/<имя> --file release.yml --repo hpnssflw/mednet-kit --allow-publish -y`
