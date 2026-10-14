@@ -22,3 +22,6 @@ packages/ui/src/index.ts
 packages/ui/llms.md
 # дословный текст для агентов: Prettier дописывает «;» в JSX-пример
 packages/ui/llms/intro.md
+
+# @mednet/lint-config: строки фикстур помечены // @bad — Prettier не должен их переносить
+packages/lint-config/test/fixtures

@@ -1,0 +1,62 @@
+{
+  "name": "@mednet/lint-config",
+  "version": "0.1.1",
+  "private": true,
+  "description": "ESLint и stylelint для проектов ЦНИИОИЗ: защита бренда",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpnssflw/mednet-kit.git",
+    "directory": "packages/lint-config"
+  },
+  "files": [
+    "eslint.js",
+    "eslint.d.ts",
+    "stylelint.js",
+    "stylelint.d.ts",
+    "README.md"
+  ],
+  "exports": {
+    "./eslint": {
+      "types": "./eslint.d.ts",
+      "default": "./eslint.js"
+    },
+    "./stylelint": {
+      "types": "./stylelint.d.ts",
+      "default": "./stylelint.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0 || ^10.0.0",
+    "stylelint": "^17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "eslint": {
+      "optional": true
+    },
+    "stylelint": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "16.4.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "stylelint": "^17.16.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "^5.0.4"
+  }
+}
