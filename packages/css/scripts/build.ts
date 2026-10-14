@@ -4,8 +4,15 @@ import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadFontFaces } from './fonts.ts';
+import postcss from 'postcss';
 
 const require = createRequire(import.meta.url);
+
+// Chrome/Edge 109 (Windows 7/8.1, спека D18): статические копии цветов перед @supports, var(--x, ),
+// hex вместо oklch() в иконках, значения в ::backdrop. Тот же плагин подключают Next-проекты.
+const legacyFallbacks = postcss([require('@mednet/ui/postcss')()]);
+const withLegacyFallbacks = (code: string) =>
+  legacyFallbacks.process(code, { from: undefined }).css;
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dist = join(root, 'dist');
 const { version } = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
@@ -33,8 +40,12 @@ const compiler = await compile(readFileSync(entry, 'utf8'), {
 const css = `${banner}\n${fonts.css}\n\n${compiler.build([])}`;
 // Обе версии проходят Lightning CSS: вложенные правила Basecoat (`&`) разворачиваются,
 // поэтому mednet.css работает и в браузерах без CSS nesting — так же, как mednet.min.css.
-writeFileSync(join(dist, 'mednet.css'), optimize(css, { minify: false }).code);
-writeFileSync(join(dist, 'mednet.min.css'), optimize(css, { minify: true }).code);
+// Плагин — после optimize: минификатор Tailwind сам пишет var(--x,) без пробела.
+writeFileSync(join(dist, 'mednet.css'), withLegacyFallbacks(optimize(css, { minify: false }).code));
+writeFileSync(
+  join(dist, 'mednet.min.css'),
+  withLegacyFallbacks(optimize(css, { minify: true }).code),
+);
 
 // JS Basecoat для интерактивных компонентов (диалоги, выпадающие меню, табы).
 // Лицензия MIT требует сохранять уведомление об авторских правах в каждой копии.

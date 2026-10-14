@@ -322,3 +322,25 @@ describe('лицензии в пакете', () => {
     expect(files).toContain('THIRD_PARTY_NOTICES.md');
   });
 });
+
+describe('Chrome/Edge 109 (Windows 7/8.1, спека D18)', () => {
+  it.each(['mednet.css', 'mednet.min.css'])(
+    '%s: нет var(--x,) — в Chrome 109 он гасит кольца фокуса',
+    (file) => {
+      expect(read(file)).not.toMatch(/var\(--[\w-]+,\)/);
+    },
+  );
+
+  it.each(['mednet.css', 'mednet.min.css'])(
+    '%s: у деструктивной кнопки есть статическая полупрозрачная заливка',
+    (file) => {
+      expect(read(file)).toMatch(/\.btn\[data-variant="?destructive"?\][^{]*\{[^}]*#c628281a/);
+    },
+  );
+
+  it.each(['mednet.css', 'mednet.min.css'])('%s: иконки в data-URI без oklch()', (file) => {
+    const uris = read(file).match(/data:image\/svg\+xml[^)]*/g) ?? [];
+    expect(uris.length).toBeGreaterThan(0);
+    for (const uri of uris) expect(uri).not.toContain('oklch(');
+  });
+});
