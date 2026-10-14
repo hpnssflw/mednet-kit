@@ -17,3 +17,4 @@ assets
 packages/ui/src/components
 packages/ui/src/hooks
 packages/ui/src/shadcn-tailwind.css
+packages/ui/src/brand/logo

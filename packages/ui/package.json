@@ -41,6 +41,10 @@
       "types": "./dist/lib/utils.d.ts",
       "default": "./dist/lib/utils.js"
     },
+    "./logo": {
+      "types": "./dist/brand/logo.d.ts",
+      "default": "./dist/brand/logo.js"
+    },
     "./*": {
       "types": "./dist/components/*.d.ts",
       "default": "./dist/components/*.js"
@@ -52,6 +56,7 @@
   },
   "scripts": {
     "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json",
+    "logos": "node scripts/gen-logos.mjs",
     "generate": "shadcn add --all -y --overwrite && node scripts/postgen.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
@@ -91,6 +96,7 @@
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "shadcn": "4.21.4",
+    "svgo": "4.1.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
     "vitest": "^5.0.4"
