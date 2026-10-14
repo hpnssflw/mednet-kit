@@ -5,7 +5,7 @@ export default function HomePage() {
     <>
       <h1 className="text-h1">Дизайн-система ЦНИИОИЗ</h1>
       <p className="mt-4 max-w-3xl text-lead text-muted-foreground">
-        Токены бренда, CSS для статических сайтов и (скоро) React-компоненты, чтобы прототипы сразу
+        Токены бренда, CSS для статических сайтов и React-компоненты, чтобы прототипы сразу
         выглядели по брендбуку.
       </p>
       <ul className="mt-10 grid gap-6 md:grid-cols-2">
@@ -25,6 +25,15 @@ export default function HomePage() {
           </p>
           <Link href="/css/" className="mt-4 inline-block font-semibold text-primary underline">
             CSS для статики
+          </Link>
+        </li>
+        <li className="rounded-xl border border-border p-6 shadow-sm">
+          <h2 className="text-h3">@mednet/ui</h2>
+          <p className="mt-2 text-muted-foreground">
+            React-компоненты на Base UI и Tailwind v4, логотип, шапка, подвал и каркасы страниц.
+          </p>
+          <Link href="/ui/" className="mt-4 inline-block font-semibold text-primary underline">
+            React-компоненты
           </Link>
         </li>
       </ul>
