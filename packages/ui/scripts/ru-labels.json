@@ -1,0 +1,68 @@
+[
+  ["breadcrumb.tsx", "aria-label=\"breadcrumb\"", "aria-label=\"Навигационная цепочка\""],
+  [
+    "breadcrumb.tsx",
+    "<span className=\"sr-only\">More</span>",
+    "<span className=\"sr-only\">Ещё</span>"
+  ],
+  [
+    "carousel.tsx",
+    "<span className=\"sr-only\">Previous slide</span>",
+    "<span className=\"sr-only\">Предыдущий слайд</span>"
+  ],
+  [
+    "carousel.tsx",
+    "<span className=\"sr-only\">Next slide</span>",
+    "<span className=\"sr-only\">Следующий слайд</span>"
+  ],
+  ["command.tsx", "title = \"Command Palette\"", "title = \"Команды\""],
+  [
+    "command.tsx",
+    "description = \"Search for a command to run...\"",
+    "description = \"Найдите команду\""
+  ],
+  [
+    "dialog.tsx",
+    "<span className=\"sr-only\">Close</span>",
+    "<span className=\"sr-only\">Закрыть</span>"
+  ],
+  [
+    "message-scroller.tsx",
+    "\"Scroll to end\" : \"Scroll to start\"",
+    "\"Прокрутить в конец\" : \"Прокрутить в начало\""
+  ],
+  ["pagination.tsx", "aria-label=\"pagination\"", "aria-label=\"Страницы\""],
+  ["pagination.tsx", "text = \"Previous\"", "text = \"Назад\""],
+  ["pagination.tsx", "aria-label=\"Go to previous page\"", "aria-label=\"Предыдущая страница\""],
+  ["pagination.tsx", "text = \"Next\"", "text = \"Вперёд\""],
+  ["pagination.tsx", "aria-label=\"Go to next page\"", "aria-label=\"Следующая страница\""],
+  [
+    "pagination.tsx",
+    "<span className=\"sr-only\">More pages</span>",
+    "<span className=\"sr-only\">Ещё страницы</span>"
+  ],
+  ["questionnaire.tsx", "{children ?? \"Previous\"}", "{children ?? \"Назад\"}"],
+  ["questionnaire.tsx", "{children ?? \"Skip\"}", "{children ?? \"Пропустить\"}"],
+  ["questionnaire.tsx", "{children ?? \"Next\"}", "{children ?? \"Далее\"}"],
+  ["questionnaire.tsx", "{children ?? \"Submit\"}", "{children ?? \"Отправить\"}"],
+  [
+    "sheet.tsx",
+    "<span className=\"sr-only\">Close</span>",
+    "<span className=\"sr-only\">Закрыть</span>"
+  ],
+  ["sidebar.tsx", "<SheetTitle>Sidebar</SheetTitle>", "<SheetTitle>Меню</SheetTitle>"],
+  [
+    "sidebar.tsx",
+    "<SheetDescription>Displays the mobile sidebar.</SheetDescription>",
+    "<SheetDescription>Разделы приложения</SheetDescription>"
+  ],
+  [
+    "sidebar.tsx",
+    "<span className=\"sr-only\">Toggle Sidebar</span>",
+    "<span className=\"sr-only\">Показать или скрыть меню</span>"
+  ],
+  ["sidebar.tsx", "aria-label=\"Toggle Sidebar\"", "aria-label=\"Показать или скрыть меню\""],
+  ["sidebar.tsx", "title=\"Toggle Sidebar\"", "title=\"Показать или скрыть меню\""],
+  ["spinner.tsx", "aria-label=\"Loading\"", "aria-label=\"Загрузка\""],
+  ["toast.tsx", "aria-label=\"Close toast\"", "aria-label=\"Закрыть уведомление\""]
+]
