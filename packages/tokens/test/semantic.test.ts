@@ -2,13 +2,17 @@ import { wcagContrast } from 'culori';
 import { describe, expect, it } from 'vitest';
 import { toDtcgColor } from '../src/dtcg.ts';
 import { loadTokens, toTokens } from '../src/load.ts';
-import { CONTRAST_PAIRS, REQUIRED_SEMANTIC } from '../src/pairs.ts';
+import { CONTRAST_PAIRS, REQUIRED_BRAND, REQUIRED_SEMANTIC } from '../src/pairs.ts';
 
 const tokens = loadTokens(new URL('../', import.meta.url));
 const hex = new Map(tokens.semantic.map((token) => [token.name, token.hex]));
 
 describe('семантика', () => {
   it.each(REQUIRED_SEMANTIC)('определяет %s (нужно shadcn и Basecoat)', (name) => {
+    expect(hex.has(name)).toBe(true);
+  });
+
+  it.each(REQUIRED_BRAND)('определяет %s (расширение бренда, спека §5)', (name) => {
     expect(hex.has(name)).toBe(true);
   });
 

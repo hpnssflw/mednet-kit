@@ -45,6 +45,12 @@ describe('buildScale', () => {
 });
 
 describe('GRAPHITE', () => {
+  it('держит опорные точки спеки', () => {
+    expect(GRAPHITE[400]).toBe('#8a8a8a');
+    expect(GRAPHITE[600]).toBe('#666666');
+    expect(GRAPHITE[900]).toBe('#333333');
+  });
+
   it('темнеет от 50 к 950', () => {
     const values = STEPS.map((step) => lightness(GRAPHITE[step]));
     for (let i = 1; i < values.length; i++) {

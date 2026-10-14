@@ -71,3 +71,23 @@ export const REQUIRED_SEMANTIC: readonly string[] = [
   'sidebar-border',
   'sidebar-ring',
 ];
+
+/** Токены-расширения бренда сверх shadcn (спека §5): состояния, статусы, поле ввода, доп. цвета графиков. */
+export const REQUIRED_BRAND: readonly string[] = [
+  'primary-hover',
+  'destructive-foreground',
+  'destructive-muted',
+  'success',
+  'success-foreground',
+  'success-muted',
+  'info',
+  'info-foreground',
+  'info-muted',
+  'warning',
+  'warning-foreground',
+  'warning-muted',
+  'field',
+  'chart-6',
+  'chart-7',
+  'chart-8',
+];

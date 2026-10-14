@@ -3,6 +3,9 @@ import type { Tokens } from './load.ts';
 
 const BANNER = '/* @mednet/tokens — сгенерировано scripts/build.ts, не редактировать вручную */';
 
+/** Имя примитива: `<оттенок>` или `<оттенок>-<шаг>`, шаг — цифры. */
+const PRIMITIVE_NAME = /^([a-z]+)(?:-(\d+))?$/;
+
 export function emitTokensCss(tokens: Tokens): string {
   const lines = [
     '  /* Примитивы бренда */',
@@ -15,7 +18,8 @@ export function emitTokensCss(tokens: Tokens): string {
     ...tokens.semantic.map((token) => `  --${token.name}: var(--mn-${token.name});`),
     '',
     '  /* База */',
-    `  --radius: ${RADIUS};`,
+    `  --mn-radius: ${RADIUS};`,
+    '  --radius: var(--mn-radius);',
     `  --mn-font-sans: ${FONT.sans};`,
     `  --mn-font-display: ${FONT.display};`,
     `  --mn-font-mono: ${FONT.mono};`,
@@ -58,6 +62,9 @@ export function emitThemeCss(tokens: Tokens): string {
     `  --font-sans: ${FONT.sans};`,
     `  --font-display: ${FONT.display};`,
     `  --font-mono: ${FONT.mono};`,
+    '  /* Переходы Tailwind идут через токены движения: prefers-reduced-motion обнуляет их в tokens.css */',
+    '  --default-transition-duration: var(--mn-duration-fast);',
+    '  --default-transition-timing-function: var(--mn-ease);',
     '}',
     '',
     '@theme inline {',
@@ -82,7 +89,13 @@ export function emitThemeCss(tokens: Tokens): string {
 export function tokensObject(tokens: Tokens) {
   const color: Record<string, string | Record<string, string>> = {};
   for (const token of tokens.primitives) {
-    const [hue, step] = token.name.split('-') as [string, string | undefined];
+    const match = PRIMITIVE_NAME.exec(token.name);
+    if (!match) {
+      throw new Error(
+        `Некорректное имя примитива «${token.name}»: ожидается <оттенок> или <оттенок>-<шаг> (шаг — цифры)`,
+      );
+    }
+    const [, hue, step] = match as unknown as [string, string, string | undefined];
     if (step === undefined) {
       color[hue] = token.hex;
     } else {
