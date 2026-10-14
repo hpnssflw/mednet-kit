@@ -19,16 +19,22 @@
   "jsdelivr": "dist/mednet.min.css",
   "unpkg": "dist/mednet.min.css",
   "exports": {
+    ".": {
+      "style": "./dist/mednet.css",
+      "default": "./dist/mednet.css"
+    },
     "./mednet.css": "./dist/mednet.css",
     "./mednet.min.css": "./dist/mednet.min.css",
     "./fonts.css": "./dist/fonts.css",
     "./mednet.js": "./dist/mednet.js",
+    "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
+    "prepublishOnly": "node scripts/check-dist.mjs",
     "build": "tsx scripts/build.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
@@ -37,7 +43,7 @@
     "@fontsource/montserrat": "^5.3.0",
     "@mednet/tokens": "workspace:*",
     "@tailwindcss/node": "^4.3.3",
-    "@types/node": "^26.6.5",
+    "@types/node": "^24",
     "basecoat-css": "1.0.2",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",

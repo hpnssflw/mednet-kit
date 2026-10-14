@@ -22,6 +22,7 @@
     "./tokens.css": "./dist/tokens.css",
     "./theme.css": "./dist/theme.css",
     "./tokens.json": "./dist/tokens.json",
+    "./dist/*": "./dist/*",
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -29,6 +30,7 @@
   },
   "scripts": {
     "generate": "tsx scripts/generate-primitives.ts",
+    "prepublishOnly": "node scripts/check-dist.mjs",
     "build": "tsx scripts/build.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
@@ -36,7 +38,7 @@
   "devDependencies": {
     "@tailwindcss/node": "^4.3.3",
     "@types/culori": "^4.0.1",
-    "@types/node": "^26.6.5",
+    "@types/node": "^24",
     "culori": "^4.0.2",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",

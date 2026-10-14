@@ -11,6 +11,8 @@
 
 Стандартная палитра Tailwind удалена — доступны только цвета бренда (`bg-red-500`, `text-blue-700`, шаги 50–950, базовый цвет — 500) и семантика (`bg-primary`, `text-muted-foreground`, `border-border`). Шрифт по умолчанию — Montserrat (файлы шрифта подключайте отдельно, например из `@mednet/css/fonts.css` или `@fontsource/montserrat`).
 
+> `theme.css` сбрасывает палитру Tailwind (`--color-*: initial`): в существующем проекте пропадут утилиты `gray`, `slate`, `zinc` и других, а одноимённые `red`, `blue`, `green`, `yellow`, `orange` станут шкалами бренда — проверьте проект перед переходом.
+
 ## Обычный CSS
 
 ```html
