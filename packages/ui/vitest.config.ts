@@ -8,6 +8,8 @@ export default defineConfig({
     // С пулом forks на Windows Vitest падает: «Timeout waiting for worker to respond».
     pool: 'threads',
     setupFiles: ['./src/__tests__/setup.ts'],
+    // Тест генератора логотипа тяжёлый: под нагрузкой (CI, параллельная сборка) он не влезает в 5 с.
+    testTimeout: 30_000,
     include: ['src/**/*.test.{ts,tsx}'],
   },
 });
