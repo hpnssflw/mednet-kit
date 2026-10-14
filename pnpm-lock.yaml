@@ -90,6 +90,9 @@ importers:
       '@mednet/tokens':
         specifier: workspace:*
         version: link:../tokens
+      '@mednet/ui':
+        specifier: workspace:*
+        version: link:../ui
       '@tailwindcss/node':
         specifier: ^4.3.3
         version: 4.3.3
@@ -99,6 +102,9 @@ importers:
       basecoat-css:
         specifier: 1.0.2
         version: 1.0.2
+      postcss:
+        specifier: ^8.5.30
+        version: 8.5.30
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -204,6 +210,9 @@ importers:
       input-otp:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      lightningcss:
+        specifier: ^1.33.0
+        version: 1.33.0
       lucide-react:
         specifier: ^1.57.0
         version: 1.57.0(@types/react@19.3.0)(react@19.3.0)
@@ -244,6 +253,9 @@ importers:
       jsdom:
         specifier: 30.1.2
         version: 30.1.2
+      postcss:
+        specifier: ^8.5.30
+        version: 8.5.30
       react:
         specifier: ^19.3.0
         version: 19.3.0

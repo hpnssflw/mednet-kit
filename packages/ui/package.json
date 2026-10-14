@@ -16,6 +16,7 @@
   "files": [
     "dist",
     "llms.md",
+    "postcss.cjs",
     "src/styles.css",
     "src/brand.css",
     "src/shadcn-tailwind.css",
@@ -43,6 +44,7 @@
     },
     "./styles.css": "./src/styles.css",
     "./llms.md": "./llms.md",
+    "./postcss": "./postcss.cjs",
     "./utils": {
       "types": "./dist/lib/utils.d.ts",
       "default": "./dist/lib/utils.js"
@@ -102,6 +104,7 @@
     "date-fns": "^4.4.0",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.5.0",
+    "lightningcss": "^1.33.0",
     "lucide-react": "^1.57.0",
     "react-day-picker": "^10.0.2",
     "react-resizable-panels": "^4.14.5",
@@ -117,6 +120,7 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "jsdom": "30.1.2",
+    "postcss": "^8.5.30",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "shadcn": "4.21.4",
