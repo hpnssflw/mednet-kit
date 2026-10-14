@@ -4,10 +4,12 @@
 
 Спецификация: [docs/superpowers/specs/2026-10-13-mednet-design-system-design.md](docs/superpowers/specs/2026-10-13-mednet-design-system-design.md).
 
-| Пакет                               | Что это                                                                      |
-| ----------------------------------- | ---------------------------------------------------------------------------- |
-| [`@mednet/tokens`](packages/tokens) | Цвета, шрифты, размеры — CSS-переменные, тема Tailwind v4, JS, JSON          |
-| [`@mednet/css`](packages/css)       | Готовый CSS для сайтов без React: компоненты Basecoat в теме бренда + шрифты |
+| Пакет                                         | Что это                                                                                                                     |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| [`@mednet/tokens`](packages/tokens)           | Цвета, шрифты, размеры — CSS-переменные, тема Tailwind v4, JS, JSON                                                         |
+| [`@mednet/css`](packages/css)                 | Готовый CSS для сайтов без React: компоненты Basecoat в теме бренда + шрифты                                                |
+| [`@mednet/ui`](packages/ui)                   | React-компоненты: shadcn/ui (Base UI, Maia) в теме бренда, логотип, шапка, подвал, каркасы страниц — **ещё не опубликован** |
+| [`@mednet/lint-config`](packages/lint-config) | ESLint и stylelint: защита бренда в проектах — **ещё не опубликован**                                                       |
 
 ## Разработка
 
@@ -27,4 +29,4 @@ pnpm format       # Prettier
 
 ## Лицензия
 
-MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России — см. [LICENSE](LICENSE). Сторонние компоненты в `@mednet/css` — [THIRD_PARTY_NOTICES.md](packages/css/THIRD_PARTY_NOTICES.md).
+MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России — см. [LICENSE](LICENSE). Сторонние компоненты в `@mednet/css` — [THIRD_PARTY_NOTICES.md](packages/css/THIRD_PARTY_NOTICES.md). Код shadcn/ui в `@mednet/ui` — [THIRD_PARTY_NOTICES.md](packages/ui/THIRD_PARTY_NOTICES.md).
