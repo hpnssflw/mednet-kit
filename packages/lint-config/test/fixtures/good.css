@@ -1,0 +1,8 @@
+.a { color: var(--primary); }
+.b { background: color-mix(in oklab, var(--primary) 30%, transparent); }
+.c { color: transparent; border-color: currentColor; fill: currentcolor; }
+.d { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23fff'/%3E%3C/svg%3E"); }
+.e { width: calc(100% - 1rem); grid-template-columns: repeat(2, 1fr); }
+.f { background: linear-gradient(var(--primary), transparent); }
+.g { color: inherit; background: none; border-color: initial; }
+.h { font-family: var(--font-sans), sans-serif; }

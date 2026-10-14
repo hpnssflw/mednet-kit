@@ -1,0 +1,19 @@
+.a { color: #fff; } /* @bad */
+.b { background: #b55c57cc; } /* @bad */
+.c { color: red; } /* @bad */
+.d { border-color: white; } /* @bad */
+.e { color: rgb(0 0 0); } /* @bad */
+.f { color: rgba(0, 0, 0, 0.5); } /* @bad */
+.g { color: hsl(0 0% 0%); } /* @bad */
+.h { color: hsla(0, 0%, 0%, 0.5); } /* @bad */
+.i { color: hwb(0 0% 0%); } /* @bad */
+.j { color: lab(50% 40 59); } /* @bad */
+.k { color: lch(50% 70 40); } /* @bad */
+.l { color: oklab(0.6 0.1 0.1); } /* @bad */
+.m { color: oklch(0.6 0.1 20); } /* @bad */
+.n { color: color(display-p3 1 0 0); } /* @bad */
+.o { box-shadow: 0 0 0 1px #000; } /* @bad */
+.p { background: linear-gradient(white, transparent); } /* @bad */
+.q { --brand: #b55c57; } /* @bad */
+.r { background: color-mix(in oklab, #b55c57 30%, transparent); } /* @bad */
+.s { outline: 1px solid Black; } /* @bad */

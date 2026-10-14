@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@import "@mednet/ui/styles.css";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" source(none);
+
+@plugin "@tailwindcss/typography";
+@reference "../app/globals.css";
+
+@source "../dist";
+@source not "./legacy";
+@source inline("bg-primary");
+
+@custom-variant dark (&:is(.dark *));
+
+@custom-variant data-open {
+  &:where([data-state="open"]),
+  &:where([data-open]:not([data-open="false"])) {
+    @slot;
+  }
+}
+
+@theme inline {
+  --color-x: var(--y);
+  --font-sans: var(--font-montserrat);
+}
+
+@theme {
+  --spacing-18: 4.5rem;
+}
+
+@utility content-auto {
+  content-visibility: auto;
+}
+
+@utility tab-* {
+  tab-size: --value(integer);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-primary rounded-lg hover:bg-primary-hover;
+  }
+}
+
+.overlay {
+  background: --alpha(var(--color-primary) / 50%);
+  color: --alpha(var(--color-primary) / 50%);
+  margin: --spacing(4);
+  padding: theme(--spacing-4);
+}
+
+@variant dark {
+  .x {
+    color: var(--foreground);
+  }
+}
+
+.y {
+  @variant hover {
+    color: var(--primary);
+  }
+}

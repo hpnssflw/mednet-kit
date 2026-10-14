@@ -1,9 +1,11 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { ESLint, type Linter } from 'eslint';
+import stylelint from 'stylelint';
 import tseslint from 'typescript-eslint';
 import { describe, expect, it } from 'vitest';
 import mednetEslint, { restrictedImports } from '../eslint.js';
+import mednetStylelint from '../stylelint.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const fixture = (name: string) => fileURLToPath(new URL(`./fixtures/${name}`, import.meta.url));
@@ -76,5 +78,24 @@ describe('расширение в проекте', () => {
       filePath: fixture('extend.ts'),
     });
     expect(result!.messages.map((message) => message.line)).toEqual([1, 2]);
+  });
+});
+
+describe('stylelint', () => {
+  it('ловит литеральные цвета и не трогает токены, color-mix и синтаксис Tailwind v4', async () => {
+    const { results } = await stylelint.lint({
+      files: ['bad.css', 'good.css', 'tailwind.css', 'data-uri.css'].map(fixture),
+      config: mednetStylelint,
+    });
+    const [bad, ...clean] = results;
+    expect(bad!.warnings.map((warning) => warning.line).sort((a, b) => a - b)).toEqual(
+      badLines('bad.css', '/* @bad */'),
+    );
+    for (const result of clean) {
+      expect({ file: result.source, warnings: result.warnings }).toEqual({
+        file: result.source,
+        warnings: [],
+      });
+    }
   });
 });
