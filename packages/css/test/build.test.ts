@@ -233,6 +233,20 @@ describe('бренд-правки Basecoat (src/overrides.css)', () => {
     ).toBe('1px solid var(--ring)');
   });
 
+  it('неактивная вкладка — --muted-foreground, наведение и активная — --foreground', () => {
+    const TAB = '.tabs > [role="tablist"] > [role="tab"]';
+    // winning берёт последнее объявление; @supports-блок Basecoat (foreground 60 %) идёт раньше правки.
+    expect(winning(TAB, COMPONENTS, 'color')).toBe('var(--muted-foreground)');
+    expect(winning(`${TAB}:hover`, HOVER, 'color')).toBe('var(--foreground)');
+    expect(
+      winning(
+        '.tabs > [role="tablist"]:not([data-variant="line"]) > [role="tab"][aria-selected="true"]',
+        COMPONENTS,
+        'color',
+      ),
+    ).toBe('var(--foreground)');
+  });
+
   it('основная кнопка и бейдж-ссылка при наведении — --primary-hover (белый текст 5.23:1)', () => {
     expect(winning(HOVER_PRIMARY, HOVER, 'background-color')).toBe('var(--primary-hover)');
     expect(

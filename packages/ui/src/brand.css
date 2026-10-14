@@ -42,3 +42,13 @@
     background-color: var(--primary-hover);
   }
 }
+
+/*
+ * Неактивная вкладка: Maia даёт text-foreground/60 — #817f7d на --muted (#f7f2ed) это 3.58:1, меньше AA (4.5:1).
+ * --muted-foreground (#666666) — 5.16:1. Ключ — классы триггера (text-foreground/60 в tabs.tsx только у него).
+ * Специфичность (0,2,0): бьёт утилиту text-foreground/60 (0,1,0), уступает вариантам hover:text-foreground
+ * и data-active:text-foreground (они позже в том же слое) — при наведении и у активной остаётся --foreground.
+ */
+[class~='text-foreground/60'][class~='hover:text-foreground'] {
+  color: var(--muted-foreground);
+}

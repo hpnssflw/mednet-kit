@@ -22,6 +22,10 @@ beforeAll(async () => {
       '[a]:hover:bg-primary/80',
       'aria-expanded:bg-muted',
       'border-input',
+      // Триггер вкладки: неактивный — text-foreground/60, наведение и активный — свои варианты.
+      'text-foreground/60',
+      'hover:text-foreground',
+      'data-active:text-foreground',
       // Проверка палитры: стандартной шкалы slate нет, red — брендовая.
       'bg-slate-500',
       'bg-red-500',
@@ -63,6 +67,23 @@ describe('brand.css', () => {
       'background-color: var(--primary-hover)',
     );
     expect(css).toContain("[class~='group/badge'][class~='[a]:hover:bg-primary/80']:is(a):hover");
+  });
+
+  it('неактивная вкладка — --muted-foreground (5.16:1 вместо 3.58:1 у foreground/60)', () => {
+    expect(rule("[class~='text-foreground/60']")).toContain('color: var(--muted-foreground)');
+  });
+
+  it('правило вкладки стоит в слое utilities до утилиты и вариантов hover: и data-active:', () => {
+    const utilities = css.indexOf('@layer utilities');
+    const brand = css.indexOf("[class~='text-foreground/60']");
+    const generated = css.indexOf('.text-foreground\\/60');
+    const hover = css.indexOf('.hover\\:text-foreground');
+    const active = css.indexOf('.data-active\\:text-foreground');
+    expect(utilities).toBeGreaterThan(-1);
+    expect(brand).toBeGreaterThan(utilities);
+    expect(generated).toBeGreaterThan(brand);
+    expect(hover).toBeGreaterThan(brand);
+    expect(active).toBeGreaterThan(brand);
   });
 
   it('палитры Tailwind в итоговом CSS нет — только токены', () => {

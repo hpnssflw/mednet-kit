@@ -118,6 +118,25 @@
   }
 
   /*
+   * Неактивная вкладка: Basecoat (как и Maia) красит её foreground 60 % — 3.58:1 на --muted, меньше AA.
+   * --muted-foreground — 5.16:1. Правка стоит после Basecoat (в т. ч. после его блока @supports) с той же
+   * специфичностью, поэтому побеждает; наведение (Basecoat, (0,3,0)) и активная вкладка остаются --foreground.
+   */
+  .tabs > [role='tablist'] > [role='tab'] {
+    color: var(--muted-foreground);
+  }
+
+  @media (hover: hover) {
+    .tabs > [role='tablist'] > [role='tab']:hover {
+      color: var(--foreground);
+    }
+  }
+
+  .tabs > [role='tablist'] > [role='tab'][aria-selected='true'] {
+    color: var(--foreground);
+  }
+
+  /*
    * Уменьшение движения. Basecoat задаёт анимации и переходы литералами (animate-*, duration-*),
    * а не через --mn-duration-*, поэтому обнуление токенов до компонентов не доходит.
    * При prefers-reduced-motion гасим всё разом; 0.01ms, а не 0, чтобы события
