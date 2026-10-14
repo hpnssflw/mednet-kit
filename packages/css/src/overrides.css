@@ -70,6 +70,51 @@
     .btn[data-variant='outline']:hover {
       background-color: var(--muted);
     }
+
+    /* Maia: primary/80 — белый текст 3.20:1, меньше AA; токен --primary-hover (#a55551) — 5.23:1. */
+    :is(.btn:not([data-variant]), .btn[data-variant='primary']):hover,
+    :is(.badge:not([data-variant]), .badge[data-variant='primary']):is(a):hover {
+      background-color: var(--primary-hover);
+    }
+  }
+
+  /*
+   * Выравнивание под shadcn Maia — эталон стиля (спека пилота П13); расхождения нашёл тест паритета.
+   * Контурная кнопка: .btn[data-variant='outline'] у Basecoat той же специфичности, что
+   * .btn:focus-visible и [aria-invalid], но идёт позже и перебивает их границу.
+   */
+  .btn[data-variant='outline']:focus-visible {
+    border-color: var(--ring);
+  }
+
+  .btn[data-variant='outline'][aria-invalid='true'] {
+    border-color: var(--destructive);
+  }
+
+  /* Текст 500 (спека §5): Basecoat ставит триггеру select font-normal. */
+  .select:not(select) > button {
+    font-weight: inherit;
+  }
+
+  /* Заголовок карточки как в shadcn Maia: межстрочный 1.5 (Basecoat card.css даёт leading-none). */
+  .card > header > :is(h2, h3, [data-title], .card-title) {
+    line-height: var(--mn-text-base-line-height);
+  }
+
+  /*
+   * Вкладки как в shadcn Maia: высота calc(100% - 1px), без тени у активной, контур 1px в фокусе.
+   * Тень гасится через --tw-shadow, а не box-shadow: none — иначе пропадёт и кольцо фокуса.
+   */
+  .tabs > [role='tablist'] > [role='tab'] {
+    height: calc(100% - 1px);
+  }
+
+  .tabs > [role='tablist']:not([data-variant='line']) > [role='tab'][aria-selected='true'] {
+    --tw-shadow: 0 0 #0000;
+  }
+
+  .tabs > [role='tablist'] > [role='tab']:focus-visible {
+    outline: 1px solid var(--ring);
   }
 
   /*

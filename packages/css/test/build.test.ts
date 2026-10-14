@@ -195,6 +195,55 @@ describe('бренд-правки Basecoat (src/overrides.css)', () => {
     );
   });
 
+  const FOCUS = COMPONENTS;
+  const HOVER_PRIMARY = ':is(.btn:not([data-variant]), .btn[data-variant="primary"]):hover';
+
+  it('контурная кнопка: в фокусе синяя граница (D7), с ошибкой — красная', () => {
+    expect(winning('.btn[data-variant="outline"]:focus-visible', FOCUS, 'border-color')).toBe(
+      'var(--ring)',
+    );
+    expect(
+      winning('.btn[data-variant="outline"][aria-invalid="true"]', FOCUS, 'border-color'),
+    ).toBe('var(--destructive)');
+  });
+
+  it('триггер select — насыщенность текста 500, как у всего текста (спека §5)', () => {
+    expect(winning('.select:not(select) > button', COMPONENTS, 'font-weight')).toBe('inherit');
+  });
+
+  it('заголовок карточки — межстрочный 1.5, как в shadcn Maia', () => {
+    expect(
+      winning('.card > header > :is(h2, h3, [data-title], .card-title)', COMPONENTS, 'line-height'),
+    ).toBe('var(--mn-text-base-line-height)');
+  });
+
+  it('вкладки как в shadcn Maia: высота, без тени у активной, контур в фокусе', () => {
+    expect(winning('.tabs > [role="tablist"] > [role="tab"]', COMPONENTS, 'height')).toBe(
+      'calc(100% - 1px)',
+    );
+    expect(
+      winning(
+        '.tabs > [role="tablist"]:not([data-variant="line"]) > [role="tab"][aria-selected="true"]',
+        COMPONENTS,
+        '--tw-shadow',
+      ),
+    ).toBe('0 0 #0000');
+    expect(
+      winning('.tabs > [role="tablist"] > [role="tab"]:focus-visible', COMPONENTS, 'outline'),
+    ).toBe('1px solid var(--ring)');
+  });
+
+  it('основная кнопка и бейдж-ссылка при наведении — --primary-hover (белый текст 5.23:1)', () => {
+    expect(winning(HOVER_PRIMARY, HOVER, 'background-color')).toBe('var(--primary-hover)');
+    expect(
+      winning(
+        ':is(.badge:not([data-variant]), .badge[data-variant="primary"]):is(a):hover',
+        HOVER,
+        'background-color',
+      ),
+    ).toBe('var(--primary-hover)');
+  });
+
   it('гасит анимации и переходы компонентов при prefers-reduced-motion', () => {
     for (const file of ['mednet.css', 'mednet.min.css']) {
       const css = read(file).replace(/\s+/g, '');
