@@ -26,6 +26,11 @@ beforeAll(async () => {
       'text-foreground/60',
       'hover:text-foreground',
       'data-active:text-foreground',
+      // Граница контурной кнопки: база и вариант без cn(), затем варианты фокуса и ошибки.
+      'border-border',
+      'border-transparent',
+      'focus-visible:border-ring',
+      'aria-invalid:border-destructive',
       // Проверка палитры: стандартной шкалы slate нет, red — брендовая.
       'bg-slate-500',
       'bg-red-500',
@@ -39,6 +44,9 @@ const rule = (selectorStart: string) => {
   expect(start, selectorStart).toBeGreaterThan(-1);
   return css.slice(start, css.indexOf('}', start) + 1);
 };
+
+/** Обратная косая черта — экранирование «:» в классах Tailwind. */
+const BS = String.fromCharCode(92);
 
 describe('brand.css', () => {
   it('поля, контурные кнопка и бейдж заливаются --field, а не серым --input', () => {
@@ -84,6 +92,33 @@ describe('brand.css', () => {
     expect(generated).toBeGreaterThan(brand);
     expect(hover).toBeGreaterThan(brand);
     expect(active).toBeGreaterThan(brand);
+  });
+
+  it('активную вкладку правило не трогает: исключение через :where, как у data-active:', () => {
+    // Вариант data-active: собран через :where(...) — (0,1,0); правило (0,2,0) перебило бы его без исключения.
+    const variant = '.data-active' + BS + ':text-foreground:where(';
+    expect(css).toContain(variant + "[data-state='active'])");
+    expect(css).toContain(variant + "[data-active]:not([data-active='false']))");
+    const tab = rule("[class~='text-foreground/60']")
+      .split(/[ \n]+/)
+      .join(' ');
+    expect(tab).toContain(
+      ":where( :not([data-state='active'], [data-active]:not([data-active='false']))",
+    );
+  });
+
+  it('граница контурной кнопки и бейджа переживает сырой buttonVariants без cn()', () => {
+    const start = ":is([class~='group/button'], [class~='group/badge'])[class~='border-border']";
+    expect(rule(start)).toContain('border-color: var(--border)');
+    const brand = css.indexOf(start);
+    // Варианты фокуса и ошибки стоят позже при той же специфичности (0,2,0) — граница в них прежняя.
+    for (const utility of [
+      '.border-transparent',
+      '.focus-visible' + BS + ':border-ring',
+      '.aria-invalid' + BS + ':border-destructive',
+    ]) {
+      expect(css.indexOf(utility), utility).toBeGreaterThan(brand);
+    }
   });
 
   it('палитры Tailwind в итоговом CSS нет — только токены', () => {

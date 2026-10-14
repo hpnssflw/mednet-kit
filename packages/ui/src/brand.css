@@ -46,9 +46,24 @@
 /*
  * Неактивная вкладка: Maia даёт text-foreground/60 — #817f7d на --muted (#f7f2ed) это 3.58:1, меньше AA (4.5:1).
  * --muted-foreground (#666666) — 5.16:1. Ключ — классы триггера (text-foreground/60 в tabs.tsx только у него).
- * Специфичность (0,2,0): бьёт утилиту text-foreground/60 (0,1,0), уступает вариантам hover:text-foreground
- * и data-active:text-foreground (они позже в том же слое) — при наведении и у активной остаётся --foreground.
+ * Специфичность (0,2,0): бьёт утилиту text-foreground/60 (0,1,0) и уступает hover:text-foreground (0,2,0, позже
+ * в слое). Вариант data-active:text-foreground Tailwind собирает через :where(...) — это (0,1,0), правило его
+ * перебило бы, поэтому активную вкладку исключаем сами, тоже через :where (специфичность не растёт):
+ * у неё остаётся --foreground.
  */
-[class~='text-foreground/60'][class~='hover:text-foreground'] {
+[class~='text-foreground/60'][class~='hover:text-foreground']:where(
+    :not([data-state='active'], [data-active]:not([data-active='false']))
+  ) {
   color: var(--muted-foreground);
+}
+
+/*
+ * Граница контурной кнопки и бейджа: buttonVariants({ variant: 'outline' }) / badgeVariants без cn() отдаёт
+ * и border-transparent (база), и border-border (вариант); прозрачная побеждает, и рамки нет. cn() убирает
+ * лишнее, а ссылка <a className={buttonVariants(...)}> — нет. Специфичность (0,2,0): бьёт border-transparent
+ * (0,1,0); варианты focus-visible:border-ring, aria-invalid:border-destructive — тоже (0,2,0), но позже в слое,
+ * поэтому в фокусе и с ошибкой граница прежняя.
+ */
+:is([class~='group/button'], [class~='group/badge'])[class~='border-border'] {
+  border-color: var(--border);
 }
