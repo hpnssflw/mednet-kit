@@ -54,6 +54,7 @@ export const c13 = <div className="bg-[lch(50%_70_40)]" />; // @bad
 export const c14 = <div className="bg-[oklab(0.6_0.1_0.1)]" />; // @bad
 export const c15 = <div className="bg-[color(display-p3_1_0_0)]" />; // @bad
 export const c16 = <div className="shadow-[0_0_0_1px_#fff]" />; // @bad
+export const c16b = <div className="shadow-[0_1px_2px_rgb(0_0_0/0.05)]" />; // @bad
 export const c17 = <div className="bg-[linear-gradient(#fff_0%,transparent_100%)]" />; // @bad
 export const c18 = <div className="[--brand:#b55c57]" />; // @bad
 export const c19 = <div className="BG-[#FFF]" />; // @bad
