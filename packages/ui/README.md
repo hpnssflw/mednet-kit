@@ -15,6 +15,8 @@ npm i -D tailwindcss @tailwindcss/postcss
 @import '@mednet/ui/styles.css';
 ```
 
+Графики: `recharts` — peer-зависимость, установите его в проект (`npm i recharts`); компоненты графика импортируйте из `recharts`, обёртки — из `@mednet/ui/chart`.
+
 Компоненты — по подпутям:
 
 ```tsx

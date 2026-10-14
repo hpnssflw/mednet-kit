@@ -222,9 +222,6 @@ importers:
       react-resizable-panels:
         specifier: ^4.14.5
         version: 4.14.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
-      recharts:
-        specifier: 3.8.0
-        version: 3.8.0(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react-is@17.0.2)(react@19.3.0)(redux@5.0.1)
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
@@ -262,6 +259,9 @@ importers:
       react-dom:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
+      recharts:
+        specifier: 3.8.0
+        version: 3.8.0(@types/react@19.3.0)(react-dom@19.3.0(react@19.3.0))(react-is@17.0.2)(react@19.3.0)(redux@5.0.1)
       shadcn:
         specifier: 4.21.4
         version: 4.21.4
