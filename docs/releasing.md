@@ -90,6 +90,7 @@ curl -sI https://cdn.jsdelivr.net/npm/@mednet/css@<версия>/dist/mednet.min
 - `npm install -g npm@11` в `release.yml` нужен для trusted publishing (npm 11.5.1+); мажор закреплён, чтобы релиз не ломался от выхода новой версии npm.
 - Сторонние actions в обоих workflow закреплены полным SHA коммита с комментарием `# vX.Y.Z`; обновлять — осознанно (SHA через `gh api repos/<owner>/<repo>/git/ref/tags/<tag>`, аннотированный тег разыменовать до коммита).
 - `pnpm release` перед публикацией не только собирает пакеты, но и гоняет их тесты (`turbo run build test`); `prepublishOnly` в пакетах дополнительно не даёт опубликовать их без `dist/`.
+- Job CI `chrome109` гоняет smoke-тест в Chromium 109 (Docker `mcr.microsoft.com/playwright:v1.29.2-focal`): Tailwind, Next и Base UI официально поддерживают Chrome 111+, и их обновление может молча сломать Windows 7/8.1 — job это поймает.
 
 ## История
 
