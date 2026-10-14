@@ -108,7 +108,11 @@ export default function RecipesPage() {
       </Recipe>
 
       <Recipe id="tailwind" title="Любой проект на Tailwind v4" code={TAILWIND}>
-        Стандартная палитра Tailwind заменится палитрой бренда.
+        Стандартная палитра Tailwind заменится палитрой бренда. <code>theme.css</code> сбрасывает её
+        (<code>--color-*: initial</code>): в существующем проекте пропадут утилиты <code>gray</code>
+        , <code>slate</code>, <code>zinc</code> и других, а одноимённые <code>red</code>,{' '}
+        <code>blue</code>, <code>green</code>, <code>yellow</code>, <code>orange</code> станут
+        шкалами бренда — проверьте проект перед переходом.
       </Recipe>
     </>
   );

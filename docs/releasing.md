@@ -16,7 +16,7 @@
           │
           ▼  push в main
   Release workflow: changesets нет, версия не опубликована
-          │  pnpm release = сборка пакетов + changeset publish (OIDC, provenance)
+          │  pnpm release = сборка и тесты пакетов + changeset publish (OIDC, provenance)
           │  шаг «Теги и GitHub Releases»: теги @mednet/<пакет>@<версия> + релизы из CHANGELOG
           ▼
   npm  ──►  jsDelivr (`@0` подхватывает новую версию)
@@ -87,7 +87,9 @@ curl -sI https://cdn.jsdelivr.net/npm/@mednet/css@<версия>/dist/mednet.min
 
 - `changesets/action@v1` не распознаёт формат вывода `@changesets/cli` 3: теги создаются только в раннере, GitHub Releases не появляются. Поэтому в `release.yml` есть отдельный шаг «Теги и GitHub Releases».
 - Version PR не запускает CI (ограничение GitHub для PR от `GITHUB_TOKEN`).
-- `npm install -g npm@latest` в `release.yml` нужен для trusted publishing (npm 11.5.1+).
+- `npm install -g npm@11` в `release.yml` нужен для trusted publishing (npm 11.5.1+); мажор закреплён, чтобы релиз не ломался от выхода новой версии npm.
+- Сторонние actions в обоих workflow закреплены полным SHA коммита с комментарием `# vX.Y.Z`; обновлять — осознанно (SHA через `gh api repos/<owner>/<repo>/git/ref/tags/<tag>`, аннотированный тег разыменовать до коммита).
+- `pnpm release` перед публикацией не только собирает пакеты, но и гоняет их тесты (`turbo run build test`); `prepublishOnly` в пакетах дополнительно не даёт опубликовать их без `dist/`.
 
 ## История
 
