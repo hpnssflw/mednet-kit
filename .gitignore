@@ -17,3 +17,6 @@ Thumbs.db
 *.tsbuildinfo
 next-env.d.ts
 apps/docs/public/static-demo/
+
+# генерируется сборкой @mednet/ui
+packages/ui/llms.md

@@ -15,6 +15,7 @@
   ],
   "files": [
     "dist",
+    "llms.md",
     "src/styles.css",
     "src/brand.css",
     "src/shadcn-tailwind.css",
@@ -36,7 +37,12 @@
     }
   },
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./styles.css": "./src/styles.css",
+    "./llms.md": "./llms.md",
     "./utils": {
       "types": "./dist/lib/utils.d.ts",
       "default": "./dist/lib/utils.js"
@@ -71,8 +77,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json",
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json && node scripts/build-llms.mjs",
+    "prepublishOnly": "node scripts/check-dist.mjs",
     "logos": "node scripts/gen-logos.mjs",
+    "gen:index": "node scripts/gen-index.mjs",
     "generate": "shadcn add --all -y --overwrite && node scripts/postgen.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
