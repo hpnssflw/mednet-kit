@@ -2,4 +2,43 @@
  * Бренд-правки shadcn Maia для React (зеркало packages/css/src/overrides.css).
  * Подключается в styles.css как `@import './brand.css' layer(utilities)` ДО утилит Tailwind.
  * Сгенерированные файлы shadcn не трогаем — `shadcn add <x> --diff` показывает только апстрим.
+ *
+ * Ключ — сгенерированные классы ([class~='…'] = целое слово, «/» не экранируется), НЕ data-slot:
+ * в Base UI при render={<Button />} у DialogTrigger/DialogClose/… побеждает data-slot внешней
+ * части ('dialog-trigger'), а классы кнопки сохраняются. Маркеры: поля — border-input,
+ * кнопка — group/button, бейдж — group/badge.
+ *
+ * Не трогаем (как статика): дорожку Switch и разделитель ButtonGroup (bg-input), поиск
+ * в Command и в списке Combobox (белое на белом исчезнет), dark:* (тёмной темы в v1 нет, D15).
  */
+
+/*
+ * Заливка полей, контурных кнопки и бейджа: --input (графитовая граница 3:1, 30 %) → --field (белый).
+ * Специфичность (0,2,0): бьёт утилиту bg-input/30 (0,1,0), уступает вариантам hover:, aria-expanded:
+ * и классам проекта (они позже в том же слое). Свой bg-… проекта cn() не пропустит вместе с bg-input/30.
+ */
+:is(
+    [class~='border-input'],
+    [class~='group/button'],
+    [class~='group/badge']
+  )[class~='bg-input/30']:where(
+    :not([data-slot='command-input-wrapper'] *, [data-slot='combobox-content'] *)
+  ) {
+  background-color: var(--field);
+}
+
+@media (hover: hover) {
+  /* Контурная кнопка при наведении: --input 50 % → --muted; (0,3,0) бьёт hover:bg-input/50. */
+  [class~='group/button'][class~='hover:bg-input/50']:hover {
+    background-color: var(--muted);
+  }
+
+  /*
+   * Основная кнопка и бейдж-ссылка при наведении: Maia даёт primary/80 — белый текст 3.20:1, меньше AA.
+   * Токен --primary-hover (#a55551) — 5.23:1.
+   */
+  [class~='group/button'][class~='hover:bg-primary/80']:hover,
+  [class~='group/badge'][class~='[a]:hover:bg-primary/80']:is(a):hover {
+    background-color: var(--primary-hover);
+  }
+}
