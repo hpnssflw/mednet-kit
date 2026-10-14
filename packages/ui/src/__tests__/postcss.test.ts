@@ -55,4 +55,22 @@ describe('@mednet/ui/postcss (Chrome/Edge 109)', () => {
     const out = run(THEME + 'dialog::backdrop { background-color: var(--mn-black); }');
     expect(out).toContain('dialog::backdrop { background-color: #000; }');
   });
+
+  it('.dark-mode — не тёмная тема: берёт светлые цвета', () => {
+    const out = run(THEME + GUARDED('.dark-mode .x', 10));
+    expect(out).toContain('#c628281a');
+    expect(out).not.toContain('#ef53501a');
+  });
+
+  it('непереводимый oklch() в data-URI: не падает, значение остаётся, есть предупреждение', () => {
+    const css = `:root { --i: url("data:image/svg+xml,%3Csvg stroke='oklch(foo bar)'%3E%3C/svg%3E"); }`;
+    const result = postcss([legacyFallbacks()]).process(css, { from: undefined });
+    expect(result.css).toContain('oklch(foo bar)');
+    const warnings = result.warnings();
+    expect(warnings).toHaveLength(1);
+    expect(warnings[0].text).toContain('oklch(foo bar)');
+  });
+
+  // Идемпотентность не требуется: шаг 1 каждый раз добавляет статическую копию перед @supports,
+  // поэтому повторный прогон дублирует её. Плагин ставится в конвейер один раз (Next, @mednet/css).
 });

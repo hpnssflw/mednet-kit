@@ -39,7 +39,7 @@ function lower(value, targets) {
 
 const isGuard = (atRule) =>
   atRule.params.replace(/\s/g, '').includes('(color:color-mix(inlab,red,red))');
-const isDark = (rule) => /\.dark\b/.test((rule && rule.selector) || '');
+const isDark = (rule) => /\.dark(?![\w-])/.test((rule && rule.selector) || '');
 
 /** Переменные темы: светлая — :root/:host/html, тёмная — светлая + .dark. */
 function themes(root) {
@@ -86,7 +86,7 @@ function resolver(vars) {
 function legacyFallbacks() {
   return {
     postcssPlugin: 'mednet-legacy-fallbacks',
-    OnceExit(root) {
+    OnceExit(root, { result }) {
       const { light, dark } = themes(root);
       const resolveLight = resolver(light);
       const resolveDark = resolver(dark);
@@ -95,9 +95,20 @@ function legacyFallbacks() {
       // 3. oklch() в SVG data-URI
       root.walkDecls((decl) => {
         if (!decl.value.includes('data:image/svg+xml') || !decl.value.includes('oklch(')) return;
-        decl.value = decl.value.replace(/oklch\([^)]*\)/g, (color) =>
-          lower(color, CHROME_60).replace(/^#/, '%23'),
-        );
+        decl.value = decl.value.replace(/oklch\([^)]*\)/g, (color) => {
+          try {
+            const hex = lower(color, CHROME_60);
+            // Lightning CSS не падает на нечитаемом цвете, а возвращает его как есть
+            if (hex.includes('oklch(')) throw new Error('цвет не переведён');
+            return hex.replace(/^#/, '%23');
+          } catch {
+            result.warn(
+              `mednet-legacy-fallbacks: не удалось перевести ${color} в hex внутри SVG data-URI, значение оставлено как есть`,
+              { node: decl },
+            );
+            return color;
+          }
+        });
       });
 
       // 4. var() в ::backdrop
@@ -127,6 +138,10 @@ function legacyFallbacks() {
           try {
             decl.value = lower(value, CHROME_109);
           } catch {
+            result.warn(
+              `mednet-legacy-fallbacks: не удалось перевести «${value}» в статический цвет, объявление ${decl.prop} в копии для Chrome 109 удалено`,
+              { node: decl },
+            );
             decl.remove();
           }
         });
