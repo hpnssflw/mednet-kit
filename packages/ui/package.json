@@ -45,6 +45,14 @@
       "types": "./dist/brand/logo.d.ts",
       "default": "./dist/brand/logo.js"
     },
+    "./site-header": {
+      "types": "./dist/brand/site-header.d.ts",
+      "default": "./dist/brand/site-header.js"
+    },
+    "./site-footer": {
+      "types": "./dist/brand/site-footer.d.ts",
+      "default": "./dist/brand/site-footer.js"
+    },
     "./*": {
       "types": "./dist/components/*.d.ts",
       "default": "./dist/components/*.js"
