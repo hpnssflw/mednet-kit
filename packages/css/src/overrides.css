@@ -71,4 +71,21 @@
       background-color: var(--muted);
     }
   }
+
+  /*
+   * Уменьшение движения. Basecoat задаёт анимации и переходы литералами (animate-*, duration-*),
+   * а не через --mn-duration-*, поэтому обнуление токенов до компонентов не доходит.
+   * При prefers-reduced-motion гасим всё разом; 0.01ms, а не 0, чтобы события
+   * animationend/transitionend по-прежнему срабатывали.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }

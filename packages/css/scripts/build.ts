@@ -11,7 +11,7 @@ const dist = join(root, 'dist');
 const { version } = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')) as {
   version: string;
 };
-const banner = `/*! @mednet/css v${version} | дизайн-система ЦНИИОИЗ | Basecoat (MIT), Tailwind CSS (MIT), Montserrat (OFL-1.1) */`;
+const banner = `/*! @mednet/css v${version} | дизайн-система ЦНИИОИЗ | Basecoat (MIT), Tailwind CSS (MIT), Montserrat (OFL-1.1) | см. THIRD_PARTY_NOTICES.md */`;
 
 mkdirSync(join(dist, 'fonts'), { recursive: true });
 

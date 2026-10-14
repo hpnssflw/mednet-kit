@@ -4,7 +4,7 @@
 
 ## Basecoat
 
-Стили [Basecoat](https://basecoatui.com) v1.0.2 (стиль Maia) скомпилированы в `dist/mednet.css` и `dist/mednet.min.css`; `dist/mednet.js` — JS Basecoat без изменений.
+Стили [Basecoat](https://basecoatui.com) v1.0.2 (стиль Maia) скомпилированы в `dist/mednet.css` и `dist/mednet.min.css`; `dist/mednet.js` — JS Basecoat с добавленным в начало уведомлением о лицензии (код Basecoat не менялся).
 
 ```text
 MIT License

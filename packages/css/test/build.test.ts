@@ -194,6 +194,19 @@ describe('бренд-правки Basecoat (src/overrides.css)', () => {
       'var(--muted)',
     );
   });
+
+  it('гасит анимации и переходы компонентов при prefers-reduced-motion', () => {
+    for (const file of ['mednet.css', 'mednet.min.css']) {
+      const css = read(file).replace(/\s+/g, '');
+      const block = [...css.matchAll(/@media\(prefers-reduced-motion:reduce\)\{([^@]*?\})\}/g)]
+        .map((match) => match[1])
+        .join('');
+      expect(block, file).toContain('animation-duration:.01ms!important');
+      expect(block, file).toContain('animation-iteration-count:1!important');
+      expect(block, file).toContain('transition-duration:.01ms!important');
+      expect(block, file).toContain('scroll-behavior:auto!important');
+    }
+  });
 });
 
 describe('остальные файлы dist', () => {
@@ -201,6 +214,12 @@ describe('остальные файлы dist', () => {
     const fonts = read('fonts.css');
     expect(fonts).toContain('@font-face');
     expect(fonts).not.toContain('.btn');
+  });
+
+  it('баннеры CSS отсылают к THIRD_PARTY_NOTICES.md', () => {
+    for (const file of ['mednet.css', 'mednet.min.css', 'fonts.css']) {
+      expect(read(file).split('\n')[0], file).toContain('| см. THIRD_PARTY_NOTICES.md');
+    }
   });
 
   it('кладёт лицензию шрифта', () => {
