@@ -53,6 +53,14 @@
       "types": "./dist/brand/site-footer.d.ts",
       "default": "./dist/brand/site-footer.js"
     },
+    "./public-layout": {
+      "types": "./dist/layouts/public-layout.d.ts",
+      "default": "./dist/layouts/public-layout.js"
+    },
+    "./app-shell": {
+      "types": "./dist/layouts/app-shell.d.ts",
+      "default": "./dist/layouts/app-shell.js"
+    },
     "./*": {
       "types": "./dist/components/*.d.ts",
       "default": "./dist/components/*.js"
