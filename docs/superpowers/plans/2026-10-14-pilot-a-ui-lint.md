@@ -379,7 +379,8 @@ import { afterEach } from 'vitest';
 afterEach(() => cleanup());
 
 // jsdom не реализует matchMedia, а useIsMobile (Sidebar) его вызывает.
-if (!window.matchMedia) {
+// typeof window — файл подключается и к тестам с @vitest-environment node (brand, postcss).
+if (typeof window !== 'undefined' && !window.matchMedia) {
   window.matchMedia = (query: string) =>
     ({
       matches: false,
@@ -712,6 +713,7 @@ Expected `git status`: новые `src/components/*.tsx` (61 файл или б�
 ```json
 "dependencies": {
   "@base-ui/react": "^1.9.0",
+  "@fontsource/montserrat": "^5.3.0",
   "@mednet/tokens": "workspace:*",
   "@shadcn/react": "^0.3.1",
   "class-variance-authority": "^0.7.1",
@@ -836,7 +838,7 @@ Expected: `tsc` без ошибок за 30–60 с; `dist/components/*.js` + `*
 - [ ] **Step 9: Тесты и типы проходят**
 
 Run: `pnpm --filter @mednet/ui test && pnpm --filter @mednet/ui typecheck`
-Expected: PASS. Если какой-то модуль падает при выполнении в jsdom из-за отсутствующего API браузера (`ResizeObserver`, `IntersectionObserver`), добавить заглушку в `src/__tests__/setup.ts` по образцу `matchMedia` с комментарием, какой модуль её требует.
+Expected: PASS. Если какой-то модуль падает при выполнении в jsdom из-за отсутствующего API браузера (`ResizeObserver`, `IntersectionObserver`), добавить заглушку в `src/__tests__/setup.ts` по образцу `matchMedia` (под той же проверкой `typeof window !== 'undefined'`) с комментарием, какой модуль её требует.
 
 - [ ] **Step 10: Commit**
 
@@ -890,6 +892,9 @@ beforeAll(async () => {
       '[a]:hover:bg-primary/80',
       'aria-expanded:bg-muted',
       'border-input',
+      // Проверка палитры: стандартной шкалы slate нет, red — брендовая.
+      'bg-slate-500',
+      'bg-red-500',
     ])
     .replaceAll('"', "'");
 });
@@ -931,13 +936,14 @@ describe('brand.css', () => {
   });
 
   it('палитры Tailwind в итоговом CSS нет — только токены', () => {
-    expect(css).not.toMatch(/--color-red-500:\s*oklch/);
+    expect(css).not.toContain('.bg-slate-500');
+    expect(css).toMatch(/\.bg-red-500\s*\{\s*background-color:\s*var\(--mn-red-500\)/);
     expect(css).toContain('--primary: var(--mn-primary)');
   });
 });
 ```
 
-Run: `pnpm --filter @mednet/ui test -- brand`
+Run: `pnpm --filter @mednet/ui test brand`
 Expected: FAIL — `expected -1 to be greater than -1` (правил ещё нет).
 
 - [ ] **Step 2: Правила**
@@ -989,7 +995,7 @@ Expected: FAIL — `expected -1 to be greater than -1` (правил ещё не
 
 - [ ] **Step 3: Тест проходит**
 
-Run: `pnpm --filter @mednet/ui test -- brand`
+Run: `pnpm --filter @mednet/ui test brand`
 Expected: PASS — 5 тестов. Если тест «до утилиты» падает, значит, `styles.css` подключает Tailwind одной строкой `@import 'tailwindcss'` — вернуть развёрнутый вариант из Task 2. Как правила выглядят в браузере (белые поля, `--muted` и `--primary-hover` при наведении, синее кольцо фокуса и красная граница `aria-invalid` сохраняются), проверяют тесты страницы `/ui` (Task 12) и паритета (Task 13).
 
 - [ ] **Step 4: Commit**
@@ -1074,7 +1080,7 @@ describe('Logo', () => {
 });
 ```
 
-Run: `pnpm --filter @mednet/ui test -- logo`
+Run: `pnpm --filter @mednet/ui test logo`
 Expected: FAIL — `Failed to resolve import "../brand/logo.js"`.
 
 - [ ] **Step 2: Генератор**
@@ -1225,7 +1231,7 @@ export { LogoHorizontal, LogoMark, LogoVertical };
 
 - [ ] **Step 4: Тест проходит**
 
-Run: `pnpm --filter @mednet/ui test -- logo && pnpm --filter @mednet/ui typecheck`
+Run: `pnpm --filter @mednet/ui test logo && pnpm --filter @mednet/ui typecheck`
 Expected: PASS — 7 тестов; typecheck без ошибок.
 
 - [ ] **Step 5: Commit**
@@ -1328,7 +1334,7 @@ describe('SiteFooter', () => {
 });
 ```
 
-Run: `pnpm --filter @mednet/ui test -- site`
+Run: `pnpm --filter @mednet/ui test site`
 Expected: FAIL — `Failed to resolve import "../brand/site-footer.js"`.
 
 - [ ] **Step 2: Реализация**
@@ -1479,7 +1485,7 @@ export function SiteFooter({
 
 - [ ] **Step 3: Тест проходит**
 
-Run: `pnpm --filter @mednet/ui test -- site && pnpm --filter @mednet/ui typecheck`
+Run: `pnpm --filter @mednet/ui test site && pnpm --filter @mednet/ui typecheck`
 Expected: PASS — 5 тестов.
 
 - [ ] **Step 4: Commit**
@@ -1586,7 +1592,7 @@ describe('AppShell', () => {
 });
 ```
 
-Run: `pnpm --filter @mednet/ui test -- layouts`
+Run: `pnpm --filter @mednet/ui test layouts`
 Expected: FAIL — `Failed to resolve import "../layouts/app-shell.js"`.
 
 - [ ] **Step 2: Реализация**
@@ -1737,7 +1743,7 @@ export function AppShell({
 
 - [ ] **Step 3: Тест проходит**
 
-Run: `pnpm --filter @mednet/ui test -- layouts && pnpm --filter @mednet/ui typecheck`
+Run: `pnpm --filter @mednet/ui test layouts && pnpm --filter @mednet/ui typecheck`
 Expected: PASS — 5 тестов.
 
 - [ ] **Step 4: Commit**
@@ -1814,7 +1820,7 @@ describe('пакет @mednet/ui', () => {
 });
 ```
 
-Run: `pnpm --filter @mednet/ui test -- package`
+Run: `pnpm --filter @mednet/ui test package`
 Expected: FAIL — генератора индекса и `llms.md` ещё нет.
 
 - [ ] **Step 2: Корневой индекс**
@@ -1880,7 +1886,7 @@ Expected: `src/index.ts: 67 модулей` (61+ компонентов, 3 фи�
 
 ## Правила
 
-1. **Стили — одна строка** в `app/globals.css`: `@import '@mednet/ui/styles.css';` (внутри Tailwind v4, тема бренда и классы компонентов). Montserrat подключает layout проекта (`@fontsource/montserrat`).
+1. **Стили — одна строка** в `app/globals.css`: `@import '@mednet/ui/styles.css';` (внутри Tailwind v4, тема бренда и классы компонентов). Montserrat (`@fontsource/montserrat`) подключается этой же строкой — отдельно ставить и импортировать шрифт не нужно.
 2. **Импорт — по подпутям:** `import { Button } from '@mednet/ui/button';`. Корневой `@mednet/ui` тоже работает, но тянет все модули.
 3. **Основа — Base UI, а не Radix.** Чтобы отрисовать часть компонента другим элементом, используйте проп `render`, **не** `asChild`:
    ```tsx
@@ -1893,7 +1899,7 @@ Expected: `src/index.ts: 67 модулей` (61+ компонентов, 3 фи�
    <Link href="/reports" className={buttonVariants({ variant: 'outline' })}>Отчёты</Link>
    ```
    Примеры из интернета с `asChild` переписывайте на `render`. Не ставьте `@radix-ui/*`, `radix-ui`, `@base-ui/react` напрямую.
-4. **Цвета — только семантические классы:** `bg-primary`, `text-primary-foreground`, `bg-secondary`, `bg-muted`, `text-muted-foreground`, `border-border`, `border-input`, `bg-field` (заливка полей), `ring-ring`, `bg-destructive`, `text-destructive`, `bg-card`, `bg-popover`, `chart-1…chart-8`. Палитра Tailwind (`red-500`, `slate-100`…) удалена; hex, `rgb()`, `oklch()` и `bg-[#…]` запрещены линтером (`@mednet/lint-config`).
+4. **Цвета — только семантические классы:** `bg-primary`, `text-primary-foreground`, `bg-secondary`, `bg-muted`, `text-muted-foreground`, `border-border`, `border-input`, `bg-field` (заливка полей), `ring-ring`, `bg-destructive`, `text-destructive`, `bg-card`, `bg-popover`, `chart-1…chart-8`. Стандартная палитра Tailwind (`slate-100`, `zinc-500`…) удалена, а `red-500`, `blue-700` и другие шкалы — брендовые (из `@mednet/tokens`); hex, `rgb()`, `oklch()` и `bg-[#…]` запрещены линтером (`@mednet/lint-config`).
 5. **Типографика:** заголовки — `text-h1`…`text-h4`, вводный абзац — `text-lead`, остальное — `text-base`/`text-sm`/`text-xs`. Шрифт — Montserrat.
 6. **Иконки — только `lucide-react`.**
 7. **Корневой layout** (обвязка Base UI):
@@ -1979,8 +1985,11 @@ Expected: `src/index.ts: 67 модулей` (61+ компонентов, 3 фи�
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="ru">
-      <body>
-        <PublicLayout nav={<Link href="/about">О проекте</Link>}>{children}</PublicLayout>
+      <body className="relative">
+        <div className="isolate">
+          <PublicLayout nav={<Link href="/about">О проекте</Link>}>{children}</PublicLayout>
+        </div>
+        <Toaster />
       </body>
     </html>
   );
@@ -3049,7 +3058,7 @@ git commit -m "feat(lint-config): stylelint config — literal colours banned, T
 ### Task 11: `@mednet/css` — выравнивание статики под shadcn Maia
 
 **Files:**
-- Modify: `packages/css/src/overrides.css`, `packages/css/test/build.test.ts`
+- Modify: `packages/css/src/overrides.css`, `packages/css/test/build.test.ts`, `apps/docs/tests/__screenshots__/static-demo.png`
 - Create: `.changeset/css-maia-parity.md`
 
 **Interfaces:**
@@ -3183,7 +3192,20 @@ Expected: FAIL — 5 новых тестов (`expected undefined to be 'var(--r
 Run: `pnpm --filter @mednet/css build && pnpm --filter @mednet/css test`
 Expected: PASS (все, включая старые тесты `--field` и reduced-motion). Если новый тест не находит значение, а правило в `dist/mednet.css` есть, — Lightning CSS записал селектор или значение иначе (например, `0 0 #0000`): поправить строку в тесте по фактическому выводу, правило не трогать.
 
-- [ ] **Step 4: Changeset**
+- [ ] **Step 4: Эталон скриншота статики**
+
+Правило заголовка карточки (межстрочный 1 → 1.5) сдвигает всё, что ниже карточки на демо-странице статики, примерно на 8px — эталон `static-demo.png` меняется намеренно.
+
+Run: `pnpm test:visual`
+Expected: падает скриншот `static-demo` (и, возможно, страницы docs, где показаны компоненты статики); axe и интерактивные тесты — PASS.
+
+Run: `pnpm --filter docs test:visual:update`
+Затем **посмотреть каждый изменившийся PNG** в `apps/docs/tests/__screenshots__/` (Read): изменения — только от правил этой задачи (заголовок карточки, вкладки, триггер select). Если изменилось что-то ещё — найти причину, а не принимать эталон.
+
+Run: `pnpm test:visual`
+Expected: всё PASS.
+
+- [ ] **Step 5: Changeset**
 
 `.changeset/css-maia-parity.md`:
 
@@ -3197,11 +3219,11 @@ Expected: PASS (все, включая старые тесты `--field` и redu
 
 (Тип `minor`, а не `major` по правилу «изменение бренда, меняющее вид»: это исправления до спеки, цвета бренда не меняются, кит ещё не внедрён. Окончательно тип подтверждает владелец до мержа Version PR.)
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 pnpm format:check
-git add packages/css .changeset/css-maia-parity.md
+git add packages/css .changeset/css-maia-parity.md apps/docs/tests/__screenshots__
 git commit -m "fix(css): align Basecoat with shadcn Maia — outline focus/invalid border, select weight, card title, tabs, primary hover contrast"
 ```
 
@@ -4550,7 +4572,7 @@ describe('@mednet/ui/postcss (Chrome/Edge 109)', () => {
 });
 ```
 
-Run: `pnpm --filter @mednet/ui test -- postcss`
+Run: `pnpm --filter @mednet/ui test postcss`
 Expected: FAIL — `Cannot find module '../../postcss.cjs'`.
 
 - [ ] **Step 2: Плагин**
@@ -4705,7 +4727,7 @@ module.exports = legacyFallbacks;
 
 В `packages/ui/package.json`: в `exports` после `"./llms.md"` добавить `"./postcss": "./postcss.cjs",`; в `files` добавить `"postcss.cjs"`.
 
-Run: `pnpm --filter @mednet/ui test -- postcss`
+Run: `pnpm --filter @mednet/ui test postcss`
 Expected: PASS — 6 тестов.
 
 - [ ] **Step 3: `@mednet/css` собирается с плагином**
@@ -4736,7 +4758,7 @@ describe('Chrome/Edge 109 (Windows 7/8.1, спека D18)', () => {
 ```
 
 Run: `pnpm --filter @mednet/css build && pnpm --filter @mednet/css test`
-Expected: FAIL — 6 новых тестов (в `mednet.min.css` 91 запись `var(--x,)`).
+Expected: FAIL — 5 новых тестов (в `mednet.min.css` 91 запись `var(--x,)`). Случай `mednet.css` в первом `it.each` проходит уже сейчас (там `var(--x, )` с пробелом) — он страхует от регресса.
 
 В `packages/css/scripts/build.ts`:
 - после `import { loadFontFaces } from './fonts.ts';` добавить `import postcss from 'postcss';`;
