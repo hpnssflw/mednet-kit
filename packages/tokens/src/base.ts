@@ -15,17 +15,36 @@ export const FONT_WEIGHT = {
   bold: 700,
 } as const;
 
-/** [размер, межстрочный]. h1/h2 — резиновые. */
+/**
+ * Веб-шкала шрифтов: [размер, межстрочный]. Заголовки и lead — резиновые (телефон → 1440 px).
+ * Ступени не повторяются: вверху ×1,33, внизу ×1,08. Брендбук размеров для экрана не задаёт —
+ * шкала утверждается отдельно (записка «Шкала шрифтов для сайтов»).
+ *
+ * | токен | телефон 390 | экран 1440 |
+ * | h1    | 32          | 48         |
+ * | h2    | 28          | 36         |
+ * | h3    | 24          | 28         |
+ * | h4    | 20          | 22         |
+ * | lead  | 17          | 18         |
+ */
 export const TEXT = {
-  xs: ['0.8125rem', '1.5'],
+  xs: ['0.8125rem', '1.4'],
   sm: ['0.875rem', '1.5'],
   base: ['1rem', '1.5'],
-  lead: ['1.125rem', '1.5'],
-  h4: ['1.125rem', '1.2'],
-  h3: ['1.25rem', '1.2'],
-  h2: ['clamp(1.75rem, 2.6vw, 2.375rem)', '1.2'],
-  h1: ['clamp(1.75rem, 3.2vw, 2.875rem)', '1.2'],
+  lead: ['clamp(1.0625rem, 1rem + 0.2vw, 1.125rem)', '1.5'],
+  h4: ['clamp(1.25rem, 1.125rem + 0.3vw, 1.375rem)', '1.3'],
+  h3: ['clamp(1.5rem, 1rem + 0.8vw, 1.75rem)', '1.25'],
+  h2: ['clamp(1.75rem, 1rem + 1.4vw, 2.25rem)', '1.2'],
+  h1: ['clamp(2rem, 1rem + 2.2vw, 3rem)', '1.15'],
 } as const;
+
+/** Вес заголовков (брендбук, стр. 14: SemiBold или Bold). Ключи — из FONT_WEIGHT. */
+export const TEXT_WEIGHT = {
+  h1: 'bold',
+  h2: 'heading',
+  h3: 'heading',
+  h4: 'heading',
+} as const satisfies Partial<Record<keyof typeof TEXT, keyof typeof FONT_WEIGHT>>;
 
 export const RADIUS = '1rem';
 

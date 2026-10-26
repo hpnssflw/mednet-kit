@@ -34,4 +34,15 @@
     /* текст 500 (спека §5), как body в @mednet/css */
     font-weight: var(--mn-font-weight-body);
   }
+
+  /* Вес заголовков бренда: Preflight Tailwind сбрасывает его до inherit. Размер — классом text-h1…text-h4 (он же задаёт вес). */
+  h1 {
+    font-weight: var(--mn-text-h1-font-weight);
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-weight: var(--mn-text-h2-font-weight);
+  }
 }

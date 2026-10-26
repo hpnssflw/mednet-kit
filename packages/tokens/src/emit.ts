@@ -1,4 +1,4 @@
-import { FONT, FONT_WEIGHT, MOTION, RADIUS, SHADOW, TEXT } from './base.ts';
+import { FONT, FONT_WEIGHT, MOTION, RADIUS, SHADOW, TEXT, TEXT_WEIGHT } from './base.ts';
 import type { Tokens } from './load.ts';
 
 const BANNER = '/* @mednet/tokens — сгенерировано scripts/build.ts, не редактировать вручную */';
@@ -27,6 +27,11 @@ export function emitTokensCss(tokens: Tokens): string {
     ...Object.entries(TEXT).flatMap(([key, [size, lineHeight]]) => [
       `  --mn-text-${key}: ${size};`,
       `  --mn-text-${key}-line-height: ${lineHeight};`,
+      ...(key in TEXT_WEIGHT
+        ? [
+            `  --mn-text-${key}-font-weight: var(--mn-font-weight-${TEXT_WEIGHT[key as keyof typeof TEXT_WEIGHT]});`,
+          ]
+        : []),
     ]),
     ...Object.entries(SHADOW).map(([key, value]) => `  --mn-shadow-${key}: ${value};`),
     `  --mn-ease: ${MOTION.ease};`,
@@ -77,6 +82,9 @@ export function emitThemeCss(tokens: Tokens): string {
     ...Object.keys(TEXT).flatMap((key) => [
       `  --text-${key}: var(--mn-text-${key});`,
       `  --text-${key}--line-height: var(--mn-text-${key}-line-height);`,
+      ...(key in TEXT_WEIGHT
+        ? [`  --text-${key}--font-weight: var(--mn-text-${key}-font-weight);`]
+        : []),
     ]),
     ...Object.keys(SHADOW).map((key) => `  --shadow-${key}: var(--mn-shadow-${key});`),
     '  --ease-brand: var(--mn-ease);',
@@ -109,7 +117,10 @@ export function tokensObject(tokens: Tokens) {
     font: FONT,
     fontWeight: FONT_WEIGHT,
     text: Object.fromEntries(
-      Object.entries(TEXT).map(([key, [size, lineHeight]]) => [key, { size, lineHeight }]),
+      Object.entries(TEXT).map(([key, [size, lineHeight]]) => {
+        const weight = TEXT_WEIGHT[key as keyof typeof TEXT_WEIGHT];
+        return [key, { size, lineHeight, ...(weight ? { fontWeight: FONT_WEIGHT[weight] } : {}) }];
+      }),
     ),
     radius: RADIUS,
     shadow: SHADOW,

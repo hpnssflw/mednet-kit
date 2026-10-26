@@ -16,7 +16,7 @@
    ```
    Примеры из интернета с `asChild` переписывайте на `render`. Не ставьте `@radix-ui/*`, `radix-ui`, `@base-ui/react` напрямую.
 4. **Цвета — только семантические классы:** `bg-primary`, `text-primary-foreground`, `bg-secondary`, `bg-muted`, `text-muted-foreground`, `border-border`, `border-input`, `bg-field` (заливка полей), `ring-ring`, `bg-destructive`, `text-destructive`, `bg-card`, `bg-popover`, `chart-1…chart-8`. Стандартная палитра Tailwind (`slate-100`, `zinc-500`…) удалена, а `red-500`, `blue-700` и другие шкалы — брендовые (из `@mednet/tokens`); hex, `rgb()`, `oklch()` и `bg-[#…]` запрещены линтером (`@mednet/lint-config`).
-5. **Типографика:** заголовки — `text-h1`…`text-h4`, вводный абзац — `text-lead`, остальное — `text-base`/`text-sm`/`text-xs`. Шрифт — Montserrat.
+5. **Типографика:** заголовки — `text-h1`…`text-h4` (класс задаёт размер, межстрочный и вес: h1 — bold, h2–h4 — semibold; на телефоне размеры меньше), вводный абзац — `text-lead`, остальное — `text-base`/`text-sm`/`text-xs`. Размеры экран/телефон, px: h1 48/32, h2 36/28, h3 28/24, h4 22/20, lead 18/17, base 16, sm 14, xs 13. Шрифт — Montserrat. Своих `text-[…px]` и `font-*` на заголовках не добавляйте.
 6. **Иконки — только `lucide-react`.**
 7. **Корневой layout** (обвязка Base UI):
    ```tsx
