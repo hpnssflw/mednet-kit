@@ -41,4 +41,16 @@ describe('тема Tailwind', () => {
     const css = await build(['text-h1']);
     expect(css).toMatch(/\.text-h1\s*\{[^}]*var\(--mn-text-h1\)/);
   });
+
+  it('утилита text-h* сама задаёт вес заголовка', async () => {
+    const css = await build(['text-h1', 'text-h3', 'text-base']);
+    // Tailwind оборачивает вес в var(--tw-font-weight, …): явный font-bold на элементе его перекроет
+    expect(css).toMatch(
+      /\.text-h1\s*\{[^}]*font-weight:\s*var\(--tw-font-weight,\s*var\(--mn-text-h1-font-weight\)\)/,
+    );
+    expect(css).toMatch(
+      /\.text-h3\s*\{[^}]*font-weight:\s*var\(--tw-font-weight,\s*var\(--mn-text-h3-font-weight\)\)/,
+    );
+    expect(css).not.toMatch(/\.text-base\s*\{[^}]*font-weight/);
+  });
 });

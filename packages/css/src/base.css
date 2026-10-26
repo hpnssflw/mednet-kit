@@ -1,5 +1,6 @@
 /*
- * Базовая типографика бренда. Слой components (Basecoat) перекрывает только те свойства,
+ * Базовая типографика бренда: размер, вес и межстрочный каждого заголовка — из токенов @mednet/tokens
+ * (веб-шкала шрифтов: h1 — bold, h2–h4 — heading). Слой components (Basecoat) перекрывает только те свойства,
  * которые компонент задаёт сам: если правило компонента меняет у заголовка лишь
  * насыщенность, размер отсюда протекает в компонент — такие места сбрасывает overrides.css.
  */
@@ -9,27 +10,27 @@
     font-weight: var(--mn-font-weight-body);
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: var(--mn-font-weight-heading);
-    line-height: 1.2;
-  }
-
   h1 {
     font-size: var(--mn-text-h1);
+    font-weight: var(--mn-text-h1-font-weight);
+    line-height: var(--mn-text-h1-line-height);
   }
 
   h2 {
     font-size: var(--mn-text-h2);
+    font-weight: var(--mn-text-h2-font-weight);
+    line-height: var(--mn-text-h2-line-height);
   }
 
   h3 {
     font-size: var(--mn-text-h3);
+    font-weight: var(--mn-text-h3-font-weight);
+    line-height: var(--mn-text-h3-line-height);
   }
 
   h4 {
     font-size: var(--mn-text-h4);
+    font-weight: var(--mn-text-h4-font-weight);
+    line-height: var(--mn-text-h4-line-height);
   }
 }

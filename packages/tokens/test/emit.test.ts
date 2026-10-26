@@ -37,8 +37,17 @@ describe('emitTokensCss', () => {
     expect(css).toContain('--mn-radius: 1rem;');
     expect(css).toContain('--radius: var(--mn-radius);');
     expect(css).toContain('--mn-font-sans: "Montserrat"');
-    expect(css).toContain('--mn-text-h1: clamp(1.75rem, 3.2vw, 2.875rem);');
+    expect(css).toContain('--mn-text-h1: clamp(2rem, 1rem + 2.2vw, 3rem);');
+    expect(css).toContain('--mn-text-h4: clamp(1.25rem, 1.125rem + 0.3vw, 1.375rem);');
+    expect(css).toContain('--mn-text-lead: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);');
     expect(css).toContain('--mn-shadow-md:');
+  });
+
+  it('задаёт заголовкам вес: h1 — bold, h2–h4 — heading', () => {
+    expect(css).toContain('--mn-text-h1-font-weight: var(--mn-font-weight-bold);');
+    expect(css).toContain('--mn-text-h2-font-weight: var(--mn-font-weight-heading);');
+    expect(css).toContain('--mn-text-h4-font-weight: var(--mn-font-weight-heading);');
+    expect(css).not.toContain('--mn-text-base-font-weight');
   });
 
   it('отключает анимации при prefers-reduced-motion', () => {
@@ -76,6 +85,7 @@ describe('emitThemeCss', () => {
   it('даёт утилиты размеров текста и теней', () => {
     expect(css).toContain('--text-h1: var(--mn-text-h1);');
     expect(css).toContain('--text-h1--line-height: var(--mn-text-h1-line-height);');
+    expect(css).toContain('--text-h1--font-weight: var(--mn-text-h1-font-weight);');
     expect(css).toContain('--shadow-md: var(--mn-shadow-md);');
   });
 });
