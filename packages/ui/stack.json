@@ -99,14 +99,14 @@
     "role": "Работа с датами в календаре и полях дат.",
     "docs": "https://date-fns.org/docs/Getting-Started",
     "when": "Форматирование и арифметика дат: `format`, `addDays`, `isSameDay`; русская локаль — `date-fns/locale/ru`.",
-    "usage": "inside"
+    "usage": "project"
   },
   {
     "id": "cmdk",
     "name": "cmdk",
     "package": "cmdk",
     "group": "lib",
-    "role": "Командная палитра и поиск: движок `Command` (`@mednet/ui/command`), используется в `Combobox`.",
+    "role": "Командная палитра и поиск: движок `Command` (`@mednet/ui/command`). `Combobox` в ките — это Base UI, не cmdk.",
     "docs": "https://github.com/dip/cmdk",
     "when": "Фильтрация и сортировка (`filter`, `shouldFilter`), `value`, группы и пустое состояние.",
     "usage": "inside"
@@ -126,9 +126,9 @@
     "name": "react-resizable-panels",
     "package": "react-resizable-panels",
     "group": "lib",
-    "role": "Панели с изменяемым размером: движок `Resizable` (`@mednet/ui/resizable`).",
+    "role": "Панели с изменяемым размером: компоненты `ResizablePanelGroup`, `ResizablePanel`, `ResizableHandle` (`@mednet/ui/resizable`).",
     "docs": "https://github.com/bvaughn/react-resizable-panels",
-    "when": "Размеры панелей (`defaultSize`, `minSize`, `maxSize`), `direction`, сохранение раскладки.",
+    "when": "Размеры панелей (`defaultSize`, `minSize`, `maxSize`: число — пиксели, строка без единиц — проценты), `orientation`, сохранение раскладки.",
     "usage": "inside"
   },
   {

@@ -45,7 +45,7 @@ describe('stack.json', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it.each(readStack(root).map((e: Entry) => [e.id, e] as const))(
+  it.each(entries.map((e) => [e.id, e] as const))(
     '%s: поля заполнены, ссылки — https',
     (_id, e) => {
       expect(Object.keys(GROUPS)).toContain(e.group);
