@@ -1,6 +1,6 @@
 {
   "name": "@mednet/ui",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "React-компоненты ЦНИИОИЗ: shadcn/ui (Base UI, стиль Maia) в теме бренда, логотип, шапка, подвал, каркасы страниц",
   "license": "MIT",
   "type": "module",
