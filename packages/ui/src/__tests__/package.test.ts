@@ -31,6 +31,19 @@ describe('пакет @mednet/ui', () => {
       expect(llms()).toContain(heading);
   });
 
+  it('llms.md: раздел «Стек и где искать API» с основными библиотеками', () => {
+    const text = llms();
+    const start = text.indexOf('## Стек и где искать API');
+    expect(start).toBeGreaterThanOrEqual(0);
+    const end = text.indexOf('\n## ', start + 1);
+    const section = text.slice(start, end === -1 ? undefined : end);
+    for (const name of ['Base UI', 'lucide-react', 'Recharts', 'Embla Carousel', 'shadcn/ui'])
+      expect(section).toContain(name);
+    expect(text.indexOf('## Стек и где искать API')).toBeLessThan(
+      text.indexOf('## Модули фирменных блоков'),
+    );
+  });
+
   it.each([
     'logo',
     'site-header',

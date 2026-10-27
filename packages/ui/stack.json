@@ -1,0 +1,174 @@
+[
+  {
+    "id": "shadcn-ui",
+    "name": "shadcn/ui",
+    "package": null,
+    "group": "base",
+    "role": "Основа кита: набор компонентов и их API. Кит — это shadcn/ui на Base UI в стиле Maia и теме бренда; код компонентов не копируется в проект, а ставится пакетом.",
+    "docs": "https://ui.shadcn.com/docs/components",
+    "llms": "https://ui.shadcn.com/llms.txt",
+    "when": "Эталон API и примеров любого компонента кита: имена частей, композиция, варианты. Ссылка на страницу компонента есть у каждого модуля в разделе «Компоненты shadcn/ui».",
+    "usage": "inside"
+  },
+  {
+    "id": "base-ui",
+    "name": "Base UI",
+    "package": "@base-ui/react",
+    "group": "base",
+    "role": "Поведение и доступность компонентов. Часть компонента подменяется пропом `render`, не `asChild`; Radix в ките нет.",
+    "docs": "https://base-ui.com/react/overview/quick-start",
+    "llms": "https://base-ui.com/llms.txt",
+    "when": "Пропсы и события, которых нет в справке кита: `value`, `onValueChange`, `disabled`, `render`, `open`, `onOpenChange`.",
+    "usage": "inside"
+  },
+  {
+    "id": "tailwindcss",
+    "name": "Tailwind CSS v4",
+    "package": "tailwindcss",
+    "group": "base",
+    "role": "Стили: утилитарные классы и тема. Тема бренда подключается строкой `@import '@mednet/ui/styles.css'`; палитра Tailwind заменена брендовой.",
+    "docs": "https://tailwindcss.com/docs",
+    "when": "Классы утилит, брейкпоинты, `@theme`, `@source`. Цвета — только семантические классы кита, см. правила выше.",
+    "usage": "peer"
+  },
+  {
+    "id": "tw-animate-css",
+    "name": "tw-animate-css",
+    "package": "tw-animate-css",
+    "group": "base",
+    "role": "Анимации появления и исчезновения (`animate-in`, `fade-in`, `slide-in-*`) в диалогах, меню и подсказках.",
+    "docs": "https://github.com/Wombosvideo/tw-animate-css",
+    "when": "Свои анимации в стиле кита — классы `animate-in`/`animate-out` и модификаторы.",
+    "usage": "inside"
+  },
+  {
+    "id": "class-variance-authority",
+    "name": "class-variance-authority",
+    "package": "class-variance-authority",
+    "group": "base",
+    "role": "Варианты компонентов (`variant`, `size`) и функции вроде `buttonVariants`.",
+    "docs": "https://cva.style/docs",
+    "when": "Список значений `variant` и `size` и значения по умолчанию — в `defaultVariants` компонента, не в документации cva.",
+    "usage": "inside"
+  },
+  {
+    "id": "lucide-react",
+    "name": "lucide-react",
+    "package": "lucide-react",
+    "group": "lib",
+    "role": "Единственный источник иконок. Контурные, одного стиля; залитые иконки запрещены.",
+    "docs": "https://lucide.dev/icons/",
+    "when": "Поиск иконки по имени и по тегам; импорт — `import { Search } from 'lucide-react'`.",
+    "usage": "peer"
+  },
+  {
+    "id": "recharts",
+    "name": "Recharts",
+    "package": "recharts",
+    "group": "lib",
+    "role": "Графики. Обёртки кита — `@mednet/ui/chart` (`ChartContainer`, `ChartTooltip`, `ChartLegend`), цвета рядов — `chart-1…chart-8`.",
+    "docs": "https://recharts.github.io/",
+    "when": "Компоненты графиков (`BarChart`, `LineChart`, `Area`, `Pie`, оси, сетка) и их пропсы — импортируются из `recharts`.",
+    "usage": "peer"
+  },
+  {
+    "id": "embla-carousel-react",
+    "name": "Embla Carousel",
+    "package": "embla-carousel-react",
+    "group": "lib",
+    "role": "Слайдер: движок компонента `Carousel` (`@mednet/ui/carousel`).",
+    "docs": "https://www.embla-carousel.com/",
+    "when": "Опции `opts` (`loop`, `align`, `slidesToScroll`), плагины, API `setApi` / `scrollNext`.",
+    "usage": "inside"
+  },
+  {
+    "id": "react-day-picker",
+    "name": "React DayPicker",
+    "package": "react-day-picker",
+    "group": "lib",
+    "role": "Календарь: движок `Calendar` (`@mednet/ui/calendar`). По-русски — `<Calendar locale={ru} />`, `import { ru } from 'react-day-picker/locale'`.",
+    "docs": "https://daypicker.dev/",
+    "when": "Режимы выбора (`mode='single' | 'range' | 'multiple'`), `disabled`, `locale`, `captionLayout`.",
+    "usage": "peer"
+  },
+  {
+    "id": "date-fns",
+    "name": "date-fns",
+    "package": "date-fns",
+    "group": "lib",
+    "role": "Работа с датами в календаре и полях дат.",
+    "docs": "https://date-fns.org/docs/Getting-Started",
+    "when": "Форматирование и арифметика дат: `format`, `addDays`, `isSameDay`; русская локаль — `date-fns/locale/ru`.",
+    "usage": "project"
+  },
+  {
+    "id": "cmdk",
+    "name": "cmdk",
+    "package": "cmdk",
+    "group": "lib",
+    "role": "Командная палитра и поиск: движок `Command` (`@mednet/ui/command`). `Combobox` в ките — это Base UI, не cmdk.",
+    "docs": "https://github.com/dip/cmdk",
+    "when": "Фильтрация и сортировка (`filter`, `shouldFilter`), `value`, группы и пустое состояние.",
+    "usage": "inside"
+  },
+  {
+    "id": "input-otp",
+    "name": "input-otp",
+    "package": "input-otp",
+    "group": "lib",
+    "role": "Ввод одноразовых кодов: движок `InputOTP` (`@mednet/ui/input-otp`).",
+    "docs": "https://github.com/guilhermerodz/input-otp",
+    "when": "`maxLength`, `pattern`, `onComplete`, `containerClassName`.",
+    "usage": "inside"
+  },
+  {
+    "id": "react-resizable-panels",
+    "name": "react-resizable-panels",
+    "package": "react-resizable-panels",
+    "group": "lib",
+    "role": "Панели с изменяемым размером: компоненты `ResizablePanelGroup`, `ResizablePanel`, `ResizableHandle` (`@mednet/ui/resizable`).",
+    "docs": "https://github.com/bvaughn/react-resizable-panels",
+    "when": "Размеры панелей (`defaultSize`, `minSize`, `maxSize`: число — пиксели, строка без единиц — проценты), `orientation`, сохранение раскладки.",
+    "usage": "inside"
+  },
+  {
+    "id": "mednet-tokens",
+    "name": "@mednet/tokens",
+    "package": "@mednet/tokens",
+    "group": "kit",
+    "role": "Токены бренда: цвета, радиусы, тени, шрифты — CSS-переменные `--mn-*`, `theme.css` для Tailwind и JSON.",
+    "docs": "https://github.com/hpnssflw/mednet-kit/tree/main/packages/tokens",
+    "when": "Значение цвета или радиуса бренда, переменные для сайта без Tailwind, палитра для графиков вне React.",
+    "usage": "project"
+  },
+  {
+    "id": "mednet-css",
+    "name": "@mednet/css",
+    "package": "@mednet/css",
+    "group": "kit",
+    "role": "То же оформление для страниц без React: статика, MODX, шаблонизаторы (CDN jsDelivr или папка `dist/`).",
+    "docs": "https://github.com/hpnssflw/mednet-kit/tree/main/packages/css",
+    "when": "Классы и разметка для страниц без React.",
+    "usage": "project"
+  },
+  {
+    "id": "mednet-lint-config",
+    "name": "@mednet/lint-config",
+    "package": "@mednet/lint-config",
+    "group": "kit",
+    "role": "ESLint и stylelint: запрещают чужие UI-библиотеки, иконки не из lucide-react и цвета вне токенов.",
+    "docs": "https://github.com/hpnssflw/mednet-kit/tree/main/packages/lint-config",
+    "when": "Настройка линтеров и список запретов; ставится в каждый проект с китом.",
+    "usage": "project"
+  },
+  {
+    "id": "montserrat",
+    "name": "Montserrat",
+    "package": "@fontsource/montserrat",
+    "group": "kit",
+    "role": "Шрифт бренда. Подключается в коде приложения: `import '@mednet/ui/fonts.css'`, не через `@import` в CSS.",
+    "docs": "https://fontsource.org/fonts/montserrat",
+    "when": "Начертания и веса шрифта; размеры заголовков — классы `text-h1…text-h4`.",
+    "usage": "inside"
+  }
+]
