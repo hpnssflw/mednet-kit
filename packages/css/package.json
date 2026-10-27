@@ -1,6 +1,6 @@
 {
   "name": "@mednet/css",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "CSS для сайтов без React: компоненты Basecoat в теме ЦНИИОИЗ, шрифты, токены",
   "license": "MIT",
   "type": "module",
