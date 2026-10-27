@@ -26,6 +26,7 @@ describe('пакет @mednet/ui', () => {
   it('llms.md: правило render вместо asChild и строка стилей', () => {
     expect(llms()).toContain('render={');
     expect(llms()).toContain("@import '@mednet/ui/styles.css';");
+    expect(llms()).toContain("import '@mednet/ui/fonts.css';");
   });
 
   it.each([

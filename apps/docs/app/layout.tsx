@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Toaster } from '@mednet/ui/toast';
 import { TooltipProvider } from '@mednet/ui/tooltip';
+import '@mednet/ui/fonts.css';
 import './globals.css';
 
 export const metadata: Metadata = {

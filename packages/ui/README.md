@@ -15,6 +15,14 @@ npm i -D tailwindcss @tailwindcss/postcss
 @import '@mednet/ui/styles.css';
 ```
 
+Шрифт Montserrat — в коде приложения (корневой layout в Next, `main.tsx` в Vite), не в CSS:
+
+```ts
+import '@mednet/ui/fonts.css';
+```
+
+Через `@import` в CSS его подключать нельзя: Tailwind встраивает `@fontsource` без перебазирования `url()`, и в Vite файлы шрифтов не попадают в сборку.
+
 Графики: `recharts` — peer-зависимость, установите его в проект (`npm i recharts`); компоненты графика импортируйте из `recharts`, обёртки — из `@mednet/ui/chart`.
 
 Peer-зависимости (`recharts`, `lucide-react`, `react-day-picker`) npm 7+ и pnpm 8+ ставят сами; в yarn и при отключённом `auto-install-peers` — `npm i recharts lucide-react react-day-picker`.
