@@ -1,6 +1,6 @@
 {
   "name": "@mednet/lint-config",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "ESLint и stylelint для проектов ЦНИИОИЗ: защита бренда",
   "license": "MIT",
   "type": "module",
