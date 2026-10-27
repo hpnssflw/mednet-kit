@@ -35,3 +35,4 @@
 10. **Свои компоненты склеивают классы через `cn` из `@mednet/ui/utils`**, а не через clsx/tailwind-merge: обычный tailwind-merge не знает размеров шрифта бренда и роняет `text-h3` рядом с `text-foreground`.
 11. Компоненты кита не копируйте в проект и не правьте их стили `className`-ами с цветами: нужен другой вид — спросите у владельцев кита.
 12. **Графики:** `recharts` — peer-зависимость, установите его в проект (`npm i recharts`); компоненты графика импортируйте из `recharts`, обёртки — из `@mednet/ui/chart`.
+13. **Peer-зависимости ставятся сами** (npm 7+, pnpm 8+): `recharts`, `lucide-react` (иконки), `react-day-picker` (календарь, `locale`). Если менеджер их не поставил (yarn, отключён `auto-install-peers`), установите вручную: `npm i recharts lucide-react react-day-picker`. Импортируйте их напрямую только из своего `package.json`.
