@@ -12,6 +12,7 @@
   "files": [
     "dist",
     "tokens",
+    "llms.md",
     "README.md"
   ],
   "exports": {

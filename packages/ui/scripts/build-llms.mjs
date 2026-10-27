@@ -81,6 +81,10 @@ const text = [
   '',
   read('llms/intro.md'),
   '',
+  ...['map', 'lint', 'brand'].flatMap((name) => [
+    readFileSync(new URL(`../../../docs/agent-guide/${name}.md`, import.meta.url), 'utf8').trim(),
+    '',
+  ]),
   read('llms/brand.md'),
   '',
   '## Модули фирменных блоков',

@@ -20,6 +20,10 @@ This block is written and re-added by `turbo` before repository-scoped commands 
 - Не мержите Version PR «Релиз пакетов @mednet/\*» и не меняйте `.github/workflows/release.yml` без явного согласия владельца.
 - Не запускайте `pnpm version-packages` локально — версии поднимает Version PR.
 
+## Справка для агентов потребителей
+
+Правила и концепции кита для чужих агентов едут в `llms.md` каждого пакета. Общие разделы (карта пакетов, линтеры, бренд) — в `docs/agent-guide/*.md`; вводные части — `packages/{tokens,css,lint-config}/llms/intro.md` и `packages/ui/llms/*.md`. Изменили правило — правьте там и запустите `pnpm build:agent-guides` (llms.md у tokens/css/lint-config лежат в git, тест сверяет). Новое правило, которое должен знать потребитель, без записи в справке не считается сделанным.
+
 ## `@mednet/ui` (пути — от `packages/ui`)
 
 - `src/components/**`, `src/hooks/**`, `src/brand/logo/**`, `src/index.ts`, `src/shadcn-tailwind.css` — сгенерированы; руками не править. Импорт `cn` и подписи — `scripts/postgen.mjs` (+ `scripts/ru-labels.json`), затем `pnpm --filter @mednet/ui generate`; цвета бренда — правилами `src/brand.css` по сгенерированным классам (не по `data-slot`).

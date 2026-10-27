@@ -23,6 +23,8 @@ import '@mednet/ui/fonts.css';
 
 Через `@import` в CSS его подключать нельзя: Tailwind встраивает `@fontsource` без перебазирования `url()`, и в Vite файлы шрифтов не попадают в сборку.
 
+Линтеры — часть подключения: `npm i -D eslint@^9 stylelint @mednet/lint-config`, настройка для Next и Vite — в [README `@mednet/lint-config`](https://www.npmjs.com/package/@mednet/lint-config) и в `llms.md`. Правила кита и бренда для AI-агентов — `node_modules/@mednet/ui/llms.md`.
+
 Графики: `recharts` — peer-зависимость, установите его в проект (`npm i recharts`); компоненты графика импортируйте из `recharts`, обёртки — из `@mednet/ui/chart`.
 
 Peer-зависимости (`recharts`, `lucide-react`, `react-day-picker`) npm 7+ и pnpm 8+ ставят сами; в yarn и при отключённом `auto-install-peers` — `npm i recharts lucide-react react-day-picker`.

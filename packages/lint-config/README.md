@@ -24,6 +24,20 @@ export default defineConfig([
 ]);
 ```
 
+**Vite / React без Next** — вместо конфигов Next берите `typescript-eslint` (`npm i -D typescript-eslint`):
+
+```js
+import { defineConfig, globalIgnores } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+import mednet from '@mednet/lint-config/eslint';
+
+export default defineConfig([
+  ...tseslint.configs.recommended,
+  ...mednet,
+  globalIgnores(['dist/**']),
+]);
+```
+
 Свои запреты **дополняйте**, а не объявляйте заново — правило с тем же именем заменяет наше целиком:
 
 ```js

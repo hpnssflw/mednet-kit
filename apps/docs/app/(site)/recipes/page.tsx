@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = { title: 'Внедрение в существующие сайты' };
 
-const TOKENS_CDN = 'https://cdn.jsdelivr.net/npm/@mednet/tokens@1/dist/tokens.css';
-const FONTS_CDN = 'https://cdn.jsdelivr.net/npm/@mednet/css@1/dist/fonts.css';
+const TOKENS_CDN = 'https://cdn.jsdelivr.net/npm/@mednet/tokens@2/dist/tokens.css';
+const FONTS_CDN = 'https://cdn.jsdelivr.net/npm/@mednet/css@2/dist/fonts.css';
 
 const PMSP = `<!-- ДО собственных стилей сайта: имена без префикса из tokens.css
      (--accent, --muted…) не перекроют переменные сайта -->
