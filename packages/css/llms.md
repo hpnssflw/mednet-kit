@@ -1,4 +1,4 @@
-# @mednet/css 2.0.0 — справка для AI-агентов
+# @mednet/css — справка для AI-агентов
 
 Готовый CSS для страниц без React (статика, MODX, любые шаблонизаторы): компоненты [Basecoat](https://basecoatui.com) в стиле Maia в теме ЦНИИОИЗ, шрифт Montserrat и токены бренда. React-проекты берут `@mednet/ui`, а не этот пакет.
 

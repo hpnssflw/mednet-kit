@@ -12,9 +12,9 @@ export const PACKAGES = ['tokens', 'css', 'lint-config'];
 export const SHARED = ['map', 'lint', 'brand'].map((name) => `docs/agent-guide/${name}.md`);
 
 export function compose(name) {
-  const pkg = JSON.parse(read(`packages/${name}/package.json`));
+  // Без версии в заголовке: файл лежит в git, а Version PR меняет версии и не пересобирает справку.
   return `${[
-    `# @mednet/${name} ${pkg.version} — справка для AI-агентов`,
+    `# @mednet/${name} — справка для AI-агентов`,
     read(`packages/${name}/llms/intro.md`),
     ...SHARED.map(read),
   ].join('\n\n')}\n`;
