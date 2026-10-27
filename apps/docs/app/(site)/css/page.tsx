@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = { title: 'CSS для статики' };
 
-const CDN = 'https://cdn.jsdelivr.net/npm/@mednet/css@0/dist';
+const CDN = 'https://cdn.jsdelivr.net/npm/@mednet/css@1/dist';
 
 const CONNECT = `<link rel="stylesheet" href="${CDN}/mednet.min.css">
 <script src="${CDN}/mednet.js" defer></script>`;

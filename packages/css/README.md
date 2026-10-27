@@ -7,8 +7,8 @@
 Без сборки — с CDN:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mednet/css@0/dist/mednet.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/@mednet/css@0/dist/mednet.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mednet/css@1/dist/mednet.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/@mednet/css@1/dist/mednet.js" defer></script>
 ```
 
 Или скопируйте к себе папку `dist/` из пакета (`npm i @mednet/css`) целиком — шрифты лежат в `dist/fonts/` и подключаются относительными путями.
