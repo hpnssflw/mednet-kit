@@ -29,6 +29,16 @@ describe('пакет @mednet/ui', () => {
     expect(llms()).toContain("import '@mednet/ui/fonts.css';");
   });
 
+  it('llms.md: раздел «Стек и где искать API» с основными библиотеками', () => {
+    const text = llms();
+    expect(text).toContain('## Стек и где искать API');
+    for (const name of ['Base UI', 'lucide-react', 'Recharts', 'Embla Carousel', 'shadcn/ui'])
+      expect(text).toContain(name);
+    expect(text.indexOf('## Стек и где искать API')).toBeLessThan(
+      text.indexOf('## Модули фирменных блоков'),
+    );
+  });
+
   it.each([
     'logo',
     'site-header',

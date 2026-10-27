@@ -3,6 +3,7 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
+import { readStack, renderStackSection } from './stack.mjs';
 
 const root = new URL('../', import.meta.url);
 const pkg = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'));
@@ -80,6 +81,8 @@ const text = [
   `# @mednet/ui ${pkg.version} — справка для AI-агентов`,
   '',
   read('llms/intro.md'),
+  '',
+  renderStackSection(readStack(root)),
   '',
   read('llms/brand.md'),
   '',
