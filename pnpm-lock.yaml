@@ -213,12 +213,6 @@ importers:
       lightningcss:
         specifier: ^1.33.0
         version: 1.33.0
-      lucide-react:
-        specifier: ^1.57.0
-        version: 1.57.0(@types/react@19.3.0)(react@19.3.0)
-      react-day-picker:
-        specifier: ^10.0.2
-        version: 10.0.2(@types/react@19.3.0)(react@19.3.0)
       react-resizable-panels:
         specifier: ^4.14.5
         version: 4.14.5(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -250,12 +244,18 @@ importers:
       jsdom:
         specifier: 30.1.2
         version: 30.1.2
+      lucide-react:
+        specifier: ^1.57.0
+        version: 1.57.0(@types/react@19.3.0)(react@19.3.0)
       postcss:
         specifier: ^8.5.30
         version: 8.5.30
       react:
         specifier: ^19.3.0
         version: 19.3.0
+      react-day-picker:
+        specifier: ^10.0.2
+        version: 10.0.2(@types/react@19.3.0)(react@19.3.0)
       react-dom:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)

@@ -17,6 +17,8 @@ npm i -D tailwindcss @tailwindcss/postcss
 
 Графики: `recharts` — peer-зависимость, установите его в проект (`npm i recharts`); компоненты графика импортируйте из `recharts`, обёртки — из `@mednet/ui/chart`.
 
+Peer-зависимости (`recharts`, `lucide-react`, `react-day-picker`) npm 7+ и pnpm 8+ ставят сами; в yarn и при отключённом `auto-install-peers` — `npm i recharts lucide-react react-day-picker`.
+
 Компоненты — по подпутям:
 
 ```tsx
