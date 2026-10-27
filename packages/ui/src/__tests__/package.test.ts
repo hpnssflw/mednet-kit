@@ -27,6 +27,8 @@ describe('пакет @mednet/ui', () => {
     expect(llms()).toContain('render={');
     expect(llms()).toContain("@import '@mednet/ui/styles.css';");
     expect(llms()).toContain("import '@mednet/ui/fonts.css';");
+    for (const heading of ['## Карта пакетов', '## Линтеры', '## Бренд ЦНИИОИЗ'])
+      expect(llms()).toContain(heading);
   });
 
   it.each([

@@ -1,0 +1,10 @@
+Дизайн-токены ЦНИИОИЗ: палитра брендбука v8, семантика shadcn/ui, тема Tailwind CSS v4. Это основа всех пакетов кита; отдельно `@mednet/tokens` ставят в существующие сайты и проекты на Tailwind без React-кита.
+
+## Правила
+
+1. **Tailwind v4:** `@import 'tailwindcss'; @import '@mednet/tokens/theme.css';` — стандартная палитра Tailwind удалена; доступны цвета бренда (`bg-red-500`, шаги 50–950, базовый — 500) и семантика (`bg-primary`, `text-muted-foreground`, `border-border`). В существующем проекте пропадут `gray`, `slate`, `zinc`, а одноимённые `red`, `blue`, `green`, `yellow`, `orange` станут брендовыми шкалами.
+2. **Обычный CSS:** `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mednet/tokens@2/dist/tokens.css">` и `var(--mn-…)`. **На существующих сайтах — только переменные с префиксом `--mn-*`**: `--primary`, `--accent`, `--muted` без префикса конфликтуют с Bootstrap 4 и самописными темами.
+3. **JS:** `import { color, semantic, font } from '@mednet/tokens';` (`semantic.primary` — кнопки и ссылки). `@mednet/tokens/tokens.json` — все токены в формате DTCG, для графиков и внешних библиотек.
+4. **Цвета в разметке и CSS — только токены**, без HEX/`rgb()`; переменная на месте цвета лучше литерала. Если у сайта свои переменные (`--accent`, `--ink`…), переназначьте их на `var(--mn-…)`, а не наоборот.
+5. Контраст всех семантических пар проверен на WCAG 2.1 AA. Нужна другая ступень — меняйте её в семантике, а не снижайте требование.
+6. Токены в `tokens/primitives.json` генерируются из исходников — руками их не правят; правки токенов — только владельцы кита.
