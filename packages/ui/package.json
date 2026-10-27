@@ -15,6 +15,7 @@
   "files": [
     "dist",
     "llms.md",
+    "stack.json",
     "postcss.cjs",
     "src/styles.css",
     "src/fonts.css",
@@ -45,6 +46,7 @@
     "./styles.css": "./src/styles.css",
     "./fonts.css": "./src/fonts.css",
     "./llms.md": "./llms.md",
+    "./stack.json": "./stack.json",
     "./postcss": "./postcss.cjs",
     "./utils": {
       "types": "./dist/lib/utils.d.ts",
