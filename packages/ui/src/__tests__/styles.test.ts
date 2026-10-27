@@ -5,7 +5,7 @@ const read = (path: string) => readFileSync(new URL(path, import.meta.url), 'utf
 const styles = read('../styles.css');
 
 describe('styles.css', () => {
-  it('подключает Tailwind развёрнуто (бренд-правки до утилит), тему, анимации, shadcn, шрифт', () => {
+  it('подключает Tailwind развёрнуто (бренд-правки до утилит), тему, анимации, shadcn', () => {
     const imports = [...styles.matchAll(/^@import '([^']+)'/gm)].map((match) => match[1]);
     expect(imports).toEqual([
       'tailwindcss/theme.css',
@@ -15,11 +15,23 @@ describe('styles.css', () => {
       '@mednet/tokens/theme.css',
       'tw-animate-css',
       './shadcn-tailwind.css',
+    ]);
+    expect(styles).toContain("@import './brand.css' layer(utilities);");
+  });
+
+  it('шрифт не в styles.css: Tailwind встраивает @import без перебазирования url() и Vite теряет woff2', () => {
+    expect(styles).not.toContain('fontsource');
+  });
+
+  it('fonts.css подключает Montserrat 500/600/700 из fontsource', () => {
+    const imports = [...read('../fonts.css').matchAll(/^@import '([^']+)'/gm)].map(
+      (match) => match[1],
+    );
+    expect(imports).toEqual([
       '@fontsource/montserrat/500.css',
       '@fontsource/montserrat/600.css',
       '@fontsource/montserrat/700.css',
     ]);
-    expect(styles).toContain("@import './brand.css' layer(utilities);");
   });
 
   it('задаёт заголовкам вес бренда: Preflight Tailwind его сбрасывает', () => {

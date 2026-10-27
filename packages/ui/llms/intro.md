@@ -2,7 +2,7 @@
 
 ## Правила
 
-1. **Стили — одна строка** в `app/globals.css`: `@import '@mednet/ui/styles.css';` (внутри Tailwind v4, тема бренда и классы компонентов). Montserrat (`@fontsource/montserrat`) подключается этой же строкой — отдельно ставить и импортировать шрифт не нужно.
+1. **Стили — одна строка** в `app/globals.css`: `@import '@mednet/ui/styles.css';` (внутри Tailwind v4, тема бренда и классы компонентов). **Шрифт — вторая строка, в коде приложения** (корневой layout, `main.tsx`): `import '@mednet/ui/fonts.css';` — Montserrat (`@fontsource/montserrat`) ставится вместе с пакетом. В CSS через `@import` его не подключайте: Tailwind не перебазирует пути `url()`, и в Vite файлы шрифтов теряются.
 2. **Импорт — по подпутям:** `import { Button } from '@mednet/ui/button';`. Корневой `@mednet/ui` тоже работает, но тянет все модули.
 3. **Основа — Base UI, а не Radix.** Чтобы отрисовать часть компонента другим элементом, используйте проп `render`, **не** `asChild`:
    ```tsx

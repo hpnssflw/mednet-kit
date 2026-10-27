@@ -17,6 +17,7 @@
     "llms.md",
     "postcss.cjs",
     "src/styles.css",
+    "src/fonts.css",
     "src/brand.css",
     "src/shadcn-tailwind.css",
     "README.md",
@@ -42,6 +43,7 @@
       "default": "./dist/index.js"
     },
     "./styles.css": "./src/styles.css",
+    "./fonts.css": "./src/fonts.css",
     "./llms.md": "./llms.md",
     "./postcss": "./postcss.cjs",
     "./utils": {
