@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
+    "build:agent-guides": "node scripts/build-agent-guides.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test:visual": "pnpm --filter docs test:visual:docker",

@@ -1,6 +1,6 @@
 {
   "name": "@mednet/tokens",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Дизайн-токены ЦНИИОИЗ: палитра брендбука, семантика shadcn, тема Tailwind v4",
   "license": "MIT",
   "type": "module",
@@ -12,6 +12,7 @@
   "files": [
     "dist",
     "tokens",
+    "llms.md",
     "README.md"
   ],
   "exports": {

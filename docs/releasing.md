@@ -19,7 +19,7 @@
           │  pnpm release = сборка и тесты пакетов + changeset publish (OIDC, provenance)
           │  шаг «Теги и GitHub Releases»: теги @mednet/<пакет>@<версия> + релизы из CHANGELOG
           ▼
-  npm  ──►  jsDelivr (`@1` подхватывает новую версию)
+  npm  ──►  jsDelivr (`@2` подхватывает новую версию в рамках мажора)
 ```
 
 На каждый push в `main` параллельно идёт CI (`.github/workflows/ci.yml`): формат, сборка, типы, тесты, скриншоты и axe.
@@ -84,10 +84,11 @@ curl -sI https://cdn.jsdelivr.net/npm/@mednet/css@<версия>/dist/mednet.min
 ```
 
 - Новая версия 1–2 минуты может отдавать 404 в `npm view` — это задержка реестра.
-- jsDelivr кэширует диапазон `@1`; если новая версия не видна, сбросьте кэш: `https://purge.jsdelivr.net/npm/@mednet/css@1/dist/mednet.min.css`.
+- jsDelivr кэширует диапазон `@2`; если новая версия не видна, сбросьте кэш: `https://purge.jsdelivr.net/npm/@mednet/css@2/dist/mednet.min.css`.
 
 ## Известные особенности
 
+- Ссылки jsDelivr привязаны к мажору (`@mednet/css@2`) и после мажорного релиза остаются на старом диапазоне навсегда. При каждом мажоре обновляйте их: `grep -rn "@mednet/[a-z]*@[0-9]"` по README пакетов и страницам `apps/docs`.
 - `changesets/action@v1` не распознаёт формат вывода `@changesets/cli` 3: теги создаются только в раннере, GitHub Releases не появляются. Поэтому в `release.yml` есть отдельный шаг «Теги и GitHub Releases».
 - Version PR не запускает CI (ограничение GitHub для PR от `GITHUB_TOKEN`).
 - `npm install -g npm@11` в `release.yml` нужен для trusted publishing (npm 11.5.1+); мажор закреплён, чтобы релиз не ломался от выхода новой версии npm.
