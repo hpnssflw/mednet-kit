@@ -7,3 +7,6 @@ packages:
 # esbuild, sharp, @tailwindcss/oxide, unrs-resolver — и только их.
 onlyBuiltDependencies:
   - esbuild
+
+# Не ставить версии младше 2 суток: вредоносные релизы обычно снимают с npm за часы.
+minimumReleaseAge: 2880
