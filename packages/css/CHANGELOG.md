@@ -1,5 +1,11 @@
 # @mednet/css
 
+## 2.0.0
+
+### Patch Changes
+
+- d4ef520: README: ссылки jsDelivr с `@0` заменены на `@1`. Диапазон `@0` навсегда остаётся на 0.2.0 и не подтягивает версии 1.x.
+
 ## 1.1.0
 
 No changes in this release.
