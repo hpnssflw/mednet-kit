@@ -19,7 +19,7 @@
           │  pnpm release = сборка и тесты пакетов + changeset publish (OIDC, provenance)
           │  шаг «Теги и GitHub Releases»: теги @mednet/<пакет>@<версия> + релизы из CHANGELOG
           ▼
-  npm  ──►  jsDelivr (`@0` подхватывает новую версию)
+  npm  ──►  jsDelivr (`@1` подхватывает новую версию)
 ```
 
 На каждый push в `main` параллельно идёт CI (`.github/workflows/ci.yml`): формат, сборка, типы, тесты, скриншоты и axe.
@@ -84,7 +84,7 @@ curl -sI https://cdn.jsdelivr.net/npm/@mednet/css@<версия>/dist/mednet.min
 ```
 
 - Новая версия 1–2 минуты может отдавать 404 в `npm view` — это задержка реестра.
-- jsDelivr кэширует диапазон `@0`; если новая версия не видна, сбросьте кэш: `https://purge.jsdelivr.net/npm/@mednet/css@0/dist/mednet.min.css`.
+- jsDelivr кэширует диапазон `@1`; если новая версия не видна, сбросьте кэш: `https://purge.jsdelivr.net/npm/@mednet/css@1/dist/mednet.min.css`.
 
 ## Известные особенности
 

@@ -4,12 +4,12 @@
 
 Спецификация: [docs/superpowers/specs/2026-10-13-mednet-design-system-design.md](docs/superpowers/specs/2026-10-13-mednet-design-system-design.md).
 
-| Пакет                                         | Что это                                                                                                                     |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [`@mednet/tokens`](packages/tokens)           | Цвета, шрифты, размеры — CSS-переменные, тема Tailwind v4, JS, JSON                                                         |
-| [`@mednet/css`](packages/css)                 | Готовый CSS для сайтов без React: компоненты Basecoat в теме бренда + шрифты                                                |
-| [`@mednet/ui`](packages/ui)                   | React-компоненты: shadcn/ui (Base UI, Maia) в теме бренда, логотип, шапка, подвал, каркасы страниц — **ещё не опубликован** |
-| [`@mednet/lint-config`](packages/lint-config) | ESLint и stylelint: защита бренда в проектах — **ещё не опубликован**                                                       |
+| Пакет                                         | Что это                                                                                            |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`@mednet/tokens`](packages/tokens)           | Цвета, шрифты, размеры — CSS-переменные, тема Tailwind v4, JS, JSON                                |
+| [`@mednet/css`](packages/css)                 | Готовый CSS для сайтов без React: компоненты Basecoat в теме бренда + шрифты                       |
+| [`@mednet/ui`](packages/ui)                   | React-компоненты: shadcn/ui (Base UI, Maia) в теме бренда, логотип, шапка, подвал, каркасы страниц |
+| [`@mednet/lint-config`](packages/lint-config) | ESLint и stylelint: защита бренда в проектах                                                       |
 
 ## Разработка
 
