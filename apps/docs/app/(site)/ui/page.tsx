@@ -129,6 +129,13 @@ export default function UiPage() {
           </TabsContent>
           <TabsContent value="about">Тестовые данные.</TabsContent>
         </Tabs>
+        <p>
+          Остальные типы —{' '}
+          <a className="text-primary underline" href="/ui/charts/">
+            галерея графиков
+          </a>
+          .
+        </p>
       </section>
 
       <section className="space-y-3">
