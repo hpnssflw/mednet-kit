@@ -27,6 +27,10 @@ pnpm format       # Prettier
 
 Изменение пакета `@mednet/*` → changeset (`pnpm changeset`) → merge в `main` → бот открывает PR «Релиз пакетов @mednet/\*» → его merge публикует пакеты из GitHub Actions (trusted publishing, provenance). Подробно и правила — [docs/releasing.md](docs/releasing.md).
 
+## Кастомизация
+
+Отступления от бренда в конкретном проекте — по лестнице из [docs/customization.md](docs/customization.md) (черновик, проверяется на боевых задачах).
+
 ## Лицензия
 
 MIT, © 2026 ФГБУ «ЦНИИОИЗ» Минздрава России — см. [LICENSE](LICENSE). Сторонние компоненты в `@mednet/css` — [THIRD_PARTY_NOTICES.md](packages/css/THIRD_PARTY_NOTICES.md). Код shadcn/ui в `@mednet/ui` — [THIRD_PARTY_NOTICES.md](packages/ui/THIRD_PARTY_NOTICES.md).

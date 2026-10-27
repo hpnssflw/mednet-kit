@@ -20,6 +20,10 @@ This block is written and re-added by `turbo` before repository-scoped commands 
 - Не мержите Version PR «Релиз пакетов @mednet/\*» и не меняйте `.github/workflows/release.yml` без явного согласия владельца.
 - Не запускайте `pnpm version-packages` локально — версии поднимает Version PR.
 
+## Кастомизация в проектах-потребителях
+
+Просят отступить от бренда в проекте — идите по лестнице из [docs/customization.md](docs/customization.md) (токены `--mn-*` → композиция → свой компонент → перенос в кит); не копируйте исходники компонентов в проект и не правьте `node_modules/@mednet/*`. Документ — черновик: ступени ещё не проверены, при проверке отмечайте результат в его чек-листе.
+
 ## `@mednet/ui` (пути — от `packages/ui`)
 
 - `src/components/**`, `src/hooks/**`, `src/brand/logo/**`, `src/index.ts`, `src/shadcn-tailwind.css` — сгенерированы; руками не править. Импорт `cn` и подписи — `scripts/postgen.mjs` (+ `scripts/ru-labels.json`), затем `pnpm --filter @mednet/ui generate`; цвета бренда — правилами `src/brand.css` по сгенерированным классам (не по `data-slot`).
