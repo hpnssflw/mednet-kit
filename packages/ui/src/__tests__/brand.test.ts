@@ -134,7 +134,9 @@ describe('brand.css', () => {
   });
 
   it('в тёмной теме нативный select заливается --field, а не --input 30 %', () => {
-    const body = rule("[class~='border-input'][class~='bg-input/30'][class~='dark:bg-input/30']:is(.dark *)");
+    const body = rule(
+      "[class~='border-input'][class~='bg-input/30'][class~='dark:bg-input/30']:is(.dark *)",
+    );
     expect(body).toContain('background-color: var(--field)');
   });
 });
