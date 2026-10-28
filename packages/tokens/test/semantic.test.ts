@@ -46,4 +46,39 @@ describe('toTokens', () => {
     };
     expect(() => toTokens(primitives, semantic)).toThrow(/semantic\.card.*примитив/);
   });
+
+  it('запрещает тёмной теме токены, которых нет в светлой', () => {
+    const primitives = { color: { white: { $value: toDtcgColor('#ffffff') } } };
+    const light = { semantic: { background: { $value: '{color.white}' } } };
+    const dark = { semantic: { unknown: { $value: '{color.white}' } } };
+    expect(() => toTokens(primitives, light, dark)).toThrow(/unknown.*светлой/);
+  });
+});
+
+const darkHex = new Map(tokens.dark.map((token) => [token.name, token.hex]));
+
+describe('тёмная тема', () => {
+  it('содержит тот же набор токенов, что светлая, в том же порядке', () => {
+    expect(tokens.dark.map((token) => token.name)).toEqual(
+      tokens.semantic.map((token) => token.name),
+    );
+  });
+
+  it.each(CONTRAST_PAIRS)('%s на %s — не ниже %s:1', (fg, bg, min) => {
+    const foreground = darkHex.get(fg);
+    const background = darkHex.get(bg);
+    expect(foreground, `нет токена ${fg}`).toBeDefined();
+    expect(background, `нет токена ${bg}`).toBeDefined();
+    expect(wcagContrast(foreground!, background!)).toBeGreaterThanOrEqual(min);
+  });
+
+  it.each([1, 2, 3, 4, 5, 6, 7, 8])('chart-%i заметен на фоне (3:1)', (n) => {
+    expect(
+      wcagContrast(darkHex.get(`chart-${n}`)!, darkHex.get('background')!),
+    ).toBeGreaterThanOrEqual(3);
+  });
+
+  it('primary остаётся красным бренда (оттенок red)', () => {
+    expect(tokens.dark.find((token) => token.name === 'primary')?.ref).toBe('red-400');
+  });
 });
