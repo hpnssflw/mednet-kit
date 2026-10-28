@@ -23,7 +23,7 @@
    * подсветка контурной кнопки при наведении — --muted.
    * Не трогаем: поиск без рамки внутри popover и command (.command > header,
    * .combobox [data-popover] > .input-group) — белое на белом исчезнет;
-   * дорожку переключателя и разделитель группы кнопок; тёмную тему (её в v1 нет, D15).
+   * дорожку переключателя и разделитель группы кнопок. Тёмная тема — отдельное правило ниже.
    */
   .btn[data-variant='outline'],
   .badge[data-variant='outline'],
@@ -63,6 +63,17 @@
   .combobox-chips,
   .select:not(select) > button,
   .input-group {
+    background-color: var(--field);
+  }
+
+  /*
+   * Тёмная тема: у нативного select Basecoat красит заливку отдельным правилом html.dark
+   * (--input 30 %, специфичность выше правила выше), и select выходит светлее соседних полей.
+   * Остальные поля Basecoat в тёмной теме не переопределяет — у них остаётся --field.
+   * Не трогаем: чекбокс, радио и дорожку переключателя (заливка --input 30 % как у Maia),
+   * заливку при наведении (в тёмной теме светлее — это подсветка).
+   */
+  :is(.field > select, select.select):is(html.dark *) {
     background-color: var(--field);
   }
 
