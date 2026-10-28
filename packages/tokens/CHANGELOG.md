@@ -1,5 +1,11 @@
 # @mednet/tokens
 
+## 2.1.0
+
+### Minor Changes
+
+- e1d8007: Тёмная тема: блок `.dark` в `tokens.css`, `semanticDark` в `tokens.json` и JS-экспорте, примитивы `danger.300` и `danger.900`. Светлая тема не изменилась.
+
 ## 2.0.2
 
 No changes in this release.
