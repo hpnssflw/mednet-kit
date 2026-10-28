@@ -1,5 +1,11 @@
 # @mednet/css
 
+## 2.1.0
+
+### Minor Changes
+
+- e1d8007: Тёмная тема: класс `.dark` на `<html>`. `@mednet/css` — `select` в тёмной теме заливается `--field`, как соседние поля; `@mednet/ui` — текст логотипа и заливка нативного `select` в тёмной теме. Светлая тема не изменилась.
+
 ## 2.0.2
 
 No changes in this release.
