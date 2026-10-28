@@ -9,7 +9,7 @@
  * кнопка — group/button, бейдж — group/badge.
  *
  * Не трогаем (как статика): дорожку Switch и разделитель ButtonGroup (bg-input), поиск
- * в Command и в списке Combobox (белое на белом исчезнет), dark:* (тёмной темы в v1 нет, D15).
+ * в Command и в списке Combobox (белое на белом исчезнет). dark:* — правила тёмной темы в конце файла.
  */
 
 /*
@@ -66,4 +66,24 @@
  */
 :is([class~='group/button'], [class~='group/badge'])[class~='border-border'] {
   border-color: var(--border);
+}
+
+/*
+ * Логотип в тёмной теме: текст в исходных SVG чёрный (у вертикального — #333), на графитовом фоне
+ * его не видно. Красный знак (#d6867f) остаётся, всё остальное берёт --foreground. В светлой теме
+ * правило не действует — исходные цвета не меняются. Ключ — маркер data-mednet-logo из gen-logos.mjs.
+ */
+:is(.dark *) svg[data-mednet-logo] path:not([fill='#d6867f']) {
+  fill: var(--foreground);
+}
+
+/*
+ * Тёмная тема: у нативного select Maia добавляет dark:bg-input/30 к bg-input/30 — заливка остаётся
+ * --input 30 % и выходит светлее соседних полей (у них --field). Ключ — все три класса сразу: только
+ * они вместе есть у NativeSelect (у чекбокса и радио dark:bg-input/30 без базового — заливка Maia,
+ * как у статики). Специфичность (0,4,0) бьёт утилиту dark:bg-input/30; заливка при наведении
+ * (dark:hover:bg-input/50) светлее — это подсветка, её не трогаем.
+ */
+[class~='border-input'][class~='bg-input/30'][class~='dark:bg-input/30']:is(.dark *) {
+  background-color: var(--field);
 }

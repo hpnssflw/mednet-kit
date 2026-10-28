@@ -18,6 +18,7 @@ beforeAll(async () => {
     .build([
       'bg-input/30',
       'hover:bg-input/50',
+      'dark:bg-input/30',
       'hover:bg-primary/80',
       '[a]:hover:bg-primary/80',
       'aria-expanded:bg-muted',
@@ -125,5 +126,15 @@ describe('brand.css', () => {
     expect(css).not.toContain('.bg-slate-500');
     expect(css).toMatch(/\.bg-red-500\s*\{\s*background-color:\s*var\(--mn-red-500\)/);
     expect(css).toContain('--primary: var(--mn-primary)');
+  });
+
+  it('в тёмной теме текст логотипа берёт --foreground, красный знак остаётся', () => {
+    const body = rule(":is(.dark *) svg[data-mednet-logo] path:not([fill='#d6867f'])");
+    expect(body).toContain('fill: var(--foreground)');
+  });
+
+  it('в тёмной теме нативный select заливается --field, а не --input 30 %', () => {
+    const body = rule("[class~='border-input'][class~='bg-input/30'][class~='dark:bg-input/30']:is(.dark *)");
+    expect(body).toContain('background-color: var(--field)');
   });
 });
