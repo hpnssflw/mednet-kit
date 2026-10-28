@@ -38,6 +38,23 @@
 
 Все компоненты: [документация Basecoat](https://basecoatui.com). Живой пример — `demo/index.html`.
 
+## Тёмная тема
+
+Включается классом `dark` на `<html>` — именно на `<html>`: тёмные правила Basecoat привязаны к `html.dark`. По `prefers-color-scheme` кит тему сам не переключает: выбор — за проектом (ключ `mn-theme` в примере — свой). Скрипт без мигания:
+
+```html
+<!-- В <head>, до стилей: класс ставится до первой отрисовки, без мигания светлой темы -->
+<script>
+  try {
+    var t = localStorage.getItem('mn-theme');
+    if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches))
+      document.documentElement.classList.add('dark');
+  } catch (e) {}
+</script>
+```
+
+Переключатель — своя кнопка: `document.documentElement.classList.toggle('dark')` и запись выбора в `localStorage`.
+
 ## Важно
 
 - **`mednet.css` — для новых страниц и сайтов без Bootstrap и других CSS-фреймворков.** В нём есть сброс стилей (Tailwind preflight обнуляет отступы, списки и заголовки) и классы с именами Bootstrap (`btn`, `badge`, `card`, `alert`, `table`…) — на существующем сайте вёрстка сломается. На существующие сайты подключайте только `@mednet/tokens/dist/tokens.css` и `@mednet/css/dist/fonts.css` — **до** CSS сайта — и в своём CSS используйте только переменные `--mn-*` (имена без префикса, например `--primary`, есть и у Bootstrap 4).

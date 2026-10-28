@@ -37,12 +37,32 @@ color.red['500']; // '#d6867f' — базовый красный бренда
 semantic.primary; // '#b55c57' — кнопки и ссылки
 ```
 
+## Тёмная тема
+
+Включается классом `dark` на `<html>` (или на любом предке). По `prefers-color-scheme` кит тему сам не переключает: выбор — за проектом (ключ `mn-theme` в примере — свой). Скрипт без мигания:
+
+```html
+<!-- В <head>, до стилей: класс ставится до первой отрисовки, без мигания светлой темы -->
+<script>
+  try {
+    var t = localStorage.getItem('mn-theme');
+    if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches))
+      document.documentElement.classList.add('dark');
+  } catch (e) {}
+</script>
+```
+
+Переключатель — своя кнопка: `document.documentElement.classList.toggle('dark')` и запись выбора в `localStorage`.
+
+Свой цвет в тёмной теме переопределяйте токеном, а не HEX: `.dark { --mn-primary: var(--mn-red-300); }`. Значения тёмной темы в JS — `semanticDark` (имя → hex), рядом с `semantic`.
+
 ## Как устроено
 
 - `tokens/primitives.json` — примитивы в формате DTCG, **генерируются** из `src/brand.ts` (`pnpm generate`).
 - `tokens/semantic.json` — семантика: только алиасы на примитивы.
+- `tokens/semantic.dark.json` — тёмная тема: только отличия от светлой, тоже алиасы (`.dark` в `tokens.css`).
 - `pnpm build` → `dist/tokens.css`, `dist/theme.css`, `dist/tokens.json`, `dist/index.js`.
-- `pnpm test` проверяет контраст всех семантических пар (WCAG 2.1 AA). Если пара не проходит — меняйте ступень в `semantic.json`, а не порог.
+- `pnpm test` проверяет контраст всех семантических пар (WCAG 2.1 AA). Проверяются обе темы. Если пара не проходит — меняйте ступень в `semantic.json` или `semantic.dark.json`, а не порог.
 
 ## Лицензия
 
