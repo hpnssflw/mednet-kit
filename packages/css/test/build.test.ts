@@ -145,7 +145,7 @@ describe('бренд-правки Basecoat (src/overrides.css)', () => {
       )
       .at(-1)?.[1];
 
-  /** Селекторы Basecoat с заданной заливкой, кроме тёмной темы (её в v1 нет, спека D15). */
+  /** Селекторы Basecoat с заданной заливкой, кроме тёмной темы (её правила проверяются в «тёмная тема»). */
   const filledWith = (fill: string, context: string) =>
     rules
       .filter(
@@ -356,5 +356,27 @@ describe('Chrome/Edge 109 (Windows 7/8.1, спека D18)', () => {
     const uris = read(file).match(/data:image\/svg\+xml[^)]*/g) ?? [];
     expect(uris.length).toBeGreaterThan(0);
     for (const uri of uris) expect(uri).not.toContain('oklch(');
+  });
+});
+
+describe('тёмная тема', () => {
+  const css = read('mednet.css');
+  const rules = parseRules(css);
+
+  it('содержит блок .dark с переменными тем', () => {
+    expect(css).toMatch(/\.dark\s*\{[^}]*color-scheme:\s*dark/);
+    expect(css).toMatch(/\.dark\s*\{[^}]*--background:\s*var\(--mn-background\)/);
+  });
+
+  it('заливает select в тёмной теме --field, а не --input 30 % Basecoat', () => {
+    const fills = rules
+      .filter(
+        (rule) =>
+          rule.context === '@layer components' &&
+          rule.selectors.includes(':is(.field > select, select.select):is(html.dark *)'),
+      )
+      .flatMap((rule) => rule.declarations)
+      .filter(([name]) => name === 'background-color');
+    expect(fills.at(-1)?.[1]).toBe('var(--field)');
   });
 });

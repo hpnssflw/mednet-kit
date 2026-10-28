@@ -46,6 +46,23 @@ export default {
 
 Правила для людей и AI-агентов — в `node_modules/@mednet/ui/llms.md` (генерируется под установленную версию). Главное: смена элемента — проп `render`, а не `asChild`; цвета — только семантические классы бренда.
 
+## Тёмная тема
+
+Включается классом `dark` на `<html>`. По `prefers-color-scheme` кит тему сам не переключает: выбор — за проектом (ключ `mn-theme` в примере — свой). Скрипт без мигания:
+
+```html
+<!-- В <head>, до стилей: класс ставится до первой отрисовки, без мигания светлой темы -->
+<script>
+  try {
+    var t = localStorage.getItem('mn-theme');
+    if (t === 'dark' || (t !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches))
+      document.documentElement.classList.add('dark');
+  } catch (e) {}
+</script>
+```
+
+Переключатель — своя кнопка: `document.documentElement.classList.toggle('dark')` и запись выбора в `localStorage`. Внутри `.dark` `dark:*`-классы компонентов срабатывают сами; цвета своих блоков берите семантическими классами (`bg-card`, `text-foreground`) — отдельных `dark:`-цветов не нужно.
+
 ## Разработка пакета
 
 - Компоненты в `src/components` генерирует CLI shadcn по `components.json`; руками их не правят. Обновить из shadcn: `pnpm generate` (≈2–7 минут: `shadcn add --all --overwrite` + `scripts/postgen.mjs`), затем `pnpm build && pnpm test` и просмотр `git diff`.

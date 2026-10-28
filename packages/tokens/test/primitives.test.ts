@@ -16,9 +16,9 @@ describe('buildPrimitives', () => {
     }
   });
 
-  it('содержит graphite и danger', () => {
+  it('содержит graphite и danger (светлые и тёмные шаги)', () => {
     expect(paths).toContain('color.graphite.900');
-    expect(paths).toContain('color.danger.600');
+    for (const step of [100, 300, 600, 900]) expect(paths).toContain(`color.danger.${step}`);
   });
 });
 

@@ -39,10 +39,28 @@ export function emitTokensCss(tokens: Tokens): string {
     `  --mn-duration-base: ${MOTION.base};`,
   ];
 
+  // В .dark оба слоя имён: `--x: var(--mn-x)` в :root уже вычислен на корне и наследуется готовым,
+  // так что .dark на вложенном контейнере без переобъявления `--x` осталась бы светлой.
+  const lightRef = new Map(tokens.semantic.map((token) => [token.name, token.ref]));
+  const darkLines = [
+    '  color-scheme: dark;',
+    ...tokens.dark
+      .filter((token) => token.ref !== lightRef.get(token.name))
+      .flatMap((token) => [
+        `  --mn-${token.name}: var(--mn-${token.ref});`,
+        `  --${token.name}: var(--mn-${token.name});`,
+      ]),
+  ];
+
   return [
     BANNER,
     ':root {',
     ...lines,
+    '}',
+    '',
+    '/* Тёмная тема: класс .dark на <html> или контейнере */',
+    '.dark {',
+    ...darkLines,
     '}',
     '',
     '@media (prefers-reduced-motion: reduce) {',
@@ -114,6 +132,7 @@ export function tokensObject(tokens: Tokens) {
   return {
     color,
     semantic: Object.fromEntries(tokens.semantic.map((token) => [token.name, token.hex])),
+    semanticDark: Object.fromEntries(tokens.dark.map((token) => [token.name, token.hex])),
     font: FONT,
     fontWeight: FONT_WEIGHT,
     text: Object.fromEntries(

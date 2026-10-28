@@ -21,6 +21,11 @@ describe('Logo', () => {
     expect(svg).not.toHaveAttribute('role');
   });
 
+  it.each(VARIANTS)('вариант %s несёт маркер для правила тёмной темы (brand.css)', (variant) => {
+    const { container } = render(<Logo variant={variant} />);
+    expect(container.querySelector('svg')).toHaveAttribute('data-mednet-logo');
+  });
+
   it('с title — изображение с доступным именем', () => {
     render(<Logo variant="mark" title="ЦНИИОИЗ" />);
     expect(screen.getByRole('img', { name: 'ЦНИИОИЗ' })).toBeInTheDocument();

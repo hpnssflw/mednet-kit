@@ -1143,6 +1143,17 @@
           "hex": "#fdecea"
         }
       },
+      "300": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            1,
+            0.5412,
+            0.502
+          ],
+          "hex": "#ff8a80"
+        }
+      },
       "600": {
         "$value": {
           "colorSpace": "srgb",
@@ -1152,6 +1163,17 @@
             0.1569
           ],
           "hex": "#c62828"
+        }
+      },
+      "900": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.2314,
+            0.0784,
+            0.0784
+          ],
+          "hex": "#3b1414"
         }
       }
     }

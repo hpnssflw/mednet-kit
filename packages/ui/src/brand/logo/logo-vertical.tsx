@@ -15,6 +15,7 @@ export function LogoVertical({ title, ...props }: LogoVerticalProps) {
       role={title ? "img" : undefined}
       aria-labelledby={title ? `${uid}title` : undefined}
       aria-hidden={title ? undefined : true}
+      data-mednet-logo=""
       {...props}
     >
       {title ? <title id={`${uid}title`}>{title}</title> : null}

@@ -41,3 +41,20 @@ describe('exports @mednet/tokens', () => {
     expect(Object.keys(manifest.exports['.'] as object)[0]).toBe('types');
   });
 });
+
+describe('тёмная тема в dist', () => {
+  it('tokens.json содержит semanticDark', () => {
+    const json = JSON.parse(readFileSync(`${pkg}dist/tokens.json`, 'utf8')) as {
+      semanticDark: Record<string, string>;
+    };
+    expect(json.semanticDark.background).toBe('#1f1f1f');
+  });
+
+  it('index.js экспортирует semanticDark', () => {
+    expect(readFileSync(`${pkg}dist/index.js`, 'utf8')).toContain('export const semanticDark =');
+  });
+
+  it('tokens.css содержит блок .dark', () => {
+    expect(readFileSync(`${pkg}dist/tokens.css`, 'utf8')).toContain('.dark {');
+  });
+});

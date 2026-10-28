@@ -124,3 +124,50 @@ describe('emitJson / emitJs', () => {
     expect(dts).toContain('"primary": "#b55c57"');
   });
 });
+
+const fixtureDark = toTokens(
+  {
+    color: {
+      $type: 'color',
+      white: { $value: toDtcgColor('#ffffff') },
+      graphite: { '950': { $value: toDtcgColor('#1f1f1f') } },
+      red: { '600': { $value: toDtcgColor('#b55c57') } },
+    },
+  },
+  {
+    semantic: {
+      $type: 'color',
+      background: { $value: '{color.white}' },
+      primary: { $value: '{color.red.600}' },
+    },
+  },
+  { semantic: { background: { $value: '{color.graphite.950}' } } },
+);
+
+describe('emitTokensCss — тёмная тема', () => {
+  const css = emitTokensCss(fixtureDark);
+  const dark = css.slice(css.indexOf('.dark {'));
+
+  it('переопределяет только отличающиеся токены, оба слоя имён', () => {
+    expect(dark).toContain('--mn-background: var(--mn-graphite-950);');
+    expect(dark).toContain('--background: var(--mn-background);');
+    expect(dark).not.toContain('--mn-primary');
+  });
+
+  it('объявляет color-scheme: dark', () => {
+    expect(dark).toContain('color-scheme: dark;');
+  });
+
+  it('идёт после :root', () => {
+    expect(css.indexOf('.dark {')).toBeGreaterThan(css.indexOf(':root {'));
+  });
+});
+
+describe('tokensObject — тёмная тема', () => {
+  it('отдаёт semanticDark: имя → hex, полный набор', () => {
+    expect(tokensObject(fixtureDark).semanticDark).toEqual({
+      background: '#1f1f1f',
+      primary: '#b55c57',
+    });
+  });
+});
