@@ -19,6 +19,13 @@ describe('styles.css', () => {
     expect(styles).toContain("@import './brand.css' layer(utilities);");
   });
 
+  it('привязывает вариант dark к классу .dark, а не к prefers-color-scheme', () => {
+    expect(styles).toContain('@custom-variant dark (&:is(.dark *));');
+    expect(styles.indexOf('@custom-variant dark')).toBeGreaterThan(
+      styles.indexOf("@import '@mednet/tokens/theme.css';"),
+    );
+  });
+
   it('шрифт не в styles.css: Tailwind встраивает @import без перебазирования url() и Vite теряет woff2', () => {
     expect(styles).not.toContain('fontsource');
   });

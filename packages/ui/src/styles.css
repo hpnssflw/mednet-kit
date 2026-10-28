@@ -18,6 +18,9 @@
 @import './shadcn-tailwind.css';
 /* Montserrat — отдельно: import '@mednet/ui/fonts.css' (см. fonts.css, почему не отсюда). */
 
+/* Тёмная тема — класс .dark на <html> (как у Basecoat в @mednet/css), а не prefers-color-scheme. */
+@custom-variant dark (&:is(.dark *));
+
 /* Классы компонентов живут в dist пакета, а node_modules Tailwind сам не сканирует. */
 @source '../dist';
 
