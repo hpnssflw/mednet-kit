@@ -84,7 +84,7 @@ const text = [
   '',
   renderStackSection(readStack(root)),
   '',
-  ...['map', 'lint', 'brand'].flatMap((name) => [
+  ...['map', 'lint', 'brand', 'ux'].flatMap((name) => [
     readFileSync(new URL(`../../../docs/agent-guide/${name}.md`, import.meta.url), 'utf8').trim(),
     '',
   ]),
