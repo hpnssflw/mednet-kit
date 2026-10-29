@@ -13,12 +13,13 @@ describe('справка для агентов', () => {
   });
 
   it.each(['tokens', 'css', 'lint-config'])(
-    '%s: в справке есть карта пакетов, линтеры и бренд',
+    '%s: в справке есть карта пакетов, линтеры, бренд и UX',
     (pkg) => {
       const text = read(pkg);
       expect(text).toContain('## Карта пакетов');
       expect(text).toContain('## Линтеры');
       expect(text).toContain('## Бренд ЦНИИОИЗ');
+      expect(text).toContain('## UX: правила и рецепты экранов');
     },
   );
 });

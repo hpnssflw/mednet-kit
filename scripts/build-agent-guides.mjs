@@ -1,5 +1,5 @@
 // llms.md пакетов tokens, css, lint-config: вводная часть пакета (packages/<имя>/llms/intro.md)
-// + общие разделы для агентов из docs/agent-guide/ (карта пакетов, линтеры, бренд).
+// + общие разделы для агентов из docs/agent-guide/ (карта пакетов, линтеры, бренд, UX).
 // Результат лежит в git и едет в npm; `--check` падает, если файл не пересобран.
 // llms.md пакета ui собирает его собственный build (там же читаются общие разделы).
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -9,7 +9,7 @@ const root = new URL('../', import.meta.url);
 const read = (file) => readFileSync(new URL(file, root), 'utf8').trim();
 
 export const PACKAGES = ['tokens', 'css', 'lint-config'];
-export const SHARED = ['map', 'lint', 'brand'].map((name) => `docs/agent-guide/${name}.md`);
+export const SHARED = ['map', 'lint', 'brand', 'ux'].map((name) => `docs/agent-guide/${name}.md`);
 
 export function compose(name) {
   // Без версии в заголовке: файл лежит в git, а Version PR меняет версии и не пересобирает справку.
