@@ -1,9 +1,0 @@
-@import '@mednet/ui/styles.css';
-
-@layer base {
-  h1,
-  h2,
-  h3 {
-    font-weight: var(--mn-font-weight-heading);
-  }
-}
