@@ -22,13 +22,18 @@ This block is written and re-added by `turbo` before repository-scoped commands 
 
 ## Справка для агентов потребителей
 
-Правила и концепции кита для чужих агентов едут в `llms.md` каждого пакета. Общие разделы (карта пакетов, линтеры, бренд) — в `docs/agent-guide/*.md`; вводные части — `packages/{tokens,css,lint-config}/llms/intro.md` и `packages/ui/llms/*.md`. Изменили правило — правьте там и запустите `pnpm build:agent-guides` (llms.md у tokens/css/lint-config лежат в git, тест сверяет). Новое правило, которое должен знать потребитель, без записи в справке не считается сделанным.
+Правила и концепции кита для чужих агентов едут в `llms.md` каждого пакета. Общие разделы (карта пакетов, линтеры, бренд, UX) — в `docs/agent-guide/*.md`; вводные части — `packages/{tokens,css,lint-config}/llms/intro.md` и `packages/ui/llms/*.md`. Изменили правило — правьте там и запустите `pnpm build:agent-guides` (llms.md у tokens/css/lint-config лежат в git, тест сверяет). Новое правило, которое должен знать потребитель, без записи в справке не считается сделанным.
 
 ## `@mednet/ui` (пути — от `packages/ui`)
 
 - `src/components/**`, `src/hooks/**`, `src/brand/logo/**`, `src/index.ts`, `src/shadcn-tailwind.css` — сгенерированы; руками не править. Импорт `cn` и подписи — `scripts/postgen.mjs` (+ `scripts/ru-labels.json`), затем `pnpm --filter @mednet/ui generate`; цвета бренда — правилами `src/brand.css` по сгенерированным классам (не по `data-slot`).
-- Любое изменение вида компонента — на обеих сторонах (`packages/ui/src/brand.css` и `packages/css/src/overrides.css`): тест паритета в docs (`tests/parity.spec.ts`) сравнивает их вычисленные стили. Эталон — shadcn Maia.
-- Chrome/Edge 109 поддерживается (`@mednet/ui/postcss`, job CI `chrome109`): не убирайте плагин из сборок и не отключайте job.
+- Любое изменение вида компонента — на обеих сторонах (`packages/ui/src/brand.css` и `packages/css/src/overrides.css`). Автотеста паритета больше нет (его вместе с `apps/docs` удалили), сверяйте руками. Эталон — shadcn Maia.
+- Chrome/Edge 109 поддерживается (`@mednet/ui/postcss`): не убирайте плагин из сборок. CI-job `chrome109` удалён вместе с `apps/docs`, проверка совместимости теперь ручная.
+
+## Приложение документации
+
+В этом репозитории фронтенд-приложения нет: `apps/docs` удалён (2026-10-28). Живая документация и демо компонентов — `C:\A\mednet-playground\react` (Vite + React, вне этого репозитория). Не воссоздавайте `apps/docs`, правки сайта делайте там.
+
 - Основа — Base UI: проп `render`, не `asChild`; зависимостей `radix-ui`/`@radix-ui/*` в пакете быть не должно.
 - Импорты внутри пакета — `#components/…`, `#hooks/…`, `#lib/…`.
 - Новый публичный модуль — ключ в `exports` пакета, `pnpm --filter @mednet/ui gen:index`, раздел в `llms/brand.md` и запись в карте `BRAND` в `scripts/build-llms.mjs`, если это фирменный блок (логотип, шапка, каркас); для каркасов и брендовых модулей — ещё путь в списке `required` в `scripts/check-dist.mjs`.
