@@ -29,7 +29,7 @@
      </body>
    </html>
    ```
-   `isolate` — порталы (диалоги, меню, подсказки, уведомления) всегда поверх страницы; `relative` — бэкдропы в Safari iOS 26+; `Toaster` (из `@mednet/ui/toast`) — один на приложение, вызов `toast.add({ title, description, type: 'success' })` из любого клиентского компонента. `TooltipProvider` (из `@mednet/ui/tooltip`) необязателен, он объединяет задержку подсказок.
+   `isolate` — порталы (диалоги, меню, подсказки, уведомления) всегда поверх страницы; `relative` — бэкдропы в Safari iOS 26+; `Toaster` (из `@mednet/ui/toast`) — один на приложение, вызов `toast.add({ title, description, type: 'success' })` из любого клиентского компонента. Доступное имя области — «Уведомления», кнопки закрытия — «Закрыть уведомление»; при составной сборке своё имя области можно передать через `aria-label` в `ToastViewport`. `TooltipProvider` (из `@mednet/ui/tooltip`) необязателен, он объединяет задержку подсказок.
 8. **Календарь — по-русски:** `<Calendar locale={ru} />`, `import { ru } from 'react-day-picker/locale';`.
 9. **Старые браузеры:** Chrome/Edge 109 (Windows 7/8.1) поддерживаются, если в `postcss.config.mjs` после `@tailwindcss/postcss` стоит `'@mednet/ui/postcss': {}`. Не работают там AI-компоненты `bubble` и эффект `shimmer` (относительные цвета, Chrome 119+) — не используйте их на публичных страницах.
 10. **Свои компоненты склеивают классы через `cn` из `@mednet/ui/utils`**, а не через clsx/tailwind-merge: обычный tailwind-merge не знает размеров шрифта бренда и роняет `text-h3` рядом с `text-foreground`.
