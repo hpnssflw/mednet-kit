@@ -11,6 +11,10 @@
 | [`@mednet/ui`](packages/ui)                   | React-компоненты: shadcn/ui (Base UI, Maia) в теме бренда, логотип, шапка, подвал, каркасы страниц |
 | [`@mednet/lint-config`](packages/lint-config) | ESLint и stylelint: защита бренда в проектах                                                       |
 
+## CLI для агентов (в разработке)
+
+В `packages/cli` добавлен private пакет `@mednet/cli`: установка Codex skill, синхронизация собственных файлов и диагностика уже установленного кита. В npm пока не опубликован. Локальный запуск и ограничения — в [README CLI](packages/cli/README.md).
+
 ## Разработка
 
 Нужны Node 22.12+ (рекомендуется 24 LTS), pnpm 10, Docker (для скриншот-тестов).
