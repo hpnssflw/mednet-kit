@@ -1,47 +1,40 @@
 # Подготовка первого публичного CLI и релиза 2.3.0
 
-## Выполненные проверки (2026-11-08)
+Сверка 2026-11-08. Владелец поручил завершить текущие задачи, включая выпуск. Повторного разрешения на эту цепочку не требуется; фактический блокер — npm-сессия с ответом 401.
 
-- Windows, Node 24.20.0: `turbo run build typecheck test` — 14 успешных задач, в CLI 70 тестов.
-- `format:check` и `git diff --check` — без ошибок.
-- npm и pnpm: реальная установка опубликованного @mednet/css@2.2.0, переход на локальный tarball source-версии 2.2.1 и theme set solid/graphite. Обновлены lock-файлы; postinstall, завершающийся кодом 99, не исполняется. Локальные версии пакетов не поднимались.
-- Chrome: 40 комбинаций React/HTML × desktop/mobile × light/dark × brand/четыре палитры; проверены портал, геометрия контролов, отсутствие горизонтального переполнения. Осмотрены восемь PNG Graphite.
-- 150 проверок контраста фактически собранного CSS: текстовые пары ≥4.5, границы полей и фокус ≥3.
-- Документация: 60 тестов, check/lint/build; production-страница /docs/cli при 1440/390/320 px и увеличении текста до 200%. У lint/build остаются прежние предупреждения демо и размера bundle.
+## Проверено
 
-Настоящий Chrome 109 и опубликованные npm/OIDC-артефакты 2.3.0 на этом этапе не проверялись. Проверка source tarballs не заменяет smoke после выпуска.
+- Windows, Node 24.20.0: build/typecheck/test — 14 успешных задач, 319 тестов UI и 70 CLI; format:check и git diff --check.
+- Реальные npm/pnpm consumers: опубликованный CSS 2.2.0 → локальные tarballs source-версии 2.2.1, обновление lock, отключённый postinstall и theme set solid/graphite. Локальных подъёмов версий не было.
+- Свежие source tarballs: Chrome 156.0.8078.80 и Chromium 109.0.5414.46 — по 40 состояний React/HTML и 120 проверок прозрачности. Проверены реальные цвета, размеры, темы, портал и desktop/mobile; PNG осмотрены.
+- Reduced motion: восемь проверок в каждом браузере, сохранены видимость/ARIA, одна короткая итерация и animationend; popup закрывается по Escape с возвратом фокуса.
+- 150 проверок семантического контраста: текстовые пары ≥4.5, границы полей и фокус ≥3.
+- Playground на опубликованном 2.2.1: check, 60 тестов, lint/build; Chrome 156 — оформление 39/39 и восемь примеров, чат/дашборд 56/56. Chromium 109 — 57 компонентов и восемь примеров, 64 открытия оверлеев и ввод OTP.
+- Отдельная сборка playground с исправленным source PostCSS прошла оформление Chromium 109 39/39. В обычной установленной 2.2.1 ещё нет этих исправлений и публичного экспорта Солида.
 
-Состав рассчитан `changeset status`: @mednet/cli, tokens, ui, css и lint-config → 2.3.0. Версии локально не поднимались: это делает Version PR.
+Ни source tarballs, ни отдельная сборка не заменяют smoke опубликованных npm/OIDC-артефактов 2.3.0. Весь fixed-релиз пяти пакетов готовит Version PR #25; целевые package.json поднимает только бот.
 
-Пользовательский сценарий после публикации:
+## Первый пакет и выпуск
+
+Актуальная процедура — [releasing.md](releasing.md#новый-пакет-mednet).
+
+1. Восстановить обычную npm-сессию владельца: npm login, затем npm whoami. Последняя проверка дала 401; CLI 2.3.0 в публичном registry отсутствует.
+2. Зарезервировать новое имя CLI отдельным bootstrap tarball через staged publishing. Bootstrap использует отдельную версию, например 0.0.1-bootstrap.0, **не 2.3.0**: staged и published версии делят один semver index.
+3. Настроить и проверить trusted publisher для hpnssflw/mednet-kit, release.yml, право publish. Не утверждать bootstrap как рабочий CLI.
+4. После зелёного CI последнего main слить Version PR #25. Настоящий релиз выполняет существующий release.yml; npm-токены, ручной релизный publish и локальный version-packages не используются.
+5. Проверить registry/bin/exports, provenance и реального npm-потребителя. Отклонить только собственный временный bootstrap stage по точному ID.
+
+[Официальный npm stage](https://docs.npmjs.com/cli/v11/commands/npm-stage/), [npm trust](https://docs.npmjs.com/cli/v11/commands/npm-trust/).
+
+## Потребитель после публикации
 
 ```sh
-npx @mednet/cli@latest update --dry-run
-npx @mednet/cli@latest update
-npx @mednet/cli@latest theme set solid --palette graphite --dry-run
-npx @mednet/cli@latest theme set solid --palette graphite
+npx @mednet/cli@2.3.0 update --dry-run
+npx @mednet/cli@2.3.0 update
+npx @mednet/cli@2.3.0 theme set solid --palette graphite --dry-run
+npx @mednet/cli@2.3.0 theme set solid --palette graphite
 ```
 
-Если loader установлен, после обновления выполнить agent sync. Тема подключается из установленного каталога; package.json и CSS/HTML/TSX не пересобираются целиком. CSS-only пакет не требует React/tokens в runtime.
+Если loader установлен, после обновления выполнить agent sync. CLI использует каталог установленного пакета и сохраняет bytes вне своих диапазонов; CSS-only канал не требует React/tokens в runtime.
 
-## Перед выпуском
-
-1. Зелёные форматирование, сборка, типы и тесты feature PR.
-2. Tarball smoke: реальные npm/pnpm install/update через локальный registry, затем theme set; lifecycle scripts отключены.
-3. React/HTML: desktop/mobile, светлый/тёмный режимы, четыре палитры, размеры контролов и наследование темы порталом; PNG осмотрены. Build target chrome109 и legacy PostCSS проверены; запуск настоящего Chrome 109 отдельно.
-4. До merge Version PR владельцу нужно подготовить новый npm-пакет @mednet/cli и издателя `hpnssflw/mednet-kit`, workflow `release.yml`. На момент проверки имени публичного пакета ещё нет.
-5. Feature PR → main создаёт Version PR; его merge и выпуск — в рамках явного согласия владельца по AGENTS.md. release.yml не изменён.
-
-## Граница первой публикации
-
-У нового @mednet/cli ещё нет настроенного trusted publisher. Простой merge Version PR без подготовки npm может привести к частичному выпуску fixed-группы. Настройки npm, токены и ручные publish агент не выполняет: это прямо запрещено AGENTS.md.
-
-Вариант первоначальной подготовки определяет владелец npm. В актуальной [справке npm о staged publishing](https://docs.npmjs.com/staged-publishing/) описано создание нового пакета через staging: registry создаёт публичную placeholder-версию 0.0.0-stage, а содержимое ждёт одобрения владельца. Это внешнее действие, не локальная проверка. Требования npm CLI ≥11.15.0 и Node ≥22.14.0 относятся к издателю, не к runtime CLI потребителя. Затем используется [trusted publishing](https://docs.npmjs.com/trusted-publishers/) с существующим release.yml.
-
-Подготовленный manifest CLI имеет public publishConfig и соответствует общей fixed-группе. Новая тема opt-in, поэтому changeset minor. Импорты и внешний вид существующих страниц не меняются сами.
-
-## Документация и следующая проверка
-
-Страница /docs/cli в C:/A/mednet-playground/react дополнена update/theme set и отмечает, что npx станет доступен после публикации. Пакеты playground пока остаются на опубликованном релизе; переход самого сайта с прототипного CSS на официальный импорт следует выполнять после появления 2.3.0 в npm.
-
-После релиза проверить `npm view @mednet/cli@2.3.0 version`, bin через `npx @mednet/cli@2.3.0 --help`, provenance и переход потребителя из registry. Локальные tarballs проверяют состав и команды, но не доступность опубликованной версии и OIDC.
+Playground пока остаётся на npm 2.2.1 с локальным прототипом. После выпуска обновить его через CLI, заменить прототипные значения импортом @mednet/ui/themes/solid.css, выполнить gen:api/gen:stack, обязательные проверки и целевой browser/motion smoke. Страница CLI уже интегрирована; npx до публикации отмечен как будущий сценарий.

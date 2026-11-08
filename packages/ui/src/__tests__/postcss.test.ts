@@ -71,6 +71,59 @@ describe('@mednet/ui/postcss (Chrome/Edge 109)', () => {
     expect(warnings[0].text).toContain('oklch(foo bar)');
   });
 
+  it('прозрачный цвет сохраняет связь с токеном при переключении темы', () => {
+    const out = run(THEME + GUARDED('.x', 10));
+    expect(out).toContain(
+      'rgba(var(--mn-legacy-rgb-destructive), calc(var(--mn-legacy-alpha-destructive) * 0.1))',
+    );
+    const root = postcss.parse(out);
+    const values: Record<string, string> = {};
+    root.walkRules((rule) => {
+      if (rule.selector === ':root' || rule.selector === '.dark') {
+        rule.walkDecls('--mn-legacy-rgb-destructive', (decl) => {
+          values[rule.selector] = decl.value;
+        });
+      }
+    });
+    expect(values).toEqual({ ':root': '198, 40, 40', '.dark': '239, 83, 80' });
+  });
+
+  it('алиасы и локальная палитра наследуют RGB и исходную прозрачность', () => {
+    const out =
+      run(`:root { --base: #fff; --background: var(--base); --input: rgb(1 2 3 / 20%); --space: 4px; }
+.dark { --base: #111; }
+html[data-kit-theme=solid][data-solid-palette=graphite] { --base: #333; }
+${GUARDED('.x', 30).replaceAll('--destructive', '--input')}`);
+    expect(out).toContain('--mn-legacy-rgb-background: var(--mn-legacy-rgb-base)');
+    expect(out).toContain('--mn-legacy-alpha-background: var(--mn-legacy-alpha-base)');
+    expect(out).toContain('--mn-legacy-rgb-base: 51, 51, 51');
+    expect(out).toContain('--mn-legacy-alpha-input: 0.2');
+    expect(out).toContain('calc(var(--mn-legacy-alpha-input) * 0.3)');
+    expect(out).not.toContain('--mn-legacy-rgb-space');
+  });
+
+  it('вложенный Tailwind supports получает динамический fallback; циклы не создают цвет', () => {
+    const out = run(`:root { --background: #fff; --a: var(--b); --b: var(--a); }
+.dark { --background: #111; }
+.x { background-color: var(--background); @supports (color: color-mix(in lab, red, red)) { background-color: color-mix(in oklab, var(--background) 95%, transparent); } }`);
+    expect(out).toContain(
+      'rgba(var(--mn-legacy-rgb-background), calc(var(--mn-legacy-alpha-background) * 0.95))',
+    );
+    expect(out.indexOf('rgba(var(')).toBeLessThan(out.indexOf('@supports'));
+    expect(out).not.toContain('--mn-legacy-rgb-a:');
+    expect(out).not.toContain('--mn-legacy-rgb-b:');
+  });
+
+  it('отдельный stylesheet темы сохраняет алиасы цветов из базового файла', () => {
+    const out = run(
+      'html[data-kit-theme=solid] { --primary: var(--brand-red-650); --cycle-a: var(--cycle-b); --cycle-b: var(--cycle-a); }',
+    );
+    expect(out).toContain('--mn-legacy-rgb-primary: var(--mn-legacy-rgb-brand-red-650)');
+    expect(out).toContain('--mn-legacy-alpha-primary: var(--mn-legacy-alpha-brand-red-650)');
+    expect(out).not.toContain('--mn-legacy-rgb-cycle-a:');
+    expect(out).not.toContain('--mn-legacy-rgb-cycle-b:');
+  });
+
   // Идемпотентность не требуется: шаг 1 каждый раз добавляет статическую копию перед @supports,
   // поэтому повторный прогон дублирует её. Плагин ставится в конвейер один раз (Next, @mednet/css).
 });
