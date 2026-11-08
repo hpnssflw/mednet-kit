@@ -1,0 +1,1434 @@
+{
+  "$schema": "./schemas/manifest.schema.json",
+  "schemaVersion": 1,
+  "contractVersion": "1.0.0-draft.1",
+  "exportStatus": "prepared-source-snapshot",
+  "kit": {
+    "id": "mednet",
+    "name": "Mednet Kit / ЦНИИОИЗ",
+    "primaryPackage": "@mednet/ui",
+    "version": "2.2.1",
+    "packages": {
+      "@mednet/tokens": { "version": "2.2.1", "peerDependencies": {}, "peerDependenciesMeta": {} },
+      "@mednet/css": { "version": "2.2.1", "peerDependencies": {}, "peerDependenciesMeta": {} },
+      "@mednet/ui": {
+        "version": "2.2.1",
+        "peerDependencies": {
+          "lucide-react": "^1.57.0",
+          "react": "^19.2.0",
+          "react-day-picker": "^10.0.2",
+          "react-dom": "^19.2.0",
+          "recharts": "^3.8.0",
+          "tailwindcss": "^4.3.0"
+        },
+        "peerDependenciesMeta": {}
+      },
+      "@mednet/lint-config": {
+        "version": "2.2.1",
+        "peerDependencies": { "eslint": "^9.0.0 || ^10.0.0", "stylelint": "^17.0.0" },
+        "peerDependenciesMeta": {
+          "eslint": { "optional": true },
+          "stylelint": { "optional": true }
+        }
+      }
+    },
+    "license": "MIT",
+    "foundation": {
+      "style": "base-maia",
+      "componentPrimitives": "@base-ui/react",
+      "primaryFont": "Montserrat",
+      "htmlLayer": "Basecoat Maia",
+      "sourceRefs": [
+        "repo:packages/ui/components.json",
+        "repo:packages/ui/package.json",
+        "repo:packages/css/package.json"
+      ]
+    }
+  },
+  "source": {
+    "repository": "https://github.com/hpnssflw/mednet-kit",
+    "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+    "basis": "repository-source",
+    "distUsedForData": false,
+    "capturedOn": "2026-11-05",
+    "publicationVerification": "npm-tarballs-verified"
+  },
+  "compatibility": {
+    "exportReader": {
+      "schemaVersion": 1,
+      "contractVersion": "1.0.0-draft.1",
+      "schemaDialect": "http://json-schema.org/draft-07/schema#",
+      "runtime": "JSON/Markdown reader; no kit runtime or network required"
+    },
+    "uiPeers": {
+      "lucide-react": "^1.57.0",
+      "react": "^19.2.0",
+      "react-day-picker": "^10.0.2",
+      "react-dom": "^19.2.0",
+      "recharts": "^3.8.0",
+      "tailwindcss": "^4.3.0"
+    },
+    "rootBuildNodeEngine": ">=22.12",
+    "peerRangeMeaning": "declared compatibility requirements, not an exhaustively tested matrix",
+    "exactSourceMatchRequiredForGuarantees": true,
+    "designDirector": {
+      "inspectedPackage": "@local/codex-design-director",
+      "inspectedVersion": "1.0.0",
+      "verification": "documentation-and-CLI-source-only",
+      "minimumCompatibleVersion": null,
+      "nativeKitImportCommand": false,
+      "projectContextMechanism": "benchmark project config context_files; ordinary skill reads context explicitly",
+      "sourceRefs": [
+        "consumer:@local/codex-design-director:package.json",
+        "consumer:@local/codex-design-director:knowledge/README.md",
+        "consumer:@local/codex-design-director:knowledge/project.schema.json",
+        "consumer:@local/codex-design-director:scripts/cli.mjs"
+      ]
+    },
+    "codex": {
+      "minimumVersion": null,
+      "verification": "not-runtime-tested",
+      "skillInstalledByExport": false
+    },
+    "html": {
+      "packageVersion": "2.2.1",
+      "tokenDataPortableWithoutReact": true,
+      "fullComponentMetadataIncluded": false
+    },
+    "chrome109": {
+      "status": "documented-support-with-constraints",
+      "requiredPostcssPlugin": "@mednet/ui/postcss",
+      "excludedFeatures": ["bubble relative colors", "shimmer relative colors"],
+      "browserTestPerformedForExport": false,
+      "sourceRefs": ["repo:packages/ui/llms/intro.md", "repo:packages/ui/postcss.cjs"]
+    }
+  },
+  "artifacts": {
+    "tokens": {
+      "path": "tokens.json",
+      "mediaType": "application/json",
+      "sha256": "faf4a4c3afafd401e4d1c88874160da4210eddfe336c12658ae7558c536b5913",
+      "schemaArtifact": "tokensSchema"
+    },
+    "components": {
+      "path": "components.json",
+      "mediaType": "application/json",
+      "sha256": "9077d4a259e3bb6f900621a9092f790cf1cca162069ab0f13d103594971da81d",
+      "schemaArtifact": "componentsSchema"
+    },
+    "designRules": {
+      "path": "design-rules.md",
+      "mediaType": "text/markdown",
+      "sha256": "6c3c80477cd23c4d9dc563253ab4a7f7ce0fae50d6e1def5a1e273a02ef3af67"
+    },
+    "integration": {
+      "path": "integration.md",
+      "mediaType": "text/markdown",
+      "sha256": "e73fa125a3957e2d0a41510d33a72cbbfded797e489c2b14b8e2e3185141a2bc"
+    },
+    "verification": {
+      "path": "verification.md",
+      "mediaType": "text/markdown",
+      "sha256": "68f16ffbb9ab7933a5f94f5525a81ccc3ae323e0ec34c08ad9d0c69dab4b1dfe"
+    },
+    "manifestSchema": {
+      "path": "schemas/manifest.schema.json",
+      "mediaType": "application/json",
+      "sha256": "35805cc1f15e192ea1ce9ae7f5306ddc22d91765c66f2efa68502128eee62365"
+    },
+    "tokensSchema": {
+      "path": "schemas/tokens.schema.json",
+      "mediaType": "application/json",
+      "sha256": "569f76c23f03bda17c899fde1db3480b4ffd05e72ed8573b3d195682d4426fad"
+    },
+    "componentsSchema": {
+      "path": "schemas/components.schema.json",
+      "mediaType": "application/json",
+      "sha256": "39152b04e6c1f27dd276e8d4a8272e2021695551ba38fc786a739094bd1d87bb"
+    }
+  },
+  "sources": {
+    "repo:packages/tokens/src/base.ts": {
+      "kind": "repository",
+      "path": "packages/tokens/src/base.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/src/base.ts",
+      "sha256": "517b4ebf75b55abae502399c1c90599aeb348fbd2fc977a8a579afd2146c1653"
+    },
+    "repo:packages/tokens/src/emit.ts": {
+      "kind": "repository",
+      "path": "packages/tokens/src/emit.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/src/emit.ts",
+      "sha256": "57791ad61db9268bf5d8310778408e7e98fddea18f8522c1b1b123863cef3849"
+    },
+    "repo:packages/tokens/tokens/primitives.json": {
+      "kind": "repository",
+      "path": "packages/tokens/tokens/primitives.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/tokens/primitives.json",
+      "sha256": "c80c482b783ca8da357c7d1618c48396a9fda844fb266ffc3c7636ed84e5b94b"
+    },
+    "repo:packages/tokens/tokens/semantic.json": {
+      "kind": "repository",
+      "path": "packages/tokens/tokens/semantic.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/tokens/semantic.json",
+      "sha256": "57a6270655abb1474c9739d54dc78a85fa5bd8572e994e9f5869df1ab83ca5a0"
+    },
+    "repo:packages/tokens/tokens/semantic.dark.json": {
+      "kind": "repository",
+      "path": "packages/tokens/tokens/semantic.dark.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/tokens/semantic.dark.json",
+      "sha256": "72a04b06e185a64842f19c46a7a57ecb2dbb013fb51db26dbc830e08ca441707"
+    },
+    "repo:packages/tokens/src/brand.ts": {
+      "kind": "repository",
+      "path": "packages/tokens/src/brand.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/src/brand.ts",
+      "sha256": "c8d0c5174a545ead058796496910b1b47bcd6d751dc11b242714d0b52aa90e9d"
+    },
+    "repo:packages/tokens/src/scale.ts": {
+      "kind": "repository",
+      "path": "packages/tokens/src/scale.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/src/scale.ts",
+      "sha256": "350e2c1aacccd351e450e21903a45af2499b778733fa3586158504bc6035b5e6"
+    },
+    "repo:packages/tokens/src/load.ts": {
+      "kind": "repository",
+      "path": "packages/tokens/src/load.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/src/load.ts",
+      "sha256": "d62b78f187a1903cb6c70202b71eb1e243c0b27408330d9fbd3fd1c8b7657d7a"
+    },
+    "repo:packages/ui/components.json": {
+      "kind": "repository",
+      "path": "packages/ui/components.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/components.json",
+      "sha256": "37cfad0c436e927dd0582e0bf8e0d45fa43dbbec97359b3f96baf40fc208c01e"
+    },
+    "repo:packages/ui/scripts/postgen.mjs": {
+      "kind": "repository",
+      "path": "packages/ui/scripts/postgen.mjs",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/scripts/postgen.mjs",
+      "sha256": "a5aa300ba1e339c71a578172dce93cfe43ff1e7c6e665828b2fa7b1a931eafee"
+    },
+    "repo:packages/ui/src/__tests__/sidebar-toast.test.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/__tests__/sidebar-toast.test.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/__tests__/sidebar-toast.test.tsx",
+      "sha256": "344eb3b6f37949cb8ef232ef2ee65947a5d72370811427c2e5a98fd033bc9caf"
+    },
+    "repo:packages/tokens/package.json": {
+      "kind": "repository",
+      "path": "packages/tokens/package.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/tokens/package.json",
+      "sha256": "a4c67df36d57aaceaa82a2171df4e33e5aff347a22f903bde083fbe9ec9ee3a2"
+    },
+    "repo:packages/css/package.json": {
+      "kind": "repository",
+      "path": "packages/css/package.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/css/package.json",
+      "sha256": "439f4665f7ca47758bbe10886a4c45911d29c10d413fd150d338e9ab9a8646a7"
+    },
+    "repo:packages/ui/package.json": {
+      "kind": "repository",
+      "path": "packages/ui/package.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/package.json",
+      "sha256": "73f66f5c61518b97ddb7970254449e6042efa5add0e56854f1cee2eb62ac6112"
+    },
+    "repo:packages/lint-config/package.json": {
+      "kind": "repository",
+      "path": "packages/lint-config/package.json",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/lint-config/package.json",
+      "sha256": "5eb4aa40915970d5a9d451f90aa15c17aa3a2a7aa3b1d7c859c192113b6a313f"
+    },
+    "npm:tailwindcss@4.3.3:theme.css": {
+      "kind": "dependency",
+      "package": "tailwindcss",
+      "version": "4.3.3",
+      "path": "theme.css",
+      "sha256": "443d7af364200f8ec8352dc78e39485a118a1840d498c97967bf0ae402b39167"
+    },
+    "repo:packages/ui/src/fonts.css": {
+      "kind": "repository",
+      "path": "packages/ui/src/fonts.css",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/fonts.css",
+      "sha256": "cf4a640b7fdbaf0726832e2f3b84d5049f9f6f06d925c7ec74056750b06d45bb"
+    },
+    "repo:packages/css/scripts/fonts.ts": {
+      "kind": "repository",
+      "path": "packages/css/scripts/fonts.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/css/scripts/fonts.ts",
+      "sha256": "afc6ce5133fb1afab452bcea95a8397167acd8c5c658c0b5cceb7802885c83d5"
+    },
+    "repo:packages/ui/src/components/accordion.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/accordion.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/accordion.tsx",
+      "sha256": "10894b11acb3406ce51c3529e2206fd11c6a3809310daefed9a3fd4de6404d4c"
+    },
+    "npm:@base-ui/react@1.9.0:accordion/root/AccordionRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "accordion/root/AccordionRoot.d.mts",
+      "sha256": "c8592b4f2cda7b2f54581d6146a92d67ba9572ceea4cb7b1ed9027c2bc571590"
+    },
+    "npm:@base-ui/react@1.9.0:accordion/item/AccordionItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "accordion/item/AccordionItem.d.mts",
+      "sha256": "88302e2e2c7038c94fc2d511ebe52c67469072475c27945d03222e57b55c6189"
+    },
+    "npm:@base-ui/react@1.9.0:collapsible/root/useCollapsibleRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "collapsible/root/useCollapsibleRoot.d.mts",
+      "sha256": "91be1605ad61904cf0fda441b550fd3b9f32f39bd135c3347f21a70b027390fa"
+    },
+    "npm:@base-ui/react@1.9.0:internals/types.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "internals/types.d.mts",
+      "sha256": "073f96a1cfddfedf8695401f8328a8e84a4d98fa5b08b4d894c3885069083cd6"
+    },
+    "npm:@types/react@19.3.0:index.d.ts": {
+      "kind": "dependency",
+      "package": "@types/react",
+      "version": "19.3.0",
+      "path": "index.d.ts",
+      "sha256": "045c1b395851aa71ef76393398466330fe1eeebc113c8085eefc6d84abea3a88"
+    },
+    "repo:packages/ui/src/components/alert-dialog.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/alert-dialog.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/alert-dialog.tsx",
+      "sha256": "eac5a3fb7b618c593c8e080a446af29c683b073e5736ceca290b7ef201e6ccce"
+    },
+    "npm:@base-ui/react@1.9.0:dialog/root/DialogRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "dialog/root/DialogRoot.d.mts",
+      "sha256": "b873b85501f3db21532eb6bdd8298404c75668367d3f2bdb044e98d3db295ec7"
+    },
+    "repo:packages/ui/src/components/button.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/button.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/button.tsx",
+      "sha256": "e7ad7b1fc41f53990f38b3b037c81dd08376efe9862c2b6629f917e99a2f68ab"
+    },
+    "repo:packages/ui/src/components/alert.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/alert.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/alert.tsx",
+      "sha256": "f1f14d7634bf787c1c7ef729843d40b52d736db943d794db6b4c0bad220261ed"
+    },
+    "repo:packages/ui/src/components/aspect-ratio.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/aspect-ratio.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/aspect-ratio.tsx",
+      "sha256": "6d77aebbb01d51edd09afff9da4b886b7bea48e9afaaa5b86c6bd9808b358ec1"
+    },
+    "repo:packages/ui/src/components/attachment.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/attachment.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/attachment.tsx",
+      "sha256": "7045ab10652bb0b3ccd264a7654e1d5eac6f51cf1872700120bce30ea3c70361"
+    },
+    "repo:packages/ui/src/components/avatar.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/avatar.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/avatar.tsx",
+      "sha256": "3e063f700f4c1f4705c9f25c2e5a95a9585b88696fe38d5f7f564b60a747941d"
+    },
+    "npm:@base-ui/react@1.9.0:avatar/fallback/AvatarFallback.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "avatar/fallback/AvatarFallback.d.mts",
+      "sha256": "105839ba20ef5d02ce58b11f0675a1230bca749baf0debb3273f6fc39e41df6e"
+    },
+    "repo:packages/ui/src/components/badge.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/badge.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/badge.tsx",
+      "sha256": "88f66366816f5f99676066d714067454bbb600e239b304e6f679f7b247636119"
+    },
+    "repo:packages/ui/src/components/breadcrumb.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/breadcrumb.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/breadcrumb.tsx",
+      "sha256": "532a654a1e2bd7b736751d8d3892b8f6451935ddca6e7b8879e60fdedbebbb02"
+    },
+    "repo:packages/ui/src/components/bubble.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/bubble.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/bubble.tsx",
+      "sha256": "ae838f960bc419958fbfa1dfcab0edd839273ca6518378d995766da8eb786bb3"
+    },
+    "repo:packages/ui/src/components/button-group.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/button-group.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/button-group.tsx",
+      "sha256": "1801e6b621696f26ea65510c19e61fc0ca6e999da3855abc6da76128a3a95076"
+    },
+    "npm:@base-ui/react@1.9.0:separator/Separator.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "separator/Separator.d.mts",
+      "sha256": "4d84f055621f07107b6e882b0cb79848106d08899bde344eb6ad0c9bc3539eae"
+    },
+    "repo:packages/ui/src/components/calendar.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/calendar.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/calendar.tsx",
+      "sha256": "cbaac1fad173164284e3e44620b9009abcbf5532562d0a95052a71038e64ffce"
+    },
+    "npm:react-day-picker@10.0.2:dist/esm/types/props.d.ts": {
+      "kind": "dependency",
+      "package": "react-day-picker",
+      "version": "10.0.2",
+      "path": "dist/esm/types/props.d.ts",
+      "sha256": "0b75a821d283a458bbcd826c4049a4992d608c6383194ac53dcec6b672eceb8a"
+    },
+    "repo:packages/ui/src/components/card.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/card.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/card.tsx",
+      "sha256": "e33476cfa29898bfb7ab561ae9fd80b6157276078aa0a53f3cb49805cfa5677f"
+    },
+    "repo:packages/ui/src/components/carousel.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/carousel.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/carousel.tsx",
+      "sha256": "4c859dd162fa2e034a3f5d8db33504c758195c385d144fa15cfa86c97bbd66de"
+    },
+    "repo:packages/ui/src/components/chart.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/chart.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/chart.tsx",
+      "sha256": "e0c6bef9234016e0e5014f6e3a52c6f73c68efcca109cdaef30d17027c9b97bb"
+    },
+    "npm:recharts@3.8.0:types/component/DefaultLegendContent.d.ts": {
+      "kind": "dependency",
+      "package": "recharts",
+      "version": "3.8.0",
+      "path": "types/component/DefaultLegendContent.d.ts",
+      "sha256": "90588fb5ef85f4a8a4234e8062eb97bd3c8114dfb86a0c67f62685969222da8b"
+    },
+    "repo:packages/ui/src/components/checkbox.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/checkbox.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/checkbox.tsx",
+      "sha256": "e616a4710f0b96eb9c37e8414e750a7eda5794fa73593097a71b6bc41e725f5d"
+    },
+    "npm:@base-ui/react@1.9.0:checkbox/root/CheckboxRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "checkbox/root/CheckboxRoot.d.mts",
+      "sha256": "8ea5b65bad2327b1db3ef6a69c7f155e3b4129cf1f36602e90182add219a950d"
+    },
+    "repo:packages/ui/src/components/collapsible.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/collapsible.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/collapsible.tsx",
+      "sha256": "ead4349ff7b01d696ef89294a81d18ee1d3f732321398896462c834ab9b9e065"
+    },
+    "npm:@base-ui/react@1.9.0:collapsible/root/CollapsibleRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "collapsible/root/CollapsibleRoot.d.mts",
+      "sha256": "0a39ee32f3facab0f5e4b731364457030672034115f920cc5dffa168d7d86b64"
+    },
+    "repo:packages/ui/src/components/combobox.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/combobox.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/combobox.tsx",
+      "sha256": "0003af50775d439c4bded6df17eaf0db0e359df0e25d3ac9a4f4fb2bfe56cd81"
+    },
+    "npm:@base-ui/react@1.9.0:combobox/root/AriaCombobox.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "combobox/root/AriaCombobox.d.mts",
+      "sha256": "9cb7b4f0fee2cf9800ed1b8e1b7c89ce13cc9e1b7a201eeedefd75237722d8cd"
+    },
+    "npm:@base-ui/react@1.9.0:combobox/root/ComboboxRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "combobox/root/ComboboxRoot.d.mts",
+      "sha256": "a1c3f3302ecfe43800313ae22c687124c9a871d109e244a7db392422e854ad70"
+    },
+    "npm:@base-ui/react@1.9.0:combobox/input/ComboboxInput.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "combobox/input/ComboboxInput.d.mts",
+      "sha256": "0466161ec479b11a8b15aa4e104e307d00b7c768846e3d32a3543284f1c803b2"
+    },
+    "npm:@base-ui/react@1.9.0:internals/useAnchorPositioning.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "internals/useAnchorPositioning.d.mts",
+      "sha256": "3e0d1e9b5409c57a89400561b555f49967f23d57571d45f90617c8171c85b638"
+    },
+    "npm:@base-ui/react@1.9.0:combobox/item/ComboboxItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "combobox/item/ComboboxItem.d.mts",
+      "sha256": "d5e101bf2eaafcf94b79c0a80a8b86e26ea0b24234f8f5b2c88b58cac0842a74"
+    },
+    "npm:@base-ui/react@1.9.0:combobox/separator/ComboboxSeparator.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "combobox/separator/ComboboxSeparator.d.mts",
+      "sha256": "bff935f9c88ede1807ce899218a6f3ab3bec4a39d9a9a5ebd1c3adc8a6cb0759"
+    },
+    "npm:@base-ui/react@1.9.0:combobox/trigger/ComboboxTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "combobox/trigger/ComboboxTrigger.d.mts",
+      "sha256": "a418399f14754aace50c43d6f73862a6c553b527a24d4c3033789253f1dad222"
+    },
+    "repo:packages/ui/src/components/command.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/command.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/command.tsx",
+      "sha256": "61190240eb54cd6561cc2ed9ec40b5ec640c13c3218d670bd717fbe5257768a0"
+    },
+    "npm:cmdk@1.1.1:dist/index.d.ts": {
+      "kind": "dependency",
+      "package": "cmdk",
+      "version": "1.1.1",
+      "path": "dist/index.d.ts",
+      "sha256": "bb703864a1bc9ca5ac3589ffd83785f6dc86f7f6c485c97d7ffd53438777cb9e"
+    },
+    "repo:packages/ui/src/components/context-menu.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/context-menu.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/context-menu.tsx",
+      "sha256": "f863cebcb846b8c421a92db74f87525be05279ef13e87c42e1aa98df9930b5a5"
+    },
+    "npm:@base-ui/react@1.9.0:menu/root/MenuRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/root/MenuRoot.d.mts",
+      "sha256": "eaff0ceccc675659e7e407bfcc3228e265a91f9447ebab91a2bb9d9ab28b848d"
+    },
+    "npm:@base-ui/react@1.9.0:context-menu/positioner/ContextMenuPositioner.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "context-menu/positioner/ContextMenuPositioner.d.mts",
+      "sha256": "162ae517f9fd8c00e6dcfdb5816c9fb6f151ffc8519dfffe5477417715b36acd"
+    },
+    "npm:@base-ui/react@1.9.0:menu/item/MenuItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/item/MenuItem.d.mts",
+      "sha256": "516bb6c9693b8c227d91ab6b6537157f5c896e27cf7696d09a04924d830e49f3"
+    },
+    "npm:@base-ui/react@1.9.0:menu/checkbox-item/MenuCheckboxItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/checkbox-item/MenuCheckboxItem.d.mts",
+      "sha256": "08423d547ca621886b91495db48e534803bd84bd268db12195b6f9685fcc1066"
+    },
+    "npm:@base-ui/react@1.9.0:menu/radio-item/MenuRadioItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/radio-item/MenuRadioItem.d.mts",
+      "sha256": "5262f6cf87a8deb803b20499cc39a72b91e0c9eedfa0b2ffbbe82e77db6247f2"
+    },
+    "npm:@base-ui/react@1.9.0:menu/submenu-trigger/MenuSubmenuTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/submenu-trigger/MenuSubmenuTrigger.d.mts",
+      "sha256": "2e60d8b8bffb03976a540585e0aa40c1ddf5e7efb7721d5c7213afb2b36d18c1"
+    },
+    "npm:@base-ui/react@1.9.0:menu/radio-group/MenuRadioGroup.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/radio-group/MenuRadioGroup.d.mts",
+      "sha256": "c130a5e599c565b49b02dfdaef22c5dc68bf648a9678339b44e8913d3d27ce71"
+    },
+    "repo:packages/ui/src/components/dialog.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/dialog.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/dialog.tsx",
+      "sha256": "30b3d4777622aa9efa120d1b7790e5aee9fc94971851f3b5b09266fae1bab84e"
+    },
+    "repo:packages/ui/src/components/direction.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/direction.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/direction.tsx",
+      "sha256": "661ff5b9c0dc26edde1226bfedc0ab50976d84f8bae42ca83a38dc3b478fd4d4"
+    },
+    "repo:packages/ui/src/components/drawer.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/drawer.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/drawer.tsx",
+      "sha256": "88e8821b8fec98759de95d10d46ab979be7ed6671a44d715b62b13206a9ca002"
+    },
+    "npm:@base-ui/react@1.9.0:drawer/root/DrawerRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "drawer/root/DrawerRoot.d.mts",
+      "sha256": "45dd37f1ff7f5cc55530f404297cca8aa1bd28cb31c129d3fe25cd982348348c"
+    },
+    "repo:packages/ui/src/components/dropdown-menu.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/dropdown-menu.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/dropdown-menu.tsx",
+      "sha256": "428ad11aef52655e52828ce182d0c46c48ae50ffff1e1f74b2cd4899f37db863"
+    },
+    "npm:@base-ui/react@1.9.0:menu/trigger/MenuTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/trigger/MenuTrigger.d.mts",
+      "sha256": "936e5e3f4ae59d60c06adddc6320b15f1e8898ecb9321b4b9cde57e7d9812556"
+    },
+    "npm:@base-ui/react@1.9.0:menu/positioner/MenuPositioner.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menu/positioner/MenuPositioner.d.mts",
+      "sha256": "2574bfc7fe1fd83ae53714c9c3afefbfb5fe34f8e2bb5994527b2d737cc6a0e0"
+    },
+    "repo:packages/ui/src/components/empty.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/empty.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/empty.tsx",
+      "sha256": "4bd7266a1c9c7cb02146c674575c20b3e4fb06bcb4d1866e71c6e76ac55e5322"
+    },
+    "repo:packages/ui/src/components/field.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/field.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/field.tsx",
+      "sha256": "2245e5890823d08a680e4042dea2573628116544b868a8d1d7ee6534bffec536"
+    },
+    "repo:packages/ui/src/components/hover-card.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/hover-card.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/hover-card.tsx",
+      "sha256": "b3a68b8111b5163dfa718f90110ba6dee9a343faa63d6d00d55b030986e363a8"
+    },
+    "npm:@base-ui/react@1.9.0:preview-card/root/PreviewCardRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "preview-card/root/PreviewCardRoot.d.mts",
+      "sha256": "f02b93e078c3470d7952a2ac594dcace8ed24497758ae6954417b92b6b5a25b0"
+    },
+    "npm:@base-ui/react@1.9.0:preview-card/trigger/PreviewCardTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "preview-card/trigger/PreviewCardTrigger.d.mts",
+      "sha256": "04f552ccfc4933fb01a45e8cd70a16c61d29ee2b4e9972546717f6d3340d27d3"
+    },
+    "repo:packages/ui/src/components/input-group.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/input-group.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/input-group.tsx",
+      "sha256": "17af7ec4dfaf58f129aaf21ae603264abf886e517d265d820806da9a37bfdded"
+    },
+    "repo:packages/ui/src/components/input-otp.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/input-otp.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/input-otp.tsx",
+      "sha256": "16357c3fe617a7ea1e034774984dba9708af193e689ba2840ab4cafe9089a0d3"
+    },
+    "npm:input-otp@1.5.0:dist/index.d.ts": {
+      "kind": "dependency",
+      "package": "input-otp",
+      "version": "1.5.0",
+      "path": "dist/index.d.ts",
+      "sha256": "0314c9d647a901249a28b151b9b03bd7be4bfbbb72d861d564f4099cc8e37750"
+    },
+    "repo:packages/ui/src/components/input.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/input.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/input.tsx",
+      "sha256": "8c05264aff4c4183dcd266c6fbf48f55c07019d3cbe0355b623aa0d83bd8cc36"
+    },
+    "repo:packages/ui/src/components/item.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/item.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/item.tsx",
+      "sha256": "80836c423ce1bb997c176c0f1d290d17a169dfa46cc50704f45b0e39f36d3a06"
+    },
+    "repo:packages/ui/src/components/kbd.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/kbd.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/kbd.tsx",
+      "sha256": "509557319671bbbd09032d8a0ff5b15ba7246fd658197642dbb34010bce59d93"
+    },
+    "repo:packages/ui/src/components/label.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/label.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/label.tsx",
+      "sha256": "7b89f673bcb45bc51238af41378937787cae280060db7b5263fb63351a62a1f1"
+    },
+    "repo:packages/ui/src/components/marker.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/marker.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/marker.tsx",
+      "sha256": "988769f15c4f4517b45560016f1a66b87af1c914b72c2919324245badb2249e2"
+    },
+    "repo:packages/ui/src/components/menubar.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/menubar.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/menubar.tsx",
+      "sha256": "e1be1aa8c05ba1401ad79a974945d924d9d7406615575a4aec02de30fcd1870b"
+    },
+    "npm:@base-ui/react@1.9.0:menubar/Menubar.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "menubar/Menubar.d.mts",
+      "sha256": "d1883bccd0d700456b7b2c3b2f486329baa14aab33ab744d2d55cd8a9123e611"
+    },
+    "repo:packages/ui/src/components/message-scroller.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/message-scroller.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/message-scroller.tsx",
+      "sha256": "9fd4bb7a30956a2d59624473c0cd7de021be65f24f48b6eb346cc7467d402028"
+    },
+    "npm:@shadcn/react@0.3.1:dist/message-scroller/index.d.ts": {
+      "kind": "dependency",
+      "package": "@shadcn/react",
+      "version": "0.3.1",
+      "path": "dist/message-scroller/index.d.ts",
+      "sha256": "c52ebd5d88d2f32245805e029d5cb8fa86662557c76500bdb060c90b32de1043"
+    },
+    "repo:packages/ui/src/components/message.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/message.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/message.tsx",
+      "sha256": "2cfe9513ccecb235c4b44206cff5a744bd4d6f8ece5970f781158f767df0a3a2"
+    },
+    "repo:packages/ui/src/components/native-select.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/native-select.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/native-select.tsx",
+      "sha256": "ccc7ff984d048ab8f2b0c5992d5bff4efb5a95bb3e0c2dc08a7d070c5f5073cf"
+    },
+    "repo:packages/ui/src/components/navigation-menu.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/navigation-menu.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/navigation-menu.tsx",
+      "sha256": "2111ac2a160f876068c35f064aab25a165f232d4d7b352104d69031c7502922f"
+    },
+    "npm:@base-ui/react@1.9.0:navigation-menu/root/NavigationMenuRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "navigation-menu/root/NavigationMenuRoot.d.mts",
+      "sha256": "fc55c97d9d7bcb65723bebf6353fe9a2a8d5f59b4588f13d82d72bfa87f1014a"
+    },
+    "npm:@base-ui/react@1.9.0:navigation-menu/item/NavigationMenuItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "navigation-menu/item/NavigationMenuItem.d.mts",
+      "sha256": "15de6ee96c8e0f6a78fed11e60c3a0f9b4535c1e6a802c55d65028d500e91e75"
+    },
+    "npm:@base-ui/react@1.9.0:navigation-menu/trigger/NavigationMenuTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "navigation-menu/trigger/NavigationMenuTrigger.d.mts",
+      "sha256": "ace6331dc38473e31a03aaf38ac7e1030a67e127718d2d25f2e4b49d26144b82"
+    },
+    "repo:packages/ui/src/components/pagination.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/pagination.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/pagination.tsx",
+      "sha256": "cc4125db29d93046e4c729fe95a36bc882402fd98b803c5efedc5e9143f2ff47"
+    },
+    "repo:packages/ui/src/components/popover.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/popover.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/popover.tsx",
+      "sha256": "cce2b5b40854d4e6fcc04488f741e667520cfdb2299347351bf717bd04adf4e0"
+    },
+    "npm:@base-ui/react@1.9.0:popover/root/PopoverRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "popover/root/PopoverRoot.d.mts",
+      "sha256": "453872a05540140f3e04cd6f2639368dd3e5542c431176ed53e223a6fad5f6a5"
+    },
+    "npm:@base-ui/react@1.9.0:popover/trigger/PopoverTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "popover/trigger/PopoverTrigger.d.mts",
+      "sha256": "2958c7dac374f7bfa7f64bb2ab57367b4a217ad33bb06bdcdb22a39f2289f320"
+    },
+    "repo:packages/ui/src/components/progress.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/progress.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/progress.tsx",
+      "sha256": "6021ddf9dd95a839b7dfa73d3887ed1c326dc7387035cdbfc2418f5da17db289"
+    },
+    "npm:@base-ui/react@1.9.0:progress/root/ProgressRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "progress/root/ProgressRoot.d.mts",
+      "sha256": "c09fdd0ea6b10c332ce9567a39b4056145cfd9859136d29c8bf353fdd19e6d3e"
+    },
+    "repo:packages/ui/src/components/questionnaire.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/questionnaire.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/questionnaire.tsx",
+      "sha256": "67bd7eb88413e80d24cd706380ce0ae91ca8587266d1212da1eb94912f8b0456"
+    },
+    "npm:@shadcn/react@0.3.1:dist/questionnaire/index.d.ts": {
+      "kind": "dependency",
+      "package": "@shadcn/react",
+      "version": "0.3.1",
+      "path": "dist/questionnaire/index.d.ts",
+      "sha256": "a1c8d1028a77f7b2621636aa240b069a1ace9cd0ea472e01676217f7336cb1fa"
+    },
+    "repo:packages/ui/src/components/radio-group.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/radio-group.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/radio-group.tsx",
+      "sha256": "26b927391ebd7b25b56912a42e969cbb5b40d204ee97303430b2932959832c2b"
+    },
+    "npm:@base-ui/react@1.9.0:radio-group/RadioGroup.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "radio-group/RadioGroup.d.mts",
+      "sha256": "4406ec98d5c6fe01ba7942c2f4b177ea046696fdb8d3ebc9e4793d7936f9dc0a"
+    },
+    "npm:@base-ui/react@1.9.0:radio/root/RadioRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "radio/root/RadioRoot.d.mts",
+      "sha256": "c5720921f08a4e03b504d9ad337607af493ec24d34f85bb177ae7ae1cd22ac50"
+    },
+    "repo:packages/ui/src/components/resizable.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/resizable.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/resizable.tsx",
+      "sha256": "f57fada4d194b1f28c18abfa5a74002a886344085db7e3cc7645d5d104ab1f98"
+    },
+    "npm:react-resizable-panels@4.14.5:dist/react-resizable-panels.d.ts": {
+      "kind": "dependency",
+      "package": "react-resizable-panels",
+      "version": "4.14.5",
+      "path": "dist/react-resizable-panels.d.ts",
+      "sha256": "45d0bf00978f6855d14c6c5a187d7a90de0e44665d64a62623f11575ebac0b40"
+    },
+    "repo:packages/ui/src/components/scroll-area.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/scroll-area.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/scroll-area.tsx",
+      "sha256": "aea5eb01b5f1c6f907251af9db4ad5c4e48d814811c34c5301e4ef0c663506ae"
+    },
+    "npm:@base-ui/react@1.9.0:scroll-area/scrollbar/ScrollAreaScrollbar.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "scroll-area/scrollbar/ScrollAreaScrollbar.d.mts",
+      "sha256": "73fbbf32113d791d019c474cf474344bb36d4c375f9622728163ad5640492a39"
+    },
+    "repo:packages/ui/src/components/select.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/select.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/select.tsx",
+      "sha256": "b7638e7eacca2c7bc52b3766433b13d25fa972f492dc31f5cad4afe5868efe6f"
+    },
+    "npm:@base-ui/react@1.9.0:select/root/SelectRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "select/root/SelectRoot.d.mts",
+      "sha256": "71bac8f6e1a4a75dc2c4689b7a395151a43f4e2575075f6dba153aee9be693f8"
+    },
+    "npm:@base-ui/react@1.9.0:select/positioner/SelectPositioner.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "select/positioner/SelectPositioner.d.mts",
+      "sha256": "c9c52fad67c84d9c912226316dfd152acc9ac82c86daa0a41637161a3975bc79"
+    },
+    "npm:@base-ui/react@1.9.0:select/item/SelectItem.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "select/item/SelectItem.d.mts",
+      "sha256": "5fc3d9350eb34ad3cbcb1b69249161a33ffe19d7c0e72e6087c947046de6f756"
+    },
+    "npm:@base-ui/react@1.9.0:select/separator/SelectSeparator.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "select/separator/SelectSeparator.d.mts",
+      "sha256": "03f7e27eaea783040fa9576a337604405a663ea9cc7dd0d7486d734e4d9e7df7"
+    },
+    "npm:@base-ui/react@1.9.0:select/trigger/SelectTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "select/trigger/SelectTrigger.d.mts",
+      "sha256": "7d60e8a654b98d200f6c653d474d6b368d9ad43ddd9b47110a046aafc3f0b464"
+    },
+    "repo:packages/ui/src/components/separator.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/separator.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/separator.tsx",
+      "sha256": "4215cda1efea92bf93c72a2b9e60f75eee42d0388bb0f3df6c0ed1ff8c56854f"
+    },
+    "repo:packages/ui/src/components/sheet.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/sheet.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/sheet.tsx",
+      "sha256": "b9f44cf397f385e3c85a1c0aab0afb548d2a1140b05660df54c357c4b747b363"
+    },
+    "repo:packages/ui/src/components/sidebar.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/sidebar.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/sidebar.tsx",
+      "sha256": "51cd9b21ddd3f8c2bb07fbddab3dc8fd4f9b307ffdd56083c59096949411c7f4"
+    },
+    "repo:packages/ui/src/components/skeleton.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/skeleton.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/skeleton.tsx",
+      "sha256": "80adc0516dd8e03dde50ca62aa3d77125f9e7dcc0e5e5e9643df777b4bae16f3"
+    },
+    "repo:packages/ui/src/components/slider.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/slider.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/slider.tsx",
+      "sha256": "f1f014debbcdaee545d5b84a73cd7ef9635c9b953958bf58c0d94d6811e699e5"
+    },
+    "npm:@base-ui/react@1.9.0:slider/root/SliderRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "slider/root/SliderRoot.d.mts",
+      "sha256": "ed1a245f5b82362911f50272642e5ec136842429198f130200b8b2ce1070b89f"
+    },
+    "repo:packages/ui/src/components/spinner.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/spinner.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/spinner.tsx",
+      "sha256": "4fcb8351e243e850a6ba4056dfeaa69bb8ff08a6507953d2c5541fb3d5d225a3"
+    },
+    "repo:packages/ui/src/components/switch.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/switch.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/switch.tsx",
+      "sha256": "24f8b0cd87ed1ac266bb9a5030968d7d5eba0f0b5e96ad595e0a036844572933"
+    },
+    "npm:@base-ui/react@1.9.0:switch/root/SwitchRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "switch/root/SwitchRoot.d.mts",
+      "sha256": "d40c02d227da200dd6be4e7d56ec2c560c08b9e24a4688a071f392b37953143a"
+    },
+    "repo:packages/ui/src/components/table.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/table.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/table.tsx",
+      "sha256": "517d8b6e129f4e3b1ba93206696cbd726f262489bb31ac606de9abefc0b81c75"
+    },
+    "repo:packages/ui/src/components/tabs.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/tabs.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/tabs.tsx",
+      "sha256": "4be015170c9c03a638241ad3faeb7db9db208de7fb2e48986cbfb30907fbe0d6"
+    },
+    "npm:@base-ui/react@1.9.0:tabs/root/TabsRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tabs/root/TabsRoot.d.mts",
+      "sha256": "6316b78e368c9835486834c177952ccd9033a67e41664b97276ea3e54705fac5"
+    },
+    "npm:@base-ui/react@1.9.0:tabs/tab/TabsTab.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tabs/tab/TabsTab.d.mts",
+      "sha256": "0fadf459265643344979f57c02e7ae5fdb5c70244fc9ccece5a1a977fe0b1fb8"
+    },
+    "npm:@base-ui/react@1.9.0:tabs/panel/TabsPanel.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tabs/panel/TabsPanel.d.mts",
+      "sha256": "9e68ef46923c55a0c2a01db0b1469657a0351bd82aefc5ed73ea759353db3dbe"
+    },
+    "repo:packages/ui/src/components/textarea.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/textarea.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/textarea.tsx",
+      "sha256": "0fef635491f9d031907801e0acf954ee16fb8609f52d1b5493a8625782b2508b"
+    },
+    "repo:packages/ui/src/components/toast.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/toast.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/toast.tsx",
+      "sha256": "d4a39f6b107edf483758e7cd69620ee5b22c3386eb70a4fdd0a00a5000188342"
+    },
+    "npm:@base-ui/react@1.9.0:toast/provider/ToastProvider.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "toast/provider/ToastProvider.d.mts",
+      "sha256": "c988c702e73a0ae03ff6d7868ebc2dd0497e921c3b7ea4fbde42aa781831b8a5"
+    },
+    "repo:packages/ui/src/components/toggle-group.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/toggle-group.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/toggle-group.tsx",
+      "sha256": "fd55fe6c8028ccb81637b5f12dc22c7eb24156b4d8430b035573270c96b74162"
+    },
+    "npm:@base-ui/react@1.9.0:toggle-group/ToggleGroup.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "toggle-group/ToggleGroup.d.mts",
+      "sha256": "a51d52a68c1896335e458f50c5edbf8beb447340dad23fef961c33bc1bf51ce8"
+    },
+    "repo:packages/ui/src/components/toggle.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/toggle.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/toggle.tsx",
+      "sha256": "8868691a776cd9d73d17d9e6bcfce80f06b0205000ed8f52765c4af78869ddb7"
+    },
+    "npm:@base-ui/react@1.9.0:toggle/Toggle.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "toggle/Toggle.d.mts",
+      "sha256": "9123f037f82c0567cf76f6643d7622e8d4c2ddfa527cbf10193aeb3b6b7d0440"
+    },
+    "repo:packages/ui/src/components/tooltip.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/components/tooltip.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/components/tooltip.tsx",
+      "sha256": "31f2c5105adc84641311b098247a6063e8b023d35524bce707cb2ebb4694952f"
+    },
+    "npm:@base-ui/react@1.9.0:tooltip/root/TooltipRoot.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tooltip/root/TooltipRoot.d.mts",
+      "sha256": "810676b0c211e6a5798a7d03ae0d1aac6153e5e57e5112168358e14ab6ab6dd1"
+    },
+    "npm:@base-ui/react@1.9.0:tooltip/trigger/TooltipTrigger.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tooltip/trigger/TooltipTrigger.d.mts",
+      "sha256": "524aced94f1d1feaf9541ddb4074c8be7357127d61838922ef177d64b692d4cd"
+    },
+    "npm:@base-ui/react@1.9.0:tooltip/positioner/TooltipPositioner.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tooltip/positioner/TooltipPositioner.d.mts",
+      "sha256": "48c81515c07978b73cf8539ff5f33b267f03acd1ea5a74ac62cbab310bd0f1b4"
+    },
+    "npm:@base-ui/react@1.9.0:tooltip/provider/TooltipProvider.d.mts": {
+      "kind": "dependency",
+      "package": "@base-ui/react",
+      "version": "1.9.0",
+      "path": "tooltip/provider/TooltipProvider.d.mts",
+      "sha256": "338abeb4d9b0c7e14f56317ebb437f2a654dde4f8f6b52bec45657644f0688e3"
+    },
+    "repo:packages/ui/src/brand/logo.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/brand/logo.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/brand/logo.tsx",
+      "sha256": "fb7859f1d7c55f9738280eca6bee088c509e1f77caa9c9af826e6ad03745c344"
+    },
+    "repo:packages/ui/src/brand/site-header.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/brand/site-header.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/brand/site-header.tsx",
+      "sha256": "65022c8ffc3ea875301e797ecb5bbba42f6fb420047dcc2f8f5d6ca245e06cfa"
+    },
+    "repo:packages/ui/src/brand/site-footer.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/brand/site-footer.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/brand/site-footer.tsx",
+      "sha256": "010650acc64fa5ad37912c80a4fe162b6d08b001a30c8cce6edac5aa62c1167c"
+    },
+    "repo:packages/ui/src/layouts/public-layout.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/layouts/public-layout.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/layouts/public-layout.tsx",
+      "sha256": "eb2ce5ff54d83a99efa52ef85001f7512975715e6e3f878f91d15a3ad816fca1"
+    },
+    "repo:packages/ui/src/layouts/app-shell.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/layouts/app-shell.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/layouts/app-shell.tsx",
+      "sha256": "c13b4b0db6f6ff5afc58187b75dcf5a07c8610169cff68f58ead5b24d02470a5"
+    },
+    "repo:packages/ui/src/lib/utils.ts": {
+      "kind": "repository",
+      "path": "packages/ui/src/lib/utils.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/lib/utils.ts",
+      "sha256": "eb111b582b8667be932e071d2e6a6fbd52475179c102cd3ee29582342a228332"
+    },
+    "repo:packages/ui/src/layouts/skip-link.tsx": {
+      "kind": "repository",
+      "path": "packages/ui/src/layouts/skip-link.tsx",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/layouts/skip-link.tsx",
+      "sha256": "8e9751ddbc20cd677ca2083145978244f61441d64b4f58e2461863b9d61047b5"
+    },
+    "repo:packages/ui/src/hooks/use-mobile.ts": {
+      "kind": "repository",
+      "path": "packages/ui/src/hooks/use-mobile.ts",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/src/hooks/use-mobile.ts",
+      "sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b"
+    },
+    "repo:packages/css/README.md": {
+      "kind": "repository",
+      "path": "packages/css/README.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/css/README.md",
+      "sha256": "09a66370ebdd8ce9731a7b3954727b77394618e24d24685a7d5e74db7a0a6d2c"
+    },
+    "repo:packages/css/src/mednet.css": {
+      "kind": "repository",
+      "path": "packages/css/src/mednet.css",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/css/src/mednet.css",
+      "sha256": "7814b3367d669d19dbd41a7a7197f106bda502f257a907e30c8cd6731bbc4393"
+    },
+    "repo:packages/css/src/overrides.css": {
+      "kind": "repository",
+      "path": "packages/css/src/overrides.css",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/css/src/overrides.css",
+      "sha256": "afe121a8b4ef0f7c8ad60121677793532a506216212bffdd85df3011ea9c8a97"
+    },
+    "repo:packages/ui/llms/intro.md": {
+      "kind": "repository",
+      "path": "packages/ui/llms/intro.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/llms/intro.md",
+      "sha256": "cd89aa101885b9219515e2b32cdb79be69b8e2fd2cad2daaeda9eba6df24d39b"
+    },
+    "repo:docs/agent-guide/brand.md": {
+      "kind": "repository",
+      "path": "docs/agent-guide/brand.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/docs/agent-guide/brand.md",
+      "sha256": "9d029dd9f5c6e752795f624aa501bf401da30ae9397a67f68fa85b3aa248346d"
+    },
+    "repo:docs/agent-guide/ux.md": {
+      "kind": "repository",
+      "path": "docs/agent-guide/ux.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/docs/agent-guide/ux.md",
+      "sha256": "63485e4dc6e14f5e76863d3ed8366dc2dfecb998fd96f44e2f59d624d33c8d89"
+    },
+    "repo:docs/agent-guide/lint.md": {
+      "kind": "repository",
+      "path": "docs/agent-guide/lint.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/docs/agent-guide/lint.md",
+      "sha256": "263eff171c03d86ac5736a4dc2a0b603bad852dc63365e669e6633901fb84a24"
+    },
+    "repo:docs/agent-guide/map.md": {
+      "kind": "repository",
+      "path": "docs/agent-guide/map.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/docs/agent-guide/map.md",
+      "sha256": "c1b71d7a2b04e23b651bf03659deabf9bf57808e9a7355c076b87441ca476770"
+    },
+    "repo:packages/ui/llms/brand.md": {
+      "kind": "repository",
+      "path": "packages/ui/llms/brand.md",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/llms/brand.md",
+      "sha256": "fbecaeeabc2e042e377fe4ed9467831fae877105df0243dc3c93292f102dedf9"
+    },
+    "consumer:@local/codex-design-director:package.json": {
+      "kind": "consumer-document",
+      "package": "@local/codex-design-director",
+      "version": "1.0.0",
+      "path": "package.json",
+      "sha256": "d4b1a367f0832445b2b6debe9a61ea2fc44da08183cd2535ccabc7075df575ff"
+    },
+    "consumer:@local/codex-design-director:knowledge/README.md": {
+      "kind": "consumer-document",
+      "package": "@local/codex-design-director",
+      "version": "1.0.0",
+      "path": "knowledge/README.md",
+      "sha256": "0f8fb5c348ad9b5ed7411257d845288ea7638fdd557227e9cc24747968b80bec"
+    },
+    "consumer:@local/codex-design-director:knowledge/project.schema.json": {
+      "kind": "consumer-document",
+      "package": "@local/codex-design-director",
+      "version": "1.0.0",
+      "path": "knowledge/project.schema.json",
+      "sha256": "ed2fb44460f7d98c86c24a2954044e3d1b28f3d9acfc57a6e60396542be7ed1e"
+    },
+    "consumer:@local/codex-design-director:scripts/cli.mjs": {
+      "kind": "consumer-document",
+      "package": "@local/codex-design-director",
+      "version": "1.0.0",
+      "path": "scripts/cli.mjs",
+      "sha256": "ccb540f1b45e96847af33abf73c993ad49ce685b612f5ec76639266b191c2b68"
+    },
+    "repo:packages/ui/postcss.cjs": {
+      "kind": "repository",
+      "path": "packages/ui/postcss.cjs",
+      "revision": "7262bdbc13fafd43b537a1c399cb0630eae53893",
+      "url": "https://github.com/hpnssflw/mednet-kit/blob/7262bdbc13fafd43b537a1c399cb0630eae53893/packages/ui/postcss.cjs",
+      "sha256": "aeef65456610c77aa818fcd7c9d932e05183fe83a5852098a007a862ccec58f5"
+    }
+  },
+  "ruleIndex": [
+    {
+      "id": "mednet.ui.setup",
+      "status": "existing-policy",
+      "level": "must",
+      "surfaces": ["react"],
+      "artifact": "design-rules.md#rule-ui-setup",
+      "sourceRefs": ["repo:packages/ui/llms/intro.md"]
+    },
+    {
+      "id": "mednet.brand",
+      "status": "existing-policy",
+      "level": "must",
+      "surfaces": ["react", "html", "tokens"],
+      "artifact": "design-rules.md#rule-brand",
+      "sourceRefs": ["repo:docs/agent-guide/brand.md"]
+    },
+    {
+      "id": "mednet.ux.accessibility",
+      "status": "existing-policy",
+      "level": "mixed",
+      "surfaces": ["react", "html"],
+      "artifact": "design-rules.md#rule-ux-accessibility",
+      "sourceRefs": ["repo:docs/agent-guide/ux.md"]
+    },
+    {
+      "id": "mednet.ux.forms",
+      "status": "existing-policy",
+      "level": "mixed",
+      "surfaces": ["react", "html"],
+      "artifact": "design-rules.md#rule-ux-forms",
+      "sourceRefs": ["repo:docs/agent-guide/ux.md"]
+    },
+    {
+      "id": "mednet.ux.feedback",
+      "status": "existing-policy",
+      "level": "mixed",
+      "surfaces": ["react", "html"],
+      "artifact": "design-rules.md#rule-ux-feedback",
+      "sourceRefs": ["repo:docs/agent-guide/ux.md"]
+    },
+    {
+      "id": "mednet.ux.destructive",
+      "status": "existing-policy",
+      "level": "mixed",
+      "surfaces": ["react", "html"],
+      "artifact": "design-rules.md#rule-ux-destructive",
+      "sourceRefs": ["repo:docs/agent-guide/ux.md"]
+    },
+    {
+      "id": "mednet.ux.patterns",
+      "status": "existing-policy",
+      "level": "mixed",
+      "surfaces": ["react", "html"],
+      "artifact": "design-rules.md#rule-ux-patterns",
+      "sourceRefs": ["repo:docs/agent-guide/ux.md"]
+    },
+    {
+      "id": "mednet.lint",
+      "status": "existing-policy",
+      "level": "must",
+      "surfaces": ["react", "html", "tokens"],
+      "artifact": "design-rules.md#rule-lint",
+      "sourceRefs": ["repo:docs/agent-guide/lint.md"]
+    },
+    {
+      "id": "mednet.packages",
+      "status": "existing-policy",
+      "level": "must",
+      "surfaces": ["react", "html", "tokens"],
+      "artifact": "design-rules.md#rule-packages",
+      "sourceRefs": ["repo:docs/agent-guide/map.md"]
+    },
+    {
+      "id": "mednet.brand.blocks",
+      "status": "existing-policy",
+      "level": "mixed",
+      "surfaces": ["react"],
+      "artifact": "design-rules.md#rule-brand-blocks",
+      "sourceRefs": ["repo:packages/ui/llms/brand.md"]
+    },
+    {
+      "id": "mednet.audit.proposals",
+      "status": "proposed",
+      "level": "decision-required",
+      "surfaces": ["react", "html", "tokens"],
+      "artifact": "design-rules.md#proposals",
+      "sourceRefs": []
+    }
+  ],
+  "reviewContext": {
+    "documents": [
+      {
+        "name": "DESIGN_SYSTEM_AUDIT.md",
+        "sha256": "4c41ccde6ef1ec9a839a2bb26260b4ee047c31903b46b5e1a8b0a07dcff08c7c",
+        "role": "audit-evidence",
+        "includedAsArtifact": false,
+        "publishedAtSourceRevision": false
+      },
+      {
+        "name": "DESIGN_SYSTEM_PROPOSAL.md",
+        "sha256": "374ab42eaf1f405a62d4582fb7f2021506d0117d4117adb5ce44390536856b41",
+        "role": "proposal-or-planning",
+        "includedAsArtifact": false,
+        "publishedAtSourceRevision": false
+      },
+      {
+        "name": "AGENT_INTEGRATION_PLAN.md",
+        "sha256": "50a0975bc52b2648094e72406f7cc221ef93c1a61f4f34c2a396d2926323841c",
+        "role": "proposal-or-planning",
+        "includedAsArtifact": false,
+        "publishedAtSourceRevision": false
+      },
+      {
+        "name": "IMPLEMENTATION_ROADMAP.md",
+        "sha256": "95a5d161d13f02c979b2c1ce8f7fcae6051b81c503188f9c8d24cc1b22b22c08",
+        "role": "proposal-or-planning",
+        "includedAsArtifact": false,
+        "publishedAtSourceRevision": false
+      }
+    ],
+    "proposalApproval": "not-established",
+    "notes": [
+      "Review documents were uncommitted at export preparation and are not linked as files in the recorded source revision.",
+      "Their relevant conclusions and decisions are included in design-rules.md; they are not required to consume this bundle."
+    ]
+  },
+  "knownLimitations": [
+    "Published package contents, integrity and SLSA provenance subject/source were checked. Cryptographic verification of provenance signatures was not performed. This portable JSON/Markdown contract is prepared separately from the npm packages.",
+    "Component property/default/state metadata is partial and explicitly scoped. Only SidebarRail/Toaster received targeted browser smoke; a full runtime, screen-reader and accessibility matrix is not claimed.",
+    "Density profiles, semantic spacing roles and new CLI/package contracts remain proposals.",
+    "HTML component markup registry is not exhaustively exported.",
+    "Director package docs and project context schema were inspected; no native import command or end-to-end adapter test is claimed."
+  ]
+}
