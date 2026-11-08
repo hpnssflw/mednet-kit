@@ -88,6 +88,22 @@
   background-color: var(--field);
 }
 
+/*
+ * Как в @mednet/css: Tailwind animate-spin/pulse имеют собственные duration,
+ * поэтому нулевых --mn-duration-* недостаточно. Короткая одна итерация
+ * сохраняет animationend и завершение состояний компонентов.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Официальный opt-in Солид: геометрия и touch. Палитры — из @mednet/tokens/themes/solid.css. */
 html[data-kit-theme='solid'] :is([class~='group/button'], [class~='group/toggle']) {
   min-width: 1.5rem;

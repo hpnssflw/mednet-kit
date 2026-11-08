@@ -25,3 +25,6 @@ packages/ui/llms/intro.md
 
 # @mednet/lint-config: строки фикстур помечены // @bad — Prettier не должен их переносить
 packages/lint-config/test/fixtures
+
+# Проверенный snapshot 2.2.1 сохраняет исходные bytes и sha256
+/design-director-export

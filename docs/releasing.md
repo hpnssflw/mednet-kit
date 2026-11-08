@@ -1,6 +1,6 @@
 # Релизы `@mednet/*`
 
-Пакеты `@mednet/tokens` и `@mednet/css` публикуются **только из GitHub Actions** (`.github/workflows/release.yml`) через npm trusted publishing (OIDC): без npm-токенов, без ручного 2FA, с provenance (SLSA v1). Все пакеты `@mednet/*` выходят с одной версией (fixed versioning в `.changeset/config.json`). Человек принимает одно решение — мержить ли Version PR.
+Пакеты `@mednet/*` публикуются **только из GitHub Actions** (`.github/workflows/release.yml`) через npm trusted publishing (OIDC): без npm-токенов, без ручного 2FA, с provenance (SLSA v1). Все пакеты `@mednet/*` выходят с одной версией (fixed versioning в `.changeset/config.json`). Человек принимает одно решение — мержить ли Version PR.
 
 ## Конвейер
 
@@ -32,7 +32,7 @@
    - `minor` — новое и обратно совместимое: токен, компонент, экспорт, утилита;
    - `major` — ломающее: удаление или переименование токена/экспорта, **изменение бренда, которое меняет внешний вид** существующих страниц (значение цвета, шрифт, радиусы). Из `0.x` это переход на `1.0.0` — сайты на CDN `@0` его не получат автоматически, это и нужно.
    - **Исключение (разово):** статическое выравнивание с Maia в 0.2.0 (`.changeset/css-maia-parity.md`) поменяло hover основного цвета, цвет неактивной вкладки и line-height заголовка карточки, но вышло как `minor` по решению владельца (2026-10-14): это доалайнмент до 1.0, до публикации React-пакета. Это не прецедент: видимые изменения бренда — `major`.
-3. **Никаких ручных публикаций и npm-токенов.** Единственный путь в npm — merge Version PR. Исключения — первая публикация нового пакета и авария (см. ниже), каждый раз с записью в «Истории».
+3. **Никаких ручных релизных publish и npm-токенов.** Пакеты публикует release.yml после merge Version PR. Для нового имени нужен отдельно разрешённый bootstrap через staging и настройка trusted publisher; целевая версия выпуска при этом не публикуется вручную.
 4. **Не мержить Version PR, если CI на последнем коммите `main` красный.** Сам Version PR CI не запускает (PR создан `GITHUB_TOKEN`) — смотрите статус `main`.
 5. **Опубликованная версия неизменна.** Ошибку исправляет следующий `patch`. Сломанную версию помечают `npm deprecate @mednet/<пакет>@<версия> "причина"`, а не удаляют.
 6. **`release.yml` — доверенный издатель.** Любой, кто может менять этот файл в `main`, может публиковать от имени `@mednet`. Изменения в нём — только через ревью; рекомендуется защита ветки `main`.
@@ -51,29 +51,18 @@
 
 ## Новый пакет `@mednet/*`
 
-Trusted publisher настраивается только для уже существующего пакета, поэтому первая версия публикуется вручную.
+Trusted publisher требует существующего npm-пакета. Bootstrap нового имени и настройки npm выполняются только после явного разрешения владельца; основной релиз остаётся в release.yml.
 
-Private-пакеты версионируются Version PR вместе с остальными (`privatePackages.version: true` в `.changeset/config.json`), но не публикуются и не получают тегов, пока не снят `private`.
+Private-пакеты Version PR версионирует вместе с остальными, но не публикует. До выпуска проверить name, public publishConfig, repository.directory, bin/exports/files, LICENSE, packed состав и согласованный changeset.
 
-1. `package.json`: `"name": "@mednet/<имя>"`, версия — текущая версия кита, `"license": "MIT"`, `"publishConfig": { "access": "public" }`, `repository.directory`, `files`; файл `LICENSE` в папке пакета.
-2. Первая публикация — по разделу «Ручная публикация».
-3. `npm trust github @mednet/<имя> --file release.yml --repo hpnssflw/mednet-kit --allow-publish -y`
-4. `npm access set mfa=publish @mednet/<имя>`
+1. Проверить стандартную npm-сессию: `npm whoami`. При 401 владелец проходит `npm login`; токены не копируются в репозиторий и не создаются вручную.
+2. Для резервирования нового имени использовать отдельный временный bootstrap tarball через `npm stage publish ./mednet-cli-bootstrap.tgz --access public`. npm создаёт публичный placeholder 0.0.0-stage; содержимое stage не становится публичным без approval. Требуются npm ≥11.15 и Node ≥22.14.
+3. Bootstrap имеет отдельную prerelease-версию, например 0.0.1-bootstrap.0, **не целевую 2.3.0**. Staged и published версии делят один semver index: занятая stage-версия помешает штатной публикации той же версии. Исходные package.json кита локально не поднимаются.
+4. Настроить издателя, например `npm trust github @mednet/cli --file release.yml --repo hpnssflw/mednet-kit --allow-publish -y`. Владелец подтверждает необходимые npm 2FA-действия штатным интерфейсом. Проверить repo/workflow и право publish через `npm trust list @mednet/cli`.
+5. После зелёного CI main и проверки Version PR слить его в рамках данного разрешения. CI публикует настоящий пакет, provenance, теги и GitHub Releases.
+6. Проверить registry/bin/exports и provenance. Временный bootstrap stage отклонить по его точному stage ID; не затрагивать другие staged версии. Не утверждать bootstrap как публичную рабочую версию CLI.
 
-## Ручная публикация (первая версия нового пакета или авария)
-
-npm требует 2FA на каждую публикацию и настройку. В интерактивном терминале npm спросит сам. В неинтерактивной оболочке (агент, скрипт) работает web-подтверждение:
-
-1. `npm publish --json` (или другая команда с `--json`) возвращает `EOTP` с `authUrl` и `doneUrl`. Без `--json` npm маскирует ссылки (`***`).
-2. Владелец открывает `authUrl` и подтверждает.
-3. `GET doneUrl` с заголовком `Authorization: Bearer <токен сессии из ~/.npmrc>` → `{"token": "…"}`.
-4. Повтор той же команды с `--otp=<token>`.
-
-Подводные камни:
-
-- токен одноразовый, и действует **только последний подтверждённый** — подтверждать строго по одному: запрос → подтверждение → выполнение → следующий запрос;
-- пакеты с зависимостями `workspace:*` (например, `@mednet/css`) публиковать через pnpm (`pnpm pack` → проверить, что в `package/package.json` нет `workspace:` → `npm publish <tgz>`), а не голым `npm publish` в папке пакета;
-- после ручной публикации поставить тег `@mednet/<пакет>@<версия>`, запушить его и создать GitHub Release.
+[Официальная справка stage](https://docs.npmjs.com/cli/v11/commands/npm-stage/), [trusted publisher](https://docs.npmjs.com/cli/v11/commands/npm-trust/). Исторические ручные публикации в таблице ниже описывают прошлые события и не являются текущей процедурой.
 
 ## Проверка после релиза
 
@@ -94,7 +83,7 @@ curl -sI https://cdn.jsdelivr.net/npm/@mednet/css@<версия>/dist/mednet.min
 - `npm install -g npm@11` в `release.yml` нужен для trusted publishing (npm 11.5.1+); мажор закреплён, чтобы релиз не ломался от выхода новой версии npm.
 - Сторонние actions в обоих workflow закреплены полным SHA коммита с комментарием `# vX.Y.Z`; обновлять — осознанно (SHA через `gh api repos/<owner>/<repo>/git/ref/tags/<tag>`, аннотированный тег разыменовать до коммита).
 - `pnpm release` перед публикацией не только собирает пакеты, но и гоняет их тесты (`turbo run build test`); `prepublishOnly` в пакетах дополнительно не даёт опубликовать их без `dist/`.
-- Job CI `chrome109` гоняет smoke-тест в Chromium 109 (Docker `mcr.microsoft.com/playwright:v1.29.2-focal`): Tailwind, Next и Base UI официально поддерживают Chrome 111+, и их обновление может молча сломать Windows 7/8.1 — job это поймает.
+- Job chrome109 удалён вместе с apps/docs. Поддержка Chrome/Edge 109 проверяется вручную с реальным браузером, fresh build и @mednet/ui/postcss; современный Chrome и один build target этого не доказывают. Браузерные проверки живут во внешнем playground.
 
 ## История
 

@@ -1,0 +1,247 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Mednet portable React component inventory",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contractVersion",
+    "kitId",
+    "kitVersion",
+    "surface",
+    "dataStatus",
+    "counts",
+    "extraction",
+    "modules",
+    "nonComponentPublicModules",
+    "internalModules",
+    "otherSurfaces",
+    "unknowns"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schemaVersion": { "const": 1 },
+    "contractVersion": { "const": "1.0.0-draft.1" },
+    "kitId": { "const": "mednet" },
+    "kitVersion": { "type": "string", "minLength": 1 },
+    "surface": { "const": "react-public" },
+    "dataStatus": { "const": "existing-implementation" },
+    "counts": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "extraction": { "type": "object" },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "import",
+          "family",
+          "status",
+          "sourceRefs",
+          "moduleDirective",
+          "exports",
+          "parts",
+          "variantRecipes",
+          "stateEvidence",
+          "observedStateNames",
+          "dependencies",
+          "ruleRefs",
+          "usageConstraints",
+          "metadataCompleteness"
+        ],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "import": { "type": "string", "pattern": "^@mednet/ui/" },
+          "family": { "enum": ["component", "brand-or-layout"] },
+          "status": { "const": "existing-implementation" },
+          "sourceRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "moduleDirective": { "enum": ["use client", "none"] },
+          "exports": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "parts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "kind",
+                "sourceRefs",
+                "properties",
+                "variantDefinitions",
+                "stateEvidence"
+              ],
+              "properties": {
+                "name": { "type": "string", "minLength": 1 },
+                "kind": { "enum": ["component", "hook", "type", "value"] },
+                "sourceRefs": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": { "type": "string", "minLength": 1 }
+                },
+                "properties": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "values",
+                      "valuesComplete",
+                      "acceptsNull",
+                      "optional",
+                      "origin",
+                      "sourceRefs",
+                      "default"
+                    ],
+                    "properties": {
+                      "values": {
+                        "anyOf": [
+                          { "type": "null" },
+                          {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "minItems": 1,
+                            "items": { "type": ["string", "number", "boolean"] }
+                          }
+                        ]
+                      },
+                      "valuesComplete": { "type": "boolean" },
+                      "acceptsNull": { "type": "boolean" },
+                      "optional": { "type": "boolean" },
+                      "origin": { "enum": ["kit-cva", "kit-declaration", "inherited-declaration"] },
+                      "sourceRefs": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": { "type": "string", "minLength": 1 }
+                      },
+                      "default": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["status", "value", "expression", "origin", "sourceRefs"],
+                        "properties": {
+                          "status": { "enum": ["known", "unknown", "expression"] },
+                          "value": { "type": ["string", "number", "boolean", "null"] },
+                          "expression": { "type": ["string", "null"] },
+                          "origin": { "type": "string", "minLength": 1 },
+                          "sourceRefs": {
+                            "type": "array",
+                            "uniqueItems": true,
+                            "items": { "type": "string", "minLength": 1 }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "variantDefinitions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["name", "variants", "sourceRefs"],
+                    "properties": {
+                      "name": { "type": "string", "minLength": 1 },
+                      "variants": {
+                        "type": "object",
+                        "additionalProperties": { "type": "object" }
+                      },
+                      "sourceRefs": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "items": { "type": "string", "minLength": 1 }
+                      },
+                      "interpretation": { "type": "string", "minLength": 1 }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "stateEvidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["basis", "selector"],
+                    "properties": {
+                      "basis": { "const": "source-selector" },
+                      "selector": { "type": "string", "minLength": 1 }
+                    }
+                  }
+                },
+                "declaredPropsType": { "type": ["string", "null"] }
+              }
+            }
+          },
+          "variantRecipes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "variants", "sourceRefs"],
+              "properties": {
+                "name": { "type": "string", "minLength": 1 },
+                "variants": { "type": "object", "additionalProperties": { "type": "object" } },
+                "sourceRefs": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "items": { "type": "string", "minLength": 1 }
+                },
+                "interpretation": { "type": "string", "minLength": 1 }
+              },
+              "additionalProperties": false
+            }
+          },
+          "stateEvidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["basis", "selector"],
+              "properties": {
+                "basis": { "const": "source-selector" },
+                "selector": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "observedStateNames": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "dependencies": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "ruleRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "usageConstraints": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "metadataCompleteness": { "type": "object", "additionalProperties": { "type": "string" } }
+        }
+      }
+    },
+    "nonComponentPublicModules": { "type": "array", "items": { "type": "object" } },
+    "internalModules": { "type": "array", "items": { "type": "object" } },
+    "otherSurfaces": { "type": "object" },
+    "unknowns": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

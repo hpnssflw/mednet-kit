@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Mednet Design Director export manifest",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contractVersion",
+    "exportStatus",
+    "kit",
+    "source",
+    "compatibility",
+    "artifacts",
+    "sources",
+    "ruleIndex",
+    "reviewContext",
+    "knownLimitations"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schemaVersion": { "const": 1 },
+    "contractVersion": { "const": "1.0.0-draft.1" },
+    "exportStatus": { "const": "prepared-source-snapshot" },
+    "kit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "primaryPackage", "version", "packages", "license", "foundation"],
+      "properties": {
+        "id": { "const": "mednet" },
+        "name": { "type": "string", "minLength": 1 },
+        "primaryPackage": { "const": "@mednet/ui" },
+        "version": { "type": "string", "minLength": 1 },
+        "packages": { "type": "object", "additionalProperties": { "type": "object" } },
+        "license": { "type": "string", "minLength": 1 },
+        "foundation": { "type": "object" }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "revision",
+        "basis",
+        "distUsedForData",
+        "capturedOn",
+        "publicationVerification"
+      ],
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "basis": { "const": "repository-source" },
+        "distUsedForData": { "const": false },
+        "capturedOn": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "publicationVerification": { "enum": ["not-performed", "npm-tarballs-verified"] }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "required": ["exportReader", "uiPeers", "designDirector", "codex", "html", "chrome109"],
+      "properties": {
+        "exportReader": {
+          "type": "object",
+          "required": ["schemaVersion", "contractVersion", "schemaDialect", "runtime"]
+        },
+        "designDirector": {
+          "type": "object",
+          "required": ["minimumCompatibleVersion", "verification", "nativeKitImportCommand"]
+        },
+        "uiPeers": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "codex": {
+          "type": "object",
+          "required": ["minimumVersion", "verification", "skillInstalledByExport"]
+        },
+        "html": { "type": "object" },
+        "chrome109": { "type": "object" }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "required": [
+        "tokens",
+        "components",
+        "designRules",
+        "integration",
+        "manifestSchema",
+        "tokensSchema",
+        "componentsSchema"
+      ],
+      "minProperties": 7,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "mediaType", "sha256"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^(?!/)(?!.*\\.\\.)(?!.*:)[A-Za-z0-9_./-]+$" },
+          "mediaType": { "enum": ["application/json", "text/markdown"] },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "schemaArtifact": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["kind", "path", "sha256"],
+        "properties": {
+          "kind": { "enum": ["repository", "dependency", "consumer-document"] },
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "revision": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "minLength": 1 },
+          "package": { "type": "string", "minLength": 1 },
+          "version": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "ruleIndex": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "level", "surfaces", "artifact", "sourceRefs"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": {
+            "enum": ["existing-implementation", "existing-policy", "proposed", "unknown"]
+          },
+          "level": { "enum": ["must", "mixed", "decision-required"] },
+          "surfaces": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "artifact": { "type": "string", "minLength": 1 },
+          "sourceRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "reviewContext": { "type": "object" },
+    "knownLimitations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

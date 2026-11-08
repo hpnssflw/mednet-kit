@@ -1,6 +1,6 @@
 # @mednet/cli
 
-Node >=22.12; bin mednet. Пакет готовится к первой публичной публикации release workflow; до выпуска используй локальную сборку/tarball.
+Node >=22.12; bin mednet после установки пакета, публичный запуск — npx @mednet/cli@latest. Не выпущенные изменения проверяй локальной сборкой/tarball; пакеты публикует release workflow.
 
 - mednet doctor [--project path] [--surface react|html|tokens] [--json] [--chrome109] — только чтение.
 - mednet update [--to X.Y.Z] [--project path] [--package-manager npm|pnpm] [--no-install] [--dry-run] [--json] — точные версии уже объявленных пакетов, затем npm/pnpm install без lifecycle scripts и pnpmfile hooks. Default target — версия CLI. После обновления установленного loader выполни agent sync.
