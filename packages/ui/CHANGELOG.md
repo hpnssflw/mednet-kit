@@ -1,5 +1,22 @@
 # @mednet/ui
 
+## 2.3.0
+
+### Minor Changes
+
+- bd1d380: Официальная opt-in тема «Солид» с четырьмя палитрами и каталогом themes.json. Новые CSS exports для React, HTML и tokens-only; обновлены инструкции агентов. Исходная тема существующих страниц сохраняется, новая тема включается явно.
+  
+  CLI готов к первой публичной публикации: update согласует версии пакетов через npm/pnpm, theme set подключает официальный stylesheet и корневые атрибуты. Обе команды поддерживают dry-run, сохраняют посторонние исходники и останавливаются на конфликте. Runtime Node 22.12+.
+
+### Patch Changes
+
+- 1a0dac7: Сохранить связь полупрозрачных цветов Tailwind с токенами при переключении тёмной темы и палитр в Chrome/Edge 109. PostCSS fallback использует наследуемые RGB/alpha и сохраняет исходную прозрачность токена; современные color-mix правила не меняются.
+- a44bb55: React соблюдает prefers-reduced-motion для Spinner, Skeleton и других CSS-анимаций, как HTML-поверхность. Одна короткая итерация сохраняет animationend, видимость и доступный статус загрузки. Уточнены справки потребителей и команды первого публичного CLI.
+- Updated dependencies [1a0dac7]
+- Updated dependencies [a44bb55]
+- Updated dependencies [bd1d380]
+  - @mednet/tokens@2.3.0
+
 ## 2.2.1
 
 ### Patch Changes
