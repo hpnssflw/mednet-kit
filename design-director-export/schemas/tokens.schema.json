@@ -1,0 +1,198 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Mednet portable source-resolved tokens",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "contractVersion",
+    "kitId",
+    "kitVersion",
+    "dataStatus",
+    "extraction",
+    "counts",
+    "values",
+    "provenance",
+    "semanticBindings",
+    "fontDelivery",
+    "inheritedConventions",
+    "unknowns",
+    "cssDeclarations"
+  ],
+  "properties": {
+    "$schema": { "type": "string", "minLength": 1 },
+    "schemaVersion": { "const": 1 },
+    "contractVersion": { "const": "1.0.0-draft.1" },
+    "kitId": { "const": "mednet" },
+    "kitVersion": { "type": "string", "minLength": 1 },
+    "dataStatus": { "const": "existing-implementation" },
+    "extraction": { "type": "object" },
+    "counts": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+    "values": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "color",
+        "semantic",
+        "semanticDark",
+        "font",
+        "fontWeight",
+        "text",
+        "radius",
+        "shadow",
+        "motion"
+      ],
+      "properties": {
+        "color": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              { "type": "string", "minLength": 1 },
+              { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } }
+            ]
+          }
+        },
+        "semantic": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "semanticDark": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "font": {
+          "type": "object",
+          "required": ["sans", "display", "mono"],
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "fontWeight": {
+          "type": "object",
+          "required": ["body", "heading", "bold"],
+          "additionalProperties": { "type": "integer" }
+        },
+        "text": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["size", "lineHeight"],
+            "properties": {
+              "size": { "type": "string", "minLength": 1 },
+              "lineHeight": { "type": "string", "minLength": 1 },
+              "fontWeight": { "type": "integer" }
+            }
+          }
+        },
+        "radius": { "type": "string", "minLength": 1 },
+        "shadow": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "motion": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "sourceRefs"],
+        "properties": {
+          "status": {
+            "enum": ["existing-implementation", "existing-policy", "proposed", "unknown"]
+          },
+          "sourceRefs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "sourcePointer": { "type": "string", "minLength": 1 },
+          "sourceSymbol": { "type": "string", "minLength": 1 },
+          "alias": { "type": "string", "minLength": 1 },
+          "inheritedFromLight": { "type": "boolean" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "semanticBindings": {
+      "type": "object",
+      "required": ["light", "dark"],
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "required": [
+            "alias",
+            "primitiveValuePointer",
+            "prefixedCssVariable",
+            "cssVariable",
+            "tailwindThemeVariable",
+            "sourceRefs"
+          ],
+          "properties": {
+            "alias": { "type": "string", "minLength": 1 },
+            "primitiveValuePointer": { "type": "string", "minLength": 1 },
+            "prefixedCssVariable": { "type": "string", "minLength": 1 },
+            "cssVariable": { "type": "string", "minLength": 1 },
+            "tailwindThemeVariable": { "type": "string", "minLength": 1 },
+            "sourceRefs": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "fontDelivery": { "type": "object" },
+    "inheritedConventions": { "type": "object" },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "value", "reason"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "status": { "const": "unknown" },
+          "value": { "type": "null" },
+          "reason": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "cssDeclarations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "light",
+        "darkOverrides",
+        "reducedMotionRoot",
+        "tailwindTheme",
+        "sourceRefs",
+        "note"
+      ],
+      "properties": {
+        "light": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } },
+        "darkOverrides": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "reducedMotionRoot": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "tailwindTheme": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "note": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -20,5 +20,7 @@ next-env.d.ts
 # генерируется сборкой @mednet/ui
 packages/ui/llms.md
 
-# Локальные логи и tarball проверок CLI
-/artifacts/agent-cli/
+# Локальные логи, сборки, снимки и сессии инструментов
+/artifacts/
+/.playwright-cli/
+/.claude/settings.local.json
