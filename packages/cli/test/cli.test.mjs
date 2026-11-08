@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { version } from '../src/version.mjs';
 import { fixture, addKit, run, write, tree } from './helpers.mjs';
 
 test('help describes executable commands', (t) => {
@@ -15,7 +16,7 @@ test('help describes executable commands', (t) => {
 test('version is the package version', (t) => {
   const result = run(fixture(t), ['--version']);
   assert.equal(result.status, 0, result.stderr);
-  assert.equal(result.stdout.trim(), '2.2.1');
+  assert.equal(result.stdout.trim(), version);
 });
 
 test('bad flags and missing flag values are usage failures', (t) => {

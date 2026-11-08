@@ -1,0 +1,2 @@
+/* Официальный Солид: подключать после @mednet/ui/styles.css. */
+@import '@mednet/tokens/themes/solid.css';

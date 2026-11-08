@@ -24,7 +24,9 @@
     "./theme.css": "./dist/theme.css",
     "./tokens.json": "./dist/tokens.json",
     "./dist/*": "./dist/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./themes/solid.css": "./dist/themes/solid.css",
+    "./themes.json": "./dist/themes.json"
   },
   "publishConfig": {
     "access": "public"

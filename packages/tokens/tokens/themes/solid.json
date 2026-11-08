@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "id": "solid",
+  "defaultPalette": "terracotta",
+  "palettes": [
+    {
+      "id": "terracotta",
+      "name": "Тёплая",
+      "description": "Брендовые тёплые акценты на нейтральных поверхностях."
+    },
+    {
+      "id": "indigo",
+      "name": "Холодная",
+      "description": "Брендовые холодные акценты на нейтральных поверхностях."
+    },
+    {
+      "id": "graphite",
+      "name": "Графит",
+      "description": "Графитовые действия и нейтральная палитра с цветными статусами."
+    },
+    {
+      "id": "bright",
+      "name": "Яркая",
+      "description": "Насыщенные действия, статусы и графики на нейтральных поверхностях."
+    }
+  ],
+  "rules": [
+    {
+      "selector": "html[data-kit-theme='solid']",
+      "declarations": {
+        "--spacing": "0.125rem",
+        "--mn-text-base": "0.8125rem",
+        "--mn-text-sm": "0.75rem",
+        "--mn-text-xs": "0.6875rem",
+        "--mn-text-base-line-height": "1.4",
+        "--mn-text-sm-line-height": "1.4",
+        "--mn-text-xs-line-height": "1.4",
+        "--mn-text-lead": "0.875rem",
+        "--mn-text-h4": "1rem",
+        "--mn-text-h3": "1.25rem",
+        "--mn-text-h2": "1.5rem",
+        "--mn-text-h1": "1.875rem"
+      }
+    },
+    {
+      "selector": "html[data-kit-theme='solid']",
+      "declarations": {
+        "--mn-background": "#ffffff",
+        "--mn-foreground": "#262626",
+        "--mn-card": "#ffffff",
+        "--mn-field": "#ffffff",
+        "--mn-secondary": "#f2f2f2",
+        "--mn-muted": "#f7f7f7",
+        "--mn-muted-foreground": "#626262",
+        "--mn-accent": "#eeeeee",
+        "--mn-accent-foreground": "var(--mn-foreground)",
+        "--mn-border": "#d9d9d9",
+        "--mn-input": "#898989",
+        "--mn-card-foreground": "var(--mn-foreground)",
+        "--mn-popover": "var(--mn-card)",
+        "--mn-popover-foreground": "var(--mn-foreground)",
+        "--mn-primary-foreground": "var(--mn-white)",
+        "--mn-secondary-foreground": "var(--mn-foreground)",
+        "--mn-success-foreground": "var(--mn-white)",
+        "--mn-info-foreground": "var(--mn-white)",
+        "--mn-warning-foreground": "var(--mn-white)",
+        "--mn-destructive-foreground": "var(--mn-white)",
+        "--mn-success-muted": "var(--mn-muted)",
+        "--mn-info-muted": "var(--mn-muted)",
+        "--mn-warning-muted": "var(--mn-muted)",
+        "--mn-destructive-muted": "var(--mn-muted)",
+        "--mn-sidebar": "var(--mn-secondary)",
+        "--mn-sidebar-foreground": "var(--mn-foreground)",
+        "--mn-sidebar-primary": "var(--mn-primary)",
+        "--mn-sidebar-primary-foreground": "var(--mn-primary-foreground)",
+        "--mn-sidebar-accent": "var(--mn-accent)",
+        "--mn-sidebar-accent-foreground": "var(--mn-accent-foreground)",
+        "--mn-sidebar-border": "var(--mn-border)",
+        "--mn-sidebar-ring": "var(--mn-ring)"
+      }
+    },
+    {
+      "selector": "html[data-kit-theme='solid'][data-solid-palette='terracotta']",
+      "declarations": {
+        "--mn-primary": "var(--mn-red-600)",
+        "--mn-primary-hover": "var(--mn-red-700)",
+        "--mn-ring": "var(--mn-blue-600)",
+        "--mn-success": "var(--mn-green-700)",
+        "--mn-info": "var(--mn-blue-600)",
+        "--mn-warning": "var(--mn-orange-800)",
+        "--mn-destructive": "var(--mn-danger-600)",
+        "--mn-chart-1": "var(--mn-blue-600)",
+        "--mn-chart-2": "var(--mn-red-600)",
+        "--mn-chart-3": "var(--mn-green-600)",
+        "--mn-chart-4": "var(--mn-orange-700)",
+        "--mn-chart-5": "var(--mn-violet-700)",
+        "--mn-chart-6": "var(--mn-yellow-800)",
+        "--mn-chart-7": "var(--mn-peach-800)",
+        "--mn-chart-8": "var(--mn-beige-800)"
+      }
+    },
+    {
+      "selector": "html[data-kit-theme='solid'][data-solid-palette='indigo']",
+      "declarations": {
+        "--mn-primary": "var(--mn-red-700)",
+        "--mn-primary-hover": "var(--mn-red-800)",
+        "--mn-ring": "var(--mn-blue-600)",
+        "--mn-success": "var(--mn-green-800)",
+        "--mn-info": "var(--mn-blue-700)",
+        "--mn-warning": "var(--mn-yellow-950)",
+        "--mn-destructive": "var(--mn-danger-600)",
+        "--mn-chart-1": "var(--mn-blue-600)",
+        "--mn-chart-2": "var(--mn-red-600)",
+        "--mn-chart-3": "var(--mn-violet-600)",
+        "--mn-chart-4": "var(--mn-green-600)",
+        "--mn-chart-5": "var(--mn-blue-700)",
+        "--mn-chart-6": "var(--mn-blue-500)",
+        "--mn-chart-7": "var(--mn-peach-800)",
+        "--mn-chart-8": "var(--mn-beige-800)"
+      }
+    },
+    {
+      "selector": "html[data-kit-theme='solid'][data-solid-palette='graphite']",
+      "declarations": {
+        "--mn-primary": "#30343b",
+        "--mn-primary-hover": "#191d23",
+        "--mn-ring": "#455e86",
+        "--mn-success": "#45734f",
+        "--mn-info": "#455e86",
+        "--mn-warning": "#8f641f",
+        "--mn-destructive": "#b33e43",
+        "--mn-chart-1": "#30343b",
+        "--mn-chart-2": "#697381",
+        "--mn-chart-3": "#7c8797",
+        "--mn-chart-4": "#4a5668",
+        "--mn-chart-5": "#747181",
+        "--mn-chart-6": "#414b5a",
+        "--mn-chart-7": "#8b7a6d",
+        "--mn-chart-8": "#667b79"
+      }
+    },
+    {
+      "selector": "html[data-kit-theme='solid'][data-solid-palette='bright']",
+      "declarations": {
+        "--mn-primary": "#e02020",
+        "--mn-primary-hover": "#b51218",
+        "--mn-ring": "#006ad8",
+        "--mn-success": "#277800",
+        "--mn-info": "#006ad8",
+        "--mn-warning": "#9c6500",
+        "--mn-destructive": "#cc0c3c",
+        "--mn-chart-1": "#007ce8",
+        "--mn-chart-2": "#e02020",
+        "--mn-chart-3": "#328f00",
+        "--mn-chart-4": "#e65e00",
+        "--mn-chart-5": "#a52ce2",
+        "--mn-chart-6": "#c98500",
+        "--mn-chart-7": "#e16b29",
+        "--mn-chart-8": "#a9741d"
+      }
+    },
+    {
+      "selector": "html.dark[data-kit-theme='solid']",
+      "declarations": {
+        "--mn-background": "#111111",
+        "--mn-foreground": "#f5f5f5",
+        "--mn-card": "#1c1c1c",
+        "--mn-field": "#171717",
+        "--mn-secondary": "#2c2c2c",
+        "--mn-muted": "#242424",
+        "--mn-muted-foreground": "#bdbdbd",
+        "--mn-accent": "#303030",
+        "--mn-accent-foreground": "#f5f5f5",
+        "--mn-border": "#424242",
+        "--mn-input": "#858585",
+        "--mn-primary-foreground": "var(--mn-background)",
+        "--mn-success-foreground": "var(--mn-background)",
+        "--mn-info-foreground": "var(--mn-background)",
+        "--mn-warning-foreground": "var(--mn-background)",
+        "--mn-destructive-foreground": "var(--mn-background)"
+      }
+    },
+    {
+      "selector": "html.dark[data-kit-theme='solid'][data-solid-palette='terracotta']",
+      "declarations": {
+        "--mn-primary": "var(--mn-red-400)",
+        "--mn-primary-hover": "var(--mn-red-300)",
+        "--mn-ring": "var(--mn-blue-400)",
+        "--mn-success": "var(--mn-green-400)",
+        "--mn-info": "var(--mn-blue-400)",
+        "--mn-warning": "var(--mn-orange-400)",
+        "--mn-destructive": "var(--mn-danger-300)",
+        "--mn-chart-1": "var(--mn-blue-400)",
+        "--mn-chart-2": "var(--mn-red-400)",
+        "--mn-chart-3": "var(--mn-green-400)",
+        "--mn-chart-4": "var(--mn-orange-400)",
+        "--mn-chart-5": "var(--mn-violet-300)",
+        "--mn-chart-6": "var(--mn-yellow-500)",
+        "--mn-chart-7": "var(--mn-peach-400)",
+        "--mn-chart-8": "var(--mn-beige-400)"
+      }
+    },
+    {
+      "selector": "html.dark[data-kit-theme='solid'][data-solid-palette='indigo']",
+      "declarations": {
+        "--mn-primary": "var(--mn-red-300)",
+        "--mn-primary-hover": "var(--mn-red-200)",
+        "--mn-ring": "var(--mn-blue-300)",
+        "--mn-success": "var(--mn-green-300)",
+        "--mn-info": "var(--mn-blue-300)",
+        "--mn-warning": "var(--mn-yellow-400)",
+        "--mn-destructive": "var(--mn-danger-300)",
+        "--mn-chart-1": "var(--mn-blue-300)",
+        "--mn-chart-2": "var(--mn-red-400)",
+        "--mn-chart-3": "var(--mn-violet-300)",
+        "--mn-chart-4": "var(--mn-green-400)",
+        "--mn-chart-5": "var(--mn-blue-400)",
+        "--mn-chart-6": "var(--mn-blue-500)",
+        "--mn-chart-7": "var(--mn-peach-400)",
+        "--mn-chart-8": "var(--mn-beige-400)"
+      }
+    },
+    {
+      "selector": "html.dark[data-kit-theme='solid'][data-solid-palette='graphite']",
+      "declarations": {
+        "--mn-primary": "#d9e0ea",
+        "--mn-primary-hover": "#f4f7fb",
+        "--mn-ring": "#aec8ed",
+        "--mn-success": "#a3c99d",
+        "--mn-info": "#aec8ed",
+        "--mn-warning": "#dbbd82",
+        "--mn-destructive": "#f5a8b1",
+        "--mn-chart-1": "#d9e0ea",
+        "--mn-chart-2": "#aab6c6",
+        "--mn-chart-3": "#93a3b9",
+        "--mn-chart-4": "#c7d0df",
+        "--mn-chart-5": "#bbb3c9",
+        "--mn-chart-6": "#c8d2df",
+        "--mn-chart-7": "#c8b4a2",
+        "--mn-chart-8": "#aac4bf"
+      }
+    },
+    {
+      "selector": "html.dark[data-kit-theme='solid'][data-solid-palette='bright']",
+      "declarations": {
+        "--mn-primary": "#ff693b",
+        "--mn-primary-hover": "#ff8857",
+        "--mn-ring": "#26c5ff",
+        "--mn-success": "#76f522",
+        "--mn-info": "#26c5ff",
+        "--mn-warning": "#ffd000",
+        "--mn-destructive": "#ff6377",
+        "--mn-chart-1": "#26c5ff",
+        "--mn-chart-2": "#ff693b",
+        "--mn-chart-3": "#76f522",
+        "--mn-chart-4": "#ff9f17",
+        "--mn-chart-5": "#d27aff",
+        "--mn-chart-6": "#ffd000",
+        "--mn-chart-7": "#ffac70",
+        "--mn-chart-8": "#e8b957"
+      }
+    },
+    {
+      "selector": "html[data-kit-theme='solid']",
+      "declarations": {
+        "--solid-control-radius": "0.375rem",
+        "--solid-card-radius": "0.625rem"
+      }
+    }
+  ]
+}

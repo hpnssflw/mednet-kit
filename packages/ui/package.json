@@ -22,7 +22,8 @@
     "src/brand.css",
     "src/shadcn-tailwind.css",
     "README.md",
-    "THIRD_PARTY_NOTICES.md"
+    "THIRD_PARTY_NOTICES.md",
+    "src/themes"
   ],
   "imports": {
     "#components/*": {
@@ -76,13 +77,15 @@
       "types": "./dist/components/*.d.ts",
       "default": "./dist/components/*.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./themes/solid.css": "./src/themes/solid.css",
+    "./themes.json": "./dist/themes.json"
   },
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json && node scripts/build-llms.mjs",
+    "build": "node scripts/clean.mjs && tsc -p tsconfig.build.json && node scripts/build-llms.mjs && node scripts/build-themes.mjs",
     "prepublishOnly": "node scripts/check-dist.mjs",
     "logos": "node scripts/gen-logos.mjs",
     "gen:index": "node scripts/gen-index.mjs",

@@ -8,7 +8,7 @@ export function applyPlan(plan) {
   if (!plan.changes.length) return;
   assertNoTransaction(plan.root);
   for (const change of plan.changes) {
-    if (![...ownedFiles, lockPath, 'AGENTS.md'].includes(change.path))
+    if (!(plan.allowedPaths ?? [...ownedFiles, lockPath, 'AGENTS.md']).includes(change.path))
       throw new CliError('Неподдержанное назначение: ' + change.path);
     const current = bytesAt(safeDestination(plan.root, change.path));
     if (
@@ -54,7 +54,9 @@ export function applyPlan(plan) {
     journalCreated = true;
     for (const [index, change] of plan.changes.entries()) {
       const file = path.join(stage, String(index));
-      fs.writeFileSync(file, change.content, { flag: 'wx' });
+      const original = safeDestination(plan.root, change.path);
+      const mode = fs.existsSync(original) ? fs.statSync(original).mode : undefined;
+      fs.writeFileSync(file, change.content, { flag: 'wx', mode });
       staged.push(file);
     }
     for (const [index, change] of plan.changes.entries()) {

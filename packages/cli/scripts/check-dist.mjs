@@ -17,6 +17,8 @@ for (const name of [
   'dist/state.mjs',
   'dist/version.mjs',
   'dist/doctor.mjs',
+  'dist/theme.mjs',
+  'dist/update.mjs',
 ]) {
   if (!fs.statSync(new URL(name, root), { throwIfNoEntry: false })?.isFile())
     throw new Error('@mednet/cli: отсутствует ' + name + '; выполните build.');

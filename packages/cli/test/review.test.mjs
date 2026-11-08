@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { version } from '../src/version.mjs';
 import { fixture, addKit, run, write, read, tree } from './helpers.mjs';
 
 const install = ['agent', 'install', 'codex', '--json'];
@@ -10,7 +11,8 @@ test('older CLI cannot downgrade a newer loader lock even within the same major'
   const root = fixture(t, { surface: 'react' });
   assert.equal(run(root, install).status, 0);
   const lock = JSON.parse(read(root, '.mednet/agent-lock.json'));
-  lock.loaderVersion = '2.3.0';
+  const [major, minor] = version.split('.').map(Number);
+  lock.loaderVersion = major + '.' + (minor + 1) + '.0';
   write(root, '.mednet/agent-lock.json', lock);
   const before = tree(root);
   assert.equal(run(root, ['agent', 'sync', '--json']).status, 1);

@@ -12,7 +12,7 @@ export function check(id, status, message, evidence = [], remediation = '') {
 function manifestAt(dir) {
   return path.join(dir, 'package.json');
 }
-function nearestPackage(cwd) {
+export function nearestPackage(cwd) {
   let cursor = cwd;
   while (true) {
     if (fs.existsSync(manifestAt(cursor))) return cursor;
@@ -73,7 +73,7 @@ function patternMatches(value, pattern) {
     .replace(/\u0000/g, '.*');
   return new RegExp('^' + source + '$').test(value);
 }
-function workspaceProjects(root) {
+export function workspaceProjects(root) {
   const globs = patterns(root);
   if (!globs.length) return [];
   const result = [];

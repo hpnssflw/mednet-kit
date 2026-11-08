@@ -1,68 +1,75 @@
 # @mednet/cli
 
-Локальная установка инструкций Codex, синхронизация собственных файлов и диагностика проектов на mednet-kit.
+Обновление пакетов mednet-kit, выбор официальной темы, инструкции Codex и диагностика подключения. Node 22.12+.
 
-**Пакет пока private и не опубликован.** Команды npx ещё недоступны. Имя npm проверяется перед первым выпуском; release pipeline не изменён.
+Пакет подготовлен к первой публичной публикации через release workflow. Команды `npx` ниже станут доступны после выпуска; до него используйте собранный `packages/cli/dist/cli.mjs` из рабочей копии либо локальный tarball.
 
-## Запуск из рабочей копии
+## Обновление и тема
 
-Нужен Node 22.12+. Из корня mednet-kit:
+После публикации, из каталога потребителя:
 
-    pnpm install --frozen-lockfile
-    pnpm --filter @mednet/cli build
-    pnpm --filter @mednet/cli test
-    pnpm --filter @mednet/cli typecheck
+```sh
+npx @mednet/cli@latest update --dry-run
+npx @mednet/cli@latest update
+npx @mednet/cli@latest theme set solid --palette graphite --dry-run
+npx @mednet/cli@latest theme set solid --palette graphite
+```
 
-Затем из каталога проекта потребителя:
+`update` согласует **уже объявленные** `@mednet/ui`, `@mednet/css`, `@mednet/tokens`, `@mednet/lint-config`, `@mednet/cli` с точной версией CLI. Для другой точной версии есть `--to X.Y.Z`. Секции зависимостей, форматирование и остальные данные package.json сохраняются. Workspace/file/link/npm-alias ссылки и dist-tags требуют ручного решения.
 
-    node <mednet-kit>/packages/cli/dist/cli.mjs doctor --json
-    node <mednet-kit>/packages/cli/dist/cli.mjs agent install codex --dry-run
-    node <mednet-kit>/packages/cli/dist/cli.mjs agent install codex
-    node <mednet-kit>/packages/cli/dist/cli.mjs agent sync
+Затем запускается `npm install --ignore-scripts` либо `pnpm install --ignore-scripts --ignore-pnpmfile`. Менеджер определяется по packageManager и lock-файлам; `--package-manager npm|pnpm` разрешает неоднозначность. Установка выполняется в корне владеющего workspace и может обновить общий lock-файл. Для самостоятельного проекта pnpm дополнительно получает --ignore-workspace, чтобы не подхватить посторонний workspace выше по дереву. Сетевой доступ использует настройки registry проекта. Если потребителю нужны lifecycle scripts, запускайте их отдельно после проверки.
 
-После локальной установки собранного tarball доступен bin mednet. Установка tarball — отдельное явное действие разработчика.
+`--no-install` только подготавливает package.json и сообщает, что установка ещё нужна. При сбое менеджера package.json остаётся с целевой версией; исправьте причину и повторите `update`. Общей атомарности package.json, lock-файла и node_modules нет.
 
-## Возможности
+`theme set solid --palette graphite` читает каталог `themes.json` **установленного** пакета, добавляет импорт официальной темы после базового CSS и статические атрибуты на корневой `<html>`. Доступны terracotta, indigo, graphite, bright; без --palette берётся defaultPalette каталога. `theme set brand` возвращает исходную тему и удаляет принадлежащий CLI импорт. Класс dark сохраняется.
 
-| Команда                       | Результат                                                           |
-| ----------------------------- | ------------------------------------------------------------------- |
-| doctor                        | Read-only отчёт о пакетах, exports, llms и установленном loader     |
-| agent install codex           | Skill, самостоятельный resolver и .mednet/agent-lock.json           |
-| agent sync                    | Обновление только принадлежащих CLI файлов и зафиксированных версий |
-| --dry-run                     | План с путями, хэшами и желаемым содержимым; ни одной записи        |
-| --json                        | Машиночитаемый отчёт schemaVersion=1                                |
-| --project apps/web            | Явный выбор приложения относительно cwd                             |
-| --surface react\|html\|tokens | Выбор при нескольких явно объявленных surface                       |
-| --scope project               | Установка рядом с выбранным приложением; default — repo             |
-| --instructions managed-block  | Явное добавление только блока mednet-kit в AGENTS.md                |
-| doctor --chrome109            | Поиск статической ссылки на legacy PostCSS plugin                   |
+Автоматически распознаются стандартные CSS-файлы в src/, app/, styles/, Vite index.html и Next app/layout.tsx, jsx или js (также src/app). При нескольких кандидатах укажите `--css src/main.css --html index.html`. Пути должны лежать внутри выбранного проекта. Динамические атрибуты темы, JSX spread на html, неоднозначные точки подключения и изменённый вручную блок `mednet:theme` останавливают запись. Произвольные серверные шаблоны и CSS-in-JS подключаются вручную по справке установленного пакета.
 
-По умолчанию AGENTS.md не меняется: CLI печатает короткий snippet. В managed-block режиме сохраняются исходные bytes вне блока, UTF-8 BOM и CRLF. UTF-16 требует ручной интеграции. Ручная ссылка на llms учитывается без повторной вставки.
+## Инструкции агентов и диагностика
 
-Repo scope размещает skill в .agents/skills/mednet-kit корня Git-репозитория. Codex обнаруживает skills по пути от cwd до корня; project scope доступен при запуске внутри соответствующего приложения. Одноимённые skills не объединяются. [Официальная справка](https://learn.chatgpt.com/docs/build-skills).
+```sh
+mednet doctor --json
+mednet agent install codex --dry-run
+mednet agent install codex
+mednet agent sync
+```
 
-AGENTS.override.md имеет приоритет над AGENTS.md в своей директории; CLI сообщает о нём и не меняет override. Он не интерпретирует смысл произвольной проектной политики. [Правила discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
+Doctor читает файлы без исполнения конфигов. Agent install устанавливает самостоятельный skill, resolver и `.mednet/agent-lock.json`; npm-зависимости он не меняет. После update выполните agent sync, если loader установлен.
+
+| Флаг                          | Назначение                                                |
+| ----------------------------- | --------------------------------------------------------- |
+| --dry-run                     | План и хэши без изменения проекта и без запуска менеджера |
+| --json                        | Машиночитаемый отчёт schemaVersion=1                      |
+| --project apps/web            | Выбор приложения относительно cwd                         |
+| --surface react\|html\|tokens | Выбор явно объявленной стороны кита                       |
+| --scope project               | Skill рядом с приложением; по умолчанию repo              |
+| --instructions managed-block  | Явное добавление собственного блока в AGENTS.md           |
+| doctor --chrome109            | Статическое свидетельство legacy PostCSS plugin           |
+
+Без --instructions AGENTS.md не меняется: CLI печатает snippet. В managed-block сохраняются bytes вне собственного блока, UTF-8 BOM и CRLF. UTF-16 требует ручной интеграции.
+
+Repo scope помещает skill в .agents/skills/mednet-kit корня Git. Project scope виден Codex при запуске из соответствующего приложения. Одноимённые skills не объединяются. [Официальная справка](https://learn.chatgpt.com/docs/build-skills). AGENTS.override.md имеет приоритет; CLI сообщает о нём и не меняет. [Правила discovery](https://learn.chatgpt.com/docs/agent-configuration/agents-md).
 
 ## Источники и ограничения
 
-Первая реализация использует **установленные llms.md и package exports**. Structured manifest contract R3 пока не реализован; при явно экспортированном новом manifest CLI блокирует установку. Правила кита, стили и API в пакет CLI не копируются.
+Loader использует установленные llms.md и package exports; новый structured manifest contract R3 пока не поддержан и блокирует установку loader. Каталог тем schemaVersion=1 — отдельный публичный контракт, а не metadata contract агентов.
 
-Поддерживаются npm/pnpm node_modules, root/leaf monorepo с обычными package.json workspaces или списком packages в pnpm-workspace.yaml, React, HTML/CSS и tokens-only. Учитываются явно объявленные зависимости проекта. Для ui tokens разрешаются из контекста ui; в первой реализации поддержаны одинаковые версии ui и его tokens. Совместимость произвольных npm ranges и других сочетаний не сертифицируется.
+Поддерживаются npm/pnpm node_modules, Git/workspaces, React, HTML/CSS и tokens-only. Учитываются явно объявленные зависимости; ui и его tokens должны быть одного релиза. Разные приложения могут использовать разные релизы. Из корня doctor показывает все приложения; install/theme/update при неоднозначности требуют --project. Root sync проверяет все зарегистрированные проекты до записи.
 
-Из root doctor показывает все подходящие workspace проекты. Install при неоднозначности требует --project. Root sync проверяет все проекты своего lock до записи; --project ограничивает выбранной записью. Разные приложения могут использовать разные релизы.
+Поиск workspaces ограничен 2000 каталогами и глубиной 8, статическое подключение — 500 файлами и глубиной 6. Для больших проектов задавайте --project. Yarn PnP, CDN-only управление, генерация приложений, глобальные skills/config и другие агенты не поддерживаются.
 
-Поиск workspaces ограничен 2000 каталогами и глубиной 8; для больших/нестандартных layouts используйте --project. Статический поиск подключения ограничен 500 файлами и глубиной 6; отсутствие свидетельства означает unknown. Конфиги и package scripts не исполняются.
-
-Наличие строки подключения CSS/fonts/lint/PostCSS — свидетельство, а не доказательство фактической работы. Doctor не устанавливает effective lint rules, не проверяет WCAG, качество дизайна, загрузку webfont или работу Chrome109. Нужны соответствующие проверки приложения.
-
-Yarn PnP, CDN-only/registry knowledge packs, другие агенты и генератор приложений пока не поддерживаются. CLI не устанавливает и не обновляет npm-зависимости, не меняет глобальные skills/config и не обращается к сети.
+Doctor не доказывает применение CSS/fonts/lint, качество дизайна, WCAG и работу Chrome109: отсутствие свидетельства — unknown. Нужны проверки самого приложения. Только update запускает менеджер и обращается к registry; doctor/agent/theme конфиги и package scripts не исполняют.
 
 ## Ownership и восстановление
 
-В .mednet/agent-lock.json находятся относительные корни проектов, версии, source digest, хэши собственных файлов и своего блока. Lock и skill следует хранить в репозитории потребителя.
+Skill и .mednet/agent-lock.json следует хранить в репозитории потребителя. Lock содержит версии источников и хэши собственных файлов. Повторный запуск с теми же входами — no-op; удалённый собственный файл восстанавливается с действием restore в плане. Чужой одноимённый skill, изменённые человеком own files/блок, повреждённый lock, symlink/junction в назначениях останавливают запись. --force не предусмотрен.
 
-Повторный запуск с теми же входами — no-op. Удалённый собственный файл восстанавливается с явным действием restore в плане. Изменённый человеком файл или блок, чужой одноимённый skill, повреждённый lock и symlink/junction в назначениях останавливают весь план до записи. --force не предусмотрен.
+План theme/update показывает пути, хэши и назначение изменений без полного содержимого пользовательских файлов. CSS/HTML/TSX/package.json редактируются по диапазонам синтаксического дерева; посторонние bytes сохраняются.
 
-Обычный сбой записи откатывает уже заменённые собственные файлы. Прерванный процесс может оставить .mednet/.agent-transaction.json и .agent-stage-*; следующий запуск блокирует запись, doctor сообщает о незавершённой операции. Journal содержит исходные bytes в base64 и желаемые SHA-256. Сначала сохраните его копию и сопоставьте записи с текущими файлами, восстановите исходное либо завершённое согласованное состояние, затем удалите только проверенные временные артефакты. Автоматического reset/recover в первой версии нет. Несколько файлов не меняются одной атомарной операцией.
+Обычный сбой замены файлов откатывает уже применённые правки. Прерванный процесс может оставить .mednet/.agent-transaction.json и .agent-stage-*; следующий запуск блокирует запись, doctor сообщает о незавершённой операции. Journal содержит исходные bytes в base64 и желаемые SHA-256. Сохраните копию, сопоставьте записи с файлами, восстановите согласованное состояние, затем удалите только проверенные временные артефакты. Автоматического recover нет. Несколько файлов не меняются одной атомарной операцией.
 
-Коды выхода: 0 — нет blocking failures (предупреждения возможны), 1 — несовместимость/конфликт/ошибка операции, 2 — неверные аргументы или конфигурация проекта.
+Коды выхода: 0 — нет blocking failures (возможны предупреждения), 1 — конфликт/несовместимость/сбой операции, 2 — неверные аргументы или конфигурация.
+
+## Локальная разработка
+
+Из корня mednet-kit: `pnpm install --frozen-lockfile`, затем `pnpm --filter @mednet/cli build`, `test`, `typecheck`. Из потребителя: `node <mednet-kit>/packages/cli/dist/cli.mjs --help`. Установка локального tarball предоставляет bin mednet.

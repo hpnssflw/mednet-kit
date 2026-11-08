@@ -1,8 +1,10 @@
 {
   "name": "@mednet/cli",
   "version": "2.2.1",
-  "private": true,
-  "description": "Локальная установка инструкций агентов и диагностика проектов mednet-kit",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Обновление mednet-kit, выбор темы, инструкции агентов и диагностика проектов",
   "license": "MIT",
   "type": "module",
   "engines": {
@@ -30,5 +32,11 @@
     "typecheck": "tsc -p tsconfig.json",
     "test": "node --test test/*.test.mjs",
     "prepublishOnly": "node scripts/check-dist.mjs"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.29.9",
+    "parse5": "^8.1.0",
+    "postcss": "^8.5.30",
+    "semver": "^7.8.6"
   }
 }
