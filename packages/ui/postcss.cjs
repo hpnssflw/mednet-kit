@@ -8,7 +8,9 @@
 //    значение без прозрачности, а настоящее — в @supports (color: color-mix(in lab, red, red)).
 //    Перед этим блоком вставляем копию со статическими цветами: переменные темы — из :root
 //    (для селекторов с .dark — из .dark), color-mix и oklch Lightning CSS переводит в hex.
-//    Chrome 109 берёт копию, современные браузеры — блок @supports, который идёт позже.
+//    Для смесей токена с transparent добавляем rgba через наследуемые RGB/alpha — переключение
+//    .dark, палитры и локальное переопределение токена сохраняются. Chrome 109 берёт копию,
+//    современные браузеры — исходный блок @supports, который идёт позже.
 // 2. var(--x,) без пробела: если --x объявлено через @property без initial-value (--tw-ring-inset),
 //    Chrome 109 отбрасывает всё значение — пропадают все кольца, включая фокус. Пишем var(--x, ).
 // 3. oklch() внутри SVG data-URI (шеврон select, галочка checkbox в Basecoat) — до Chrome 111
@@ -84,10 +86,97 @@ function resolver(vars) {
   return resolve;
 }
 
+/** Цветовые токены получают наследуемые RGB/alpha рядом с исходным объявлением.
+ * Их алиасы и scoped overrides следуют тому же CSS cascade, включая .dark и Солид. */
+function legacyColorVariables(root) {
+  const declarations = [];
+  const names = new Set();
+  const declared = new Set();
+  const values = new Map();
+  const parsed = new Map();
+  // Отдельная тема может ссылаться на цвет базового CSS: его RGB/alpha наследуются.
+  const colorAlias = (value) =>
+    value?.alias && (names.has(value.alias) || !declared.has(value.alias));
+  root.walkDecls((decl) => {
+    if (!decl.prop.startsWith('--') || decl.prop.startsWith('--mn-legacy-')) return;
+    declarations.push(decl);
+    declared.add(decl.prop);
+    const alias = decl.value.match(/^var\((--[\w-]+)\)$/);
+    if (alias) {
+      values.set(decl, { alias: alias[1] });
+      return;
+    }
+    if (!/^(?:#|[a-z]+(?:\(|$))/i.test(decl.value)) return;
+    if (!parsed.has(decl.value)) {
+      let rgb = null;
+      try {
+        transform({
+          code: Buffer.from(`a{color:${lower(decl.value, CHROME_60)}}`),
+          visitor: {
+            Color(color) {
+              if (color.type === 'rgb') rgb = color;
+            },
+          },
+        });
+      } catch {
+        /* Не цвет: числовые токены, функции и произвольные custom properties. */
+      }
+      parsed.set(decl.value, rgb);
+    }
+    const rgb = parsed.get(decl.value);
+    if (rgb) {
+      names.add(decl.prop);
+      values.set(decl, { rgb });
+    }
+  });
+  let added = true;
+  while (added) {
+    added = false;
+    for (const decl of declarations) {
+      const value = values.get(decl);
+      if (colorAlias(value) && !names.has(decl.prop)) {
+        names.add(decl.prop);
+        added = true;
+      }
+    }
+  }
+  for (const decl of declarations) {
+    const value = values.get(decl);
+    if (!value?.rgb && !colorAlias(value)) continue;
+    const suffix = decl.prop.slice(2);
+    decl.cloneAfter({
+      prop: `--mn-legacy-rgb-${suffix}`,
+      value: value.rgb
+        ? `${value.rgb.r}, ${value.rgb.g}, ${value.rgb.b}`
+        : `var(--mn-legacy-rgb-${value.alias.slice(2)})`,
+    });
+    decl.cloneAfter({
+      prop: `--mn-legacy-alpha-${suffix}`,
+      value: value.rgb
+        ? String(Number(value.rgb.alpha.toFixed(6)))
+        : `var(--mn-legacy-alpha-${value.alias.slice(2)})`,
+    });
+  }
+  return names;
+}
+
+/** Частый Tailwind alpha utility остаётся связанным с токеном вместо цвета light. */
+function dynamicAlpha(value, names) {
+  const match = value.match(
+    /^color-mix\(in\s+[\w-]+,\s*var\((--[\w-]+)\)\s+([\d.]+)%,\s*transparent\)$/,
+  );
+  if (!match || !names.has(match[1])) return null;
+  const alpha = Number(match[2]) / 100;
+  if (!Number.isFinite(alpha) || alpha < 0 || alpha > 1) return null;
+  const suffix = match[1].slice(2);
+  return `rgba(var(--mn-legacy-rgb-${suffix}), calc(var(--mn-legacy-alpha-${suffix}) * ${alpha}))`;
+}
+
 function legacyFallbacks() {
   return {
     postcssPlugin: 'mednet-legacy-fallbacks',
     OnceExit(root, { result }) {
+      const colorNames = legacyColorVariables(root);
       const { light, dark } = themes(root);
       const resolveLight = resolver(light);
       const resolveDark = resolver(dark);
@@ -131,13 +220,16 @@ function legacyFallbacks() {
         const copy = atRule.clone();
         copy.walkDecls((decl) => {
           if (!decl.value.includes('color-mix(')) return;
+          const dynamic = dynamicAlpha(decl.value, colorNames);
           const value = resolveFor(decl.parent)(decl.value);
           if (value == null || /currentcolor/i.test(value)) {
-            decl.remove();
+            if (dynamic) decl.value = dynamic;
+            else decl.remove();
             return;
           }
           try {
             decl.value = lower(value, CHROME_109);
+            if (dynamic) decl.cloneAfter({ value: dynamic });
           } catch {
             result.warn(
               `mednet-legacy-fallbacks: не удалось перевести «${value}» в статический цвет, объявление ${decl.prop} в копии для Chrome 109 удалено`,
