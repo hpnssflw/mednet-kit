@@ -47,6 +47,33 @@ writeFileSync(
   withLegacyFallbacks(optimize(css, { minify: true }).code),
 );
 
+// Opt-in тема: самостоятельный CSS без runtime @mednet/tokens у HTML-потребителя.
+mkdirSync(join(dist, 'themes'), { recursive: true });
+const themeSource = readFileSync(require.resolve('@mednet/tokens/themes/solid.css'), 'utf8');
+writeFileSync(
+  join(dist, 'themes', 'solid.css'),
+  withLegacyFallbacks(optimize(themeSource, { minify: false }).code),
+);
+const themeCatalog = JSON.parse(
+  readFileSync(require.resolve('@mednet/tokens/themes.json'), 'utf8'),
+);
+writeFileSync(
+  join(dist, 'themes.json'),
+  JSON.stringify(
+    {
+      ...themeCatalog,
+      package: '@mednet/css',
+      version,
+      themes: themeCatalog.themes.map((theme: { id: string; stylesheet: string | null }) => ({
+        ...theme,
+        stylesheet: theme.stylesheet ? '@mednet/css/themes/' + theme.id + '.css' : null,
+      })),
+    },
+    null,
+    2,
+  ) + '\n',
+);
+
 // JS Basecoat для интерактивных компонентов (диалоги, выпадающие меню, табы).
 // Лицензия MIT требует сохранять уведомление об авторских правах в каждой копии.
 const basecoatDir = dirname(require.resolve('basecoat-css/package.json'));

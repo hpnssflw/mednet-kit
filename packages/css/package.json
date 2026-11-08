@@ -29,7 +29,9 @@
     "./fonts.css": "./dist/fonts.css",
     "./mednet.js": "./dist/mednet.js",
     "./dist/*": "./dist/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./themes/solid.css": "./dist/themes/solid.css",
+    "./themes.json": "./dist/themes.json"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,42 @@
+{
+  "name": "@mednet/cli",
+  "version": "2.2.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Обновление mednet-kit, выбор темы, инструкции агентов и диагностика проектов",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hpnssflw/mednet-kit.git",
+    "directory": "packages/cli"
+  },
+  "bin": {
+    "mednet": "./dist/cli.mjs"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "agents",
+    "llms.md",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test test/*.test.mjs",
+    "prepublishOnly": "node scripts/check-dist.mjs"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.29.9",
+    "parse5": "^8.1.0",
+    "postcss": "^8.5.30",
+    "semver": "^7.8.6"
+  }
+}

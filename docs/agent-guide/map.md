@@ -8,6 +8,8 @@
 | Проект на Tailwind v4 без shadcn                                         | `@import '@mednet/tokens/theme.css';` — сбрасывает палитру Tailwind (`gray`, `slate`… пропадут, `red`, `blue` станут брендовыми)                                                                                                                         |
 | Графики вне React                                                        | палитра из `@mednet/tokens/tokens.json`                                                                                                                                                                                                                  |
 
+CLI для обновления и тем — `@mednet/cli`: `mednet update` и `mednet theme set solid --palette graphite`; диагностика — `mednet doctor`, инструкции — `mednet agent install codex` / `agent sync`. До первой публикации используйте локальную сборку; справка команд — в README пакета CLI.
+
 Четыре типа приложений: публичные лендинги и отчёты (`PublicLayout`), внутренние инструменты, пользовательские сервисы, дашборды (последние три — `AppShell`).
 
 Все пакеты `@mednet/*` выходят с **одной версией** — ставьте один мажор. Справка каждого пакета лежит в `node_modules/@mednet/<пакет>/llms.md`: читайте её до работы и выполняйте. Чего в ките нет — не изобретайте и не тащите чужое, а спросите владельцев.

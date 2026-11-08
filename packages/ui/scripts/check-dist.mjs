@@ -8,6 +8,8 @@ const required = [
   'dist/layouts/app-shell.js',
   'llms.md',
   'stack.json',
+  'dist/themes.json',
+  'src/themes/solid.css',
 ];
 const missing = required.filter((file) => !existsSync(new URL(`../${file}`, import.meta.url)));
 

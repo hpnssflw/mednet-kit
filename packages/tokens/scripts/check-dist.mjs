@@ -1,7 +1,13 @@
 // Защита публикации: без собранного dist/ в npm уедет пустой пакет.
 import { existsSync, readFileSync } from 'node:fs';
 
-const required = ['dist/index.js', 'dist/theme.css', 'dist/tokens.css'];
+const required = [
+  'dist/index.js',
+  'dist/theme.css',
+  'dist/tokens.css',
+  'dist/themes.json',
+  'dist/themes/solid.css',
+];
 const missing = required.filter((file) => !existsSync(new URL(`../${file}`, import.meta.url)));
 
 if (missing.length > 0) {

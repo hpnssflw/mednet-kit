@@ -11,6 +11,12 @@
 | [`@mednet/ui`](packages/ui)                   | React-компоненты: shadcn/ui (Base UI, Maia) в теме бренда, логотип, шапка, подвал, каркасы страниц |
 | [`@mednet/lint-config`](packages/lint-config) | ESLint и stylelint: защита бренда в проектах                                                       |
 
+## CLI и официальные темы
+
+`@mednet/cli` подготовлен к первому публичному выпуску: `update` обновляет пакеты кита, `theme set solid --palette graphite` выбирает тему «Солид» и палитру «Графит». Также доступны doctor, установка Codex skill и agent sync. До публикации используйте локальную сборку; команды и ограничения — в [README CLI](packages/cli/README.md).
+
+Тема «Солид» подключается отдельным экспортом `themes/solid.css` пакетов ui/css/tokens. Каталог `themes.json` содержит четыре официальные палитры. Выбор задают атрибуты корневого html, тёмный режим — класс dark.
+
 ## Разработка
 
 Нужны Node 22.12+ (рекомендуется 24 LTS), pnpm 10, Docker (для скриншот-тестов).
