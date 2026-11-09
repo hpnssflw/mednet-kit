@@ -56,7 +56,7 @@ Trusted publisher требует существующего npm-пакета. Bo
 Private-пакеты Version PR версионирует вместе с остальными, но не публикует. До выпуска проверить name, public publishConfig, repository.directory, bin/exports/files, LICENSE, packed состав и согласованный changeset.
 
 1. Проверить стандартную npm-сессию: `npm whoami`. При 401 владелец проходит `npm login`; токены не копируются в репозиторий и не создаются вручную.
-2. Для резервирования нового имени использовать отдельный временный bootstrap tarball через `npm stage publish ./mednet-cli-bootstrap.tgz --access public`. npm создаёт публичный placeholder 0.0.0-stage; содержимое stage не становится публичным без approval. Требуются npm ≥11.15 и Node ≥22.14.
+2. Для резервирования нового имени использовать отдельный временный bootstrap tarball через `npm stage publish ./mednet-cli-bootstrap.tgz --access public --tag bootstrap`. npm создаёт публичный placeholder 0.0.0-stage; содержимое stage не становится публичным без approval. Требуются npm ≥11.15 и Node ≥22.14.
 3. Bootstrap имеет отдельную prerelease-версию, например 0.0.1-bootstrap.0, **не целевую 2.3.0**. Staged и published версии делят один semver index: занятая stage-версия помешает штатной публикации той же версии. Исходные package.json кита локально не поднимаются.
 4. Настроить издателя, например `npm trust github @mednet/cli --file release.yml --repo hpnssflw/mednet-kit --allow-publish -y`. Владелец подтверждает необходимые npm 2FA-действия штатным интерфейсом. Проверить repo/workflow и право publish через `npm trust list @mednet/cli`.
 5. После зелёного CI main и проверки Version PR слить его в рамках данного разрешения. CI публикует настоящий пакет, provenance, теги и GitHub Releases.
