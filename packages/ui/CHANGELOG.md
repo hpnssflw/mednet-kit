@@ -1,5 +1,14 @@
 # @mednet/ui
 
+## 3.0.1
+
+### Patch Changes
+
+- d0bbe01: Обновлены примеры CDN-подключения в README и справке агентов на опубликованный
+  мажор 3. Ссылки на @2 не получают исправления Solid и общие touch-размеры.
+- Updated dependencies [d0bbe01]
+  - @mednet/tokens@3.0.1
+
 ## 3.0.0
 
 ### Major Changes

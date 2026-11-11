@@ -1,5 +1,12 @@
 # @mednet/lint-config
 
+## 3.0.1
+
+### Patch Changes
+
+- d0bbe01: Обновлены примеры CDN-подключения в README и справке агентов на опубликованный
+  мажор 3. Ссылки на @2 не получают исправления Solid и общие touch-размеры.
+
 ## 3.0.0
 
 No changes in this release.
