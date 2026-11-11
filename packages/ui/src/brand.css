@@ -104,97 +104,53 @@
   }
 }
 
-/* Официальный opt-in Солид: геометрия и touch. Палитры — из @mednet/tokens/themes/solid.css. */
-html[data-kit-theme='solid'] :is([class~='group/button'], [class~='group/toggle']) {
-  min-width: 1.5rem;
-  min-height: 1.5rem;
-}
-
-html[data-kit-theme='solid']
+/* Общие touch-размеры обеих тем. Компактные size и кнопки внутри полей сохраняются.
+ * Проверяем штатные классы высоты: явный h-* через cn() остаётся выбором потребителя.
+ * min-height не уменьшает textarea и многострочные группы ввода.
+ */
+@media (pointer: coarse) {
   :is(
-    [class~='group/button'][class~='h-9'],
-    [class~='border-input'][class~='h-9'],
-    [class~='group/input-group'],
-    button[role='combobox']
-  ) {
-  min-height: 1.625rem;
+    [class~='group/button']:is(
+      [class~='h-9'],
+      [class~='h-10'],
+      [class~='size-9'],
+      [class~='size-10']
+    ),
+    input[class~='border-input'][class~='h-9'],
+    select[class~='border-input'][class~='h-9'],
+    textarea[class~='border-input'],
+    button[role='combobox'][class~='border-input'],
+    [class~='group/input-group'][class~='h-9']
+  ):where(:not([data-size='sm'], [class~='group/input-group'] *)) {
+    min-height: 2.75rem;
+  }
+
+  [class~='group/button']:is([class~='size-9'], [class~='size-10']):where(
+      :not([class~='group/input-group'] *)
+    ) {
+    min-width: 2.75rem;
+  }
 }
 
-html[data-kit-theme='solid']
-  :is(button, [class~='group/button'], [class~='group/input-group'])
-  svg {
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
-html[data-kit-theme='solid'] [class~='group/badge'] {
-  min-height: 1rem;
-}
-
-html[data-kit-theme='solid'] [class~='group/badge'] svg {
-  width: 0.625rem;
-  height: 0.625rem;
-}
-
-html[data-kit-theme='solid'] [class~='group/switch'] {
-  width: 1.5rem;
-  height: 0.875rem;
-}
-
-html[data-kit-theme='solid'] [class~='group/switch'] > [class~='rounded-full'] {
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
-html[data-kit-theme='solid']
+/* Солид сохраняет сетку и размеры. Исходный rounded-класс исчезает при cn() override. */
+:where(html[data-kit-theme='solid'])
   :is(
-    [class~='group/radio-group-item'],
-    [class~='border-primary'][class~='size-4'][class~='rounded-4xl']
-  ) {
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
-html[data-kit-theme='solid']
-  :is(
-    [class~='group/button'],
-    [class~='group/toggle'],
-    [class~='border-input'],
-    [class~='group/input-group'],
-    [class~='rounded-4xl'],
-    [class~='rounded-2xl']
+    [class~='group/button'][class~='rounded-4xl'],
+    [class~='group/toggle'][class~='rounded-4xl'],
+    [class~='group/input-group'][class~='rounded-4xl'],
+    input[class~='border-input'][class~='rounded-4xl'],
+    select[class~='border-input'][class~='rounded-4xl'],
+    textarea[class~='border-input'][class~='rounded-xl'],
+    button[role='combobox'][class~='border-input'][class~='rounded-4xl']
   ) {
   border-radius: var(--solid-control-radius);
 }
 
-html[data-kit-theme='solid']
-  :is([class~='group/card'], [class~='rounded-4xl'][class~='bg-popover']) {
+:where(html[data-kit-theme='solid'])
+  :is([class~='group/card'][class~='rounded-2xl'], [class~='rounded-4xl'][class~='bg-popover']) {
   border-radius: var(--solid-card-radius);
 }
 
-html[data-kit-theme='solid'] [class~='group/badge'] {
+:where(html[data-kit-theme='solid']) [class~='group/badge'][class~='rounded-4xl'] {
   border-radius: 0.25rem;
-}
-
-@media (pointer: coarse) {
-  html:root[data-kit-theme='solid']
-    :is(
-      [class~='group/button'],
-      [class~='group/toggle'],
-      input[class~='border-input'],
-      select[class~='border-input'],
-      textarea[class~='border-input'],
-      [class~='group/input-group'],
-      button[role='combobox']
-    ) {
-    min-height: 2.75rem;
-  }
-
-  html[data-kit-theme='solid'] :is([class~='group/button'], [class~='group/toggle']) {
-    min-width: 2.75rem;
-  }
-
-  html[data-kit-theme='solid'] :is(input, textarea, select) {
-    font-size: 1rem;
-  }
 }

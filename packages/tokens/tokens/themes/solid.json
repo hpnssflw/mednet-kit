@@ -28,23 +28,6 @@
     {
       "selector": "html[data-kit-theme='solid']",
       "declarations": {
-        "--spacing": "0.125rem",
-        "--mn-text-base": "0.8125rem",
-        "--mn-text-sm": "0.75rem",
-        "--mn-text-xs": "0.6875rem",
-        "--mn-text-base-line-height": "1.4",
-        "--mn-text-sm-line-height": "1.4",
-        "--mn-text-xs-line-height": "1.4",
-        "--mn-text-lead": "0.875rem",
-        "--mn-text-h4": "1rem",
-        "--mn-text-h3": "1.25rem",
-        "--mn-text-h2": "1.5rem",
-        "--mn-text-h1": "1.875rem"
-      }
-    },
-    {
-      "selector": "html[data-kit-theme='solid']",
-      "declarations": {
         "--mn-background": "#ffffff",
         "--mn-foreground": "#262626",
         "--mn-card": "#ffffff",

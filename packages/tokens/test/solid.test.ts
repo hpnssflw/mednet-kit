@@ -27,6 +27,11 @@ describe('официальный Солид', () => {
     expect(rules.every((r) => /^html(?:\.dark)?\[data-kit-theme='solid'\]/.test(r.selector))).toBe(
       true,
     );
-    expect(rules.some((r) => r.declarations['--spacing'] === '0.125rem')).toBe(true);
+  });
+  it('не меняет сетку и типографику приложения при переключении темы', () => {
+    const { rules } = buildSolidTheme(root);
+    const names = rules.flatMap((rule) => Object.keys(rule.declarations));
+    expect(names).not.toContain('--spacing');
+    expect(names.filter((name) => name.startsWith('--mn-text-'))).toEqual([]);
   });
 });

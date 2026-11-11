@@ -5,30 +5,38 @@
  * побеждают наши правила (они позже в том же слое).
  */
 @layer components {
-  /* Официальный opt-in Солид; значения палитр и геометрии — из tokens/themes/solid.css. */
-  html[data-kit-theme='solid'] :is(.btn, .toggle) {
-    min-width: 1.5rem;
-    min-height: 1.5rem;
-    border-radius: var(--solid-control-radius);
-  }
-  html[data-kit-theme='solid']
+  /* Общие touch-размеры обеих тем; компактные size и вложенные контролы не растягиваем. */
+  @media (pointer: coarse) {
     :is(
-      .btn:not([data-size]),
-      .btn[data-size='default'],
-      .input:not([type='checkbox']):not([type='radio']):not([type='range']),
-      .field > input:not([type='checkbox']):not([type='radio']):not([type='range']),
+      .btn:where(
+        :not([data-size]),
+        [data-size='default'],
+        [data-size='lg'],
+        [data-size='icon'],
+        [data-size='icon-lg']
+      ),
+      .input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='hidden']),
+      .field
+        > input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='hidden']),
+      .textarea,
+      .field > textarea,
       .select > button,
       select.select,
       .input-group
-    ) {
-    min-height: 1.625rem;
+    ):where(:not([data-size='sm'], .input-group *)) {
+      min-height: 2.75rem;
+    }
+
+    .btn:is([data-size='icon'], [data-size='icon-lg']):where(:not(.input-group *)) {
+      min-width: 2.75rem;
+    }
   }
-  html[data-kit-theme='solid'] :is(.btn, .toggle) svg {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-  html[data-kit-theme='solid']
+
+  /* Солид сохраняет размеры компонентов, типографику и сетку приложения. */
+  :where(html[data-kit-theme='solid'])
     :is(
+      .btn,
+      .toggle,
       .input:not([type='checkbox']):not([type='radio']):not([type='range']),
       .textarea,
       .field > textarea,
@@ -39,55 +47,12 @@
     ) {
     border-radius: var(--solid-control-radius);
   }
-  html[data-kit-theme='solid'] :is(.card, .popover > [data-popover], .select > [data-popover]) {
+  :where(html[data-kit-theme='solid'])
+    :is(.card, .popover > [data-popover], .select > [data-popover]) {
     border-radius: var(--solid-card-radius);
   }
-  html[data-kit-theme='solid'] .badge {
-    min-height: 1rem;
+  :where(html[data-kit-theme='solid']) .badge {
     border-radius: 0.25rem;
-  }
-  html[data-kit-theme='solid'] .badge svg {
-    width: 0.625rem;
-    height: 0.625rem;
-  }
-  html[data-kit-theme='solid']
-    :is(.input[type='checkbox'][role='switch'], .field > input[type='checkbox'][role='switch']) {
-    width: 1.5rem;
-    height: 0.875rem;
-  }
-  html[data-kit-theme='solid']
-    :is(
-      .input[type='checkbox'][role='switch'],
-      .field > input[type='checkbox'][role='switch']
-    )::before {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-  html[data-kit-theme='solid'] :is(.input[type='radio'], .field > input[type='radio']) {
-    width: 0.75rem;
-    height: 0.75rem;
-  }
-  @media (pointer: coarse) {
-    html:root[data-kit-theme='solid']
-      :is(
-        .btn,
-        .toggle,
-        .input:not([type='checkbox']):not([type='radio']):not([type='range']),
-        .textarea,
-        .field > textarea,
-        .field > input:not([type='checkbox']):not([type='radio']):not([type='range']),
-        .select > button,
-        select.select,
-        .input-group
-      ) {
-      min-height: 2.75rem;
-    }
-    html[data-kit-theme='solid'] :is(.btn, .toggle) {
-      min-width: 2.75rem;
-    }
-    html[data-kit-theme='solid'] :is(input, textarea, select) {
-      font-size: 1rem;
-    }
   }
 
   /*

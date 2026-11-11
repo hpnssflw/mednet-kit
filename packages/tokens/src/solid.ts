@@ -32,11 +32,7 @@ export function buildSolidTheme(root: URL) {
     if (!selector || (selector[1] && !ids.has(selector[1])))
       throw new Error('Тема не может менять правила вне своего opt-in: ' + rule.selector);
     for (const [name, value] of Object.entries(rule.declarations)) {
-      if (
-        !/^--(?:mn-|solid-|spacing$)/.test(name) ||
-        typeof value !== 'string' ||
-        /[{};]/.test(value)
-      )
+      if (!/^--(?:mn-|solid-)/.test(name) || typeof value !== 'string' || /[{};]/.test(value))
         throw new Error('Некорректный токен темы: ' + name);
     }
   }
