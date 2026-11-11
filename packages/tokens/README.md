@@ -16,7 +16,7 @@
 ## Обычный CSS
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mednet/tokens@2/dist/tokens.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mednet/tokens@3/dist/tokens.css" />
 ```
 
 ```css
